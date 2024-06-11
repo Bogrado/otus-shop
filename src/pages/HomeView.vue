@@ -1,11 +1,12 @@
 <template>
   <div class="text-center py-10">
-    <h1 class="text-4xl font-bold mb-4">Welcome to the Shop</h1>
-    <p class="text-lg text-gray-700">Here is the home page of our online shop.</p>
+    <h1 class="text-2xl font-bold mb-4">Добро пожаловать в Otus Shop</h1>
+    <products-list />
   </div>
 </template>
 
 <script setup>
+import ProductsList from '@/components/ProductsList.vue'
 </script>
 
 <style scoped>
