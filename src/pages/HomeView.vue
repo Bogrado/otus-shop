@@ -2,6 +2,8 @@
   <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold mb-4 w-1/3 mx-auto text-center">Товары</h1>
 
+    <app-preloader />
+
     <div class="max-w-screen-lg mx-auto">
       <div class="flex flex-col sm:flex-row justify-between gap-4 w-full items-center border rounded-lg shadow p-4">
         <div class="w-full sm:w-1/3">
@@ -25,6 +27,7 @@ import { useProductStore } from '../stores/productStore';
 import AppSearchBar from '../components/AppSearchBar.vue';
 import AppSortBar from '../components/AppSortBar.vue';
 import ProductsList from '../components/ProductsList.vue';
+import AppPreloader from '@/components/AppPreloader.vue'
 
 const productStore = useProductStore();
 
