@@ -1,28 +1,21 @@
 <template>
   <div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-8 w-1/3 mx-auto text-center">Товары</h1>
 
-    <div class="flex justify-between max-w-screen-lg mx-auto">
-      <h1 class="text-2xl font-bold mb-4">Добро пожаловать в Otus Shop</h1>
-
-      <div class="flex flex-col sm:flex-row sm:justify-between items-center mb-4 max-w-screen-lg mx-auto gap-4">
-
-        <div class="mb-4 max-w-screen-lg">
-          <app-sort-bar v-model="sortKey" />
+    <div class="max-w-screen-lg mx-auto">
+      <div class="flex flex-col sm:flex-row justify-between gap-4 w-full items-center border rounded-lg shadow p-4">
+        <div class="w-full sm:w-1/3">
+          <AppSearchBar v-model="searchQuery" />
         </div>
-
-        <div class="mb-4 max-w-screen-lg">
-          <app-search-bar v-model="searchQuery" />
+        <div class="w-full sm:w-1/3 sm:text-right">
+          <AppSortBar v-model="sortKey" />
         </div>
-
-
       </div>
     </div>
 
-
-    <div class="max-w-screen-lg mx-auto">
+    <div class="max-w-screen-lg mx-auto mt-4">
       <products-list :products="filteredAndSortedProducts" />
     </div>
-
   </div>
 </template>
 
