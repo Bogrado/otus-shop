@@ -1,46 +1,31 @@
-import { defineStore } from 'pinia'
-import { reactive } from 'vue'
+import { defineStore } from 'pinia';
+import { reactive, computed } from 'vue';
+import { fetchProducts } from '@/services/apiService';
 
 export const useProductStore = defineStore('product', () => {
   const state = reactive({
-    products: [
-      {
-        id: 1,
-        name: 'Продукт 1',
-        price: 1000,
-        category: 'Категория 1',
-        image: 'https://via.placeholder.com/150'
-      },
-      {
-        id: 2,
-        name: 'Продукт 2',
-        price: 1500,
-        category: 'Категория 2',
-        image: 'https://via.placeholder.com/150'
-      },
-      {
-        id: 3,
-        name: 'Продукт 3',
-        price: 2000,
-        category: 'Категория 1',
-        image: 'https://via.placeholder.com/150'
-      },
-      {
-        id: 4,
-        name: 'Продукт 4',
-        price: 2500,
-        category: 'Категория 2',
-        image: 'https://via.placeholder.com/150'
-      }
-    ]
-  })
+    products: [],
+  });
 
   const getProductById = (id) => {
-    return state.products.find((product) => product.id === id)
-  }
+    return state.products.find(product => product.id === id);
+  };
+
+  const loadProducts = async () => {
+    try {
+      state.products = await fetchProducts();
+    } catch (error) {
+      console.error('Failed to load products:', error);
+    }
+  };
+
+  // Геттер для получения продуктов
+  const products = computed(() => state.products);
 
   return {
     state,
-    getProductById
-  }
-})
+    products,
+    getProductById,
+    loadProducts,
+  };
+});
