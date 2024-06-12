@@ -2,18 +2,12 @@
   <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold mb-4 w-1/3 mx-auto text-center">Товары</h1>
 
-    <div class="max-w-screen-lg mx-auto">
-      <div
-        class="flex flex-col sm:flex-row justify-between gap-4 w-full items-center border rounded-lg shadow p-4"
-      >
-        <div class="w-full sm:w-1/3">
-          <AppSearchBar :modelValue="searchQuery" @on-change-search="updateTitle" />
-        </div>
-        <div class="w-full sm:w-1/3">
-          <AppSortBar @on-change-sort="updateSort" :sortKey="sortKey" />
-        </div>
-      </div>
-    </div>
+    <app-filters-bar
+      :searchQuery="searchQuery"
+      :sortKey="sortKey"
+      @updateTitle="updateTitle"
+      @updateSort="updateSort"
+    />
     <div v-if="loadingStore.loading">
       <AppPreloader />
     </div>
@@ -28,11 +22,10 @@ import { onMounted, watch, computed } from 'vue'
 import { useProductStore } from '../stores/productStore'
 import { useLoadingStore } from '../stores/loadingStore'
 import { updateSort, updateTitle } from '../utils/queryParamsUpdater'
-import AppSearchBar from '../components/AppSearchBar.vue'
-import AppSortBar from '../components/AppSortBar.vue'
 import ProductsList from '../components/ProductsList.vue'
 import AppPreloader from '../components/AppPreloader.vue'
 import { useQueryParamsStore } from '@/stores/queryParamsStore.js'
+import AppFiltersBar from '@/components/AppFiltersBar.vue'
 
 const productStore = useProductStore()
 const loadingStore = useLoadingStore()
@@ -50,4 +43,3 @@ watch([sortKey, searchQuery], () => {
 })
 </script>
 
-<style scoped></style>

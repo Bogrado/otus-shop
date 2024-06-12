@@ -1,6 +1,6 @@
 <template>
   <div class="mb-4">
-    <label for="sort" class="mr-2">Сортировать по:</label>
+    <label for="sort" class="mr-2">Сортировка:</label>
     <select
       id="sort"
       class="border p-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-gray-300"
