@@ -15,23 +15,22 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, ref } from 'vue';
+import { defineProps, defineEmits, ref } from 'vue'
 
 const props = defineProps({
   modelValue: {
     type: String,
     required: true
   }
-});
+})
 
-const emits = defineEmits(['update:modelValue']);
+const emits = defineEmits(['update:modelValue'])
 
-const selectedSortKey = ref(props.modelValue);
+const selectedSortKey = ref(props.modelValue)
 
 const onSortChange = () => {
-  emits('update:modelValue', selectedSortKey.value);
-};
+  emits('update:modelValue', selectedSortKey.value)
+}
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

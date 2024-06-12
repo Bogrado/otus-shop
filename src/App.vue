@@ -15,6 +15,4 @@ import AppHeader from '@/components/AppHeader.vue'
 import HomeView from '@/pages/HomeView.vue'
 </script>
 
-<style scoped>
-</style>
-
+<style scoped></style>

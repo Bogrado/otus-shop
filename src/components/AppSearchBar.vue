@@ -11,23 +11,22 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, ref } from 'vue';
+import { defineProps, defineEmits, ref } from 'vue'
 
 const props = defineProps({
   modelValue: {
     type: String,
     required: true
   }
-});
+})
 
-const emits = defineEmits(['update:modelValue']);
+const emits = defineEmits(['update:modelValue'])
 
-const query = ref(props.modelValue);
+const query = ref(props.modelValue)
 
 const onInput = () => {
-  emits('update:modelValue', query.value);
-};
+  emits('update:modelValue', query.value)
+}
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
