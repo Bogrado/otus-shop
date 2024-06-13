@@ -15,6 +15,12 @@
 - Добавлен компонент [AppFiltersBar.vue](src%2Fcomponents%2FAppFiltersBar.vue), чтобы разгрузить [HomeView.vue](src%2Fpages%2FHomeView.vue)
 - Добавлен [cartStore.js](src%2Fstores%2FcartStore.js)
 - Добавлен [cartUtils.js](src%2Futils%2FcartUtils.js), управление корзиной будет отсюда (добавление/удаление)
+- `auto-animate`, потом буду использовать
+- [CartView.vue](src%2Fpages%2FCartView.vue) страница корзины
+- Компонент [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue)
+- Компонент [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue) для управления кол-вом товара
+- Компонент [OrderSummary.vue](src%2Fcomponents%2FOrderSummary.vue) общая информация о товарах в корзине
+- Компонент [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) контейнер для товаров корзине
 
 ### Изменено
 - Обновлен [App.vue](src%2FApp.vue) для включения нового компонента [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue).
@@ -28,23 +34,19 @@
 - Функция запроса
 - Запрос в зависимости от [queryParamsStore.js](src%2Fstores%2FqueryParamsStore.js) `queryParamsStore.params`
 - Взаимодействие компонентов с [cartStore.js](src%2Fstores%2FcartStore.js)
+- Ссылки в [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue)
+- router-view в [App.vue](src%2FApp.vue)
+- [loadingStore.js](src%2Fstores%2FloadingStore.js) вызывается из [App.vue](src%2FApp.vue) и прокидывается во все компоненты.
+- [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) обращается к [cartStore.js](src%2Fstores%2FcartStore.js) за кол-вом. товаров в корзине.
 
 
 
 ## [Не выпущено]
 
 ### Добавлено
-- `auto-animate`, потом буду использовать
-- [CartView.vue](src%2Fpages%2FCartView.vue) страница корзины
-- Компонент [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue)
-- Компонент [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue) для управления кол-вом товара
-- Компонент [OrderSummary.vue](src%2Fcomponents%2FOrderSummary.vue) общая информация о товарах в корзине
-- Компонент [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) контейнер для товаров корзине
+
 
 ### Изменено
-- Ссылки в [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue)
-- router-view в [App.vue](src%2FApp.vue)
-- [loadingStore.js](src%2Fstores%2FloadingStore.js) вызывается из [App.vue](src%2FApp.vue) и прокидывается во все компоненты.
-- [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) обращается к [cartStore.js](src%2Fstores%2FcartStore.js) за кол-вом. товаров в корзине.
+
 
 
