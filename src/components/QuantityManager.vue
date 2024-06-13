@@ -1,17 +1,34 @@
-<template>
-  <div class="flex items-center">
-    <button>
-      <remove-icon class="hover:fill-gray-700" />
-    </button>
-    <input type="number"
-           class="w-12 text-center border rounded mx-2"
-    />
-    <button>
-      <add-icon class="hover:fill-gray-700" />
-    </button>
-  </div>
-</template>
 <script setup>
 import RemoveIcon from '@/components/icons/RemoveIcon.vue'
 import AddIcon from '@/components/icons/AddIcon.vue'
+
+const props = defineProps({
+  quantity: {
+    type: Number,
+    required: true
+  }
+})
+
+const emit = defineEmits(['onClickDecrease', 'onClickIncrease'])
+
+const onClickDecrease = () => {
+  if (props.quantity > 1) {
+    emit('onClickDecrease')
+  }
+}
+const onClickIncrease = () => {
+  emit('onClickIncrease')
+}
 </script>
+
+<template>
+  <div class="flex items-center">
+    <button>
+      <remove-icon class="hover:fill-gray-700" @click="onClickDecrease" />
+    </button>
+    <div>{{ props.quantity }}</div>
+    <button>
+      <add-icon class="hover:fill-gray-700" @click="onClickIncrease" />
+    </button>
+  </div>
+</template>

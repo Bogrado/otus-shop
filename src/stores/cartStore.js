@@ -60,6 +60,10 @@ export const useCartStore = defineStore('cart', () => {
 
   const itemIds = computed(() => Object.keys(state.items))
 
+  const itemQuantity = (itemId) => {
+    return state.items[itemId] || 0
+  }
+
 
   return {
     state,
@@ -69,6 +73,7 @@ export const useCartStore = defineStore('cart', () => {
     clearCart,
     totalItems,
     itemIds,
-    loadCartProducts
+    loadCartProducts,
+    itemQuantity
   }
 })

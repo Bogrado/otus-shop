@@ -45,10 +45,17 @@
 
 ### Добавлено
 - [cartQueryParamsStore.js](src%2Fstores%2FcartQueryParamsStore.js) для корзины, чтобы не пересекаться с каталогом
+- computed поле в [cartStore.js](src%2Fstores%2FcartStore.js) для подсчета кол-ва товара
+- 
 
 
 ### Изменено
 - худо бедно функция с запросом написана
+- в [cartQueryParamsStore.js](src%2Fstores%2FcartQueryParamsStore.js) изменен query параметр
+- в [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) прокинут массив с товарами
+- в [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) интерполированны свойства продукта
+- в [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue) прокинуто computed свойство
+- в [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue) начал делать эмиты, на этом остановился, продолжить с этого места
 
 
 
