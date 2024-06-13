@@ -36,8 +36,12 @@
 ## [Не выпущено]
 
 ### Добавлено
+- `auto-animate`, потом буду использовать
+- [CartView.vue](src%2Fpages%2FCartView.vue) страница корзины
 
 
 ### Изменено
+- ссылки в [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue)
+- router-view в [App.vue](src%2FApp.vue)
 
 

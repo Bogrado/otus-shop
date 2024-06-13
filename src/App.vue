@@ -2,7 +2,13 @@
   <div id="app" class="min-h-screen flex flex-col">
     <app-header />
     <main class="flex-grow p-4">
-      <home-view />
+      <div class="p-10">
+        <div v-auto-animate>
+          <router-view v-slot="{ Component }">
+            <component :is="Component" />
+          </router-view>
+        </div>
+      </div>
     </main>
     <footer class="bg-gray-800 text-white p-4 text-center">
       <p>&copy; 2024 My Online Shop. All rights reserved.</p>
@@ -12,7 +18,12 @@
 
 <script setup>
 import AppHeader from '@/components/AppHeader.vue'
-import HomeView from '@/pages/HomeView.vue'
+import { vAutoAnimate } from '@formkit/auto-animate'
+
 </script>
 
-<style scoped></style>
+<style>
+html {
+  scrollbar-gutter: stable;
+}
+</style>
