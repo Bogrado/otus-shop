@@ -15,6 +15,8 @@
 - Добавлен `productStore`
 - Добавлен `queryParamsStore`
 - Добавлен компонент `app-filters-bar`, чтобы разгрузить `HomeView`
+- Добавлен [cartStore.js](src%2Fstores%2FcartStore.js)
+- Добавлен [cartUtils.js](src%2Futils%2FcartUtils.js), управление корзиной будет отсюда (добавление/удаление)
 
 ### Изменено
 - Обновлен `App.vue` для включения нового компонента `AppHeader`.
@@ -27,15 +29,15 @@
 - Отформатировано
 - Функция запроса
 - Запрос в зависимости от `queryParamsStore.params`
+- Взаимодействие компонентов с [cartStore.js](src%2Fstores%2FcartStore.js)
 
 
 
 ## [Не выпущено]
 
 ### Добавлено
-- Добавлен [cartStore.js](src%2Fstores%2FcartStore.js)
-- Добавлен [cartUtils.js](src%2Futils%2FcartUtils.js), управление корзиной будет отсюда (добавление/удаление)
+
 
 ### Изменено
-- Взаимодействие компонентов с [cartStore.js](src%2Fstores%2FcartStore.js)
+
 
