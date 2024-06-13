@@ -45,5 +45,6 @@
 - Ссылки в [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue)
 - router-view в [App.vue](src%2FApp.vue)
 - [loadingStore.js](src%2Fstores%2FloadingStore.js) вызывается из [App.vue](src%2FApp.vue) и прокидывается во все компоненты.
+- [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) обращается к [cartStore.js](src%2Fstores%2FcartStore.js) за кол-вом. товаров в корзине.
 
 
