@@ -1,9 +1,17 @@
 import { defineStore } from 'pinia'
-import { reactive, computed } from 'vue'
+import { computed, reactive } from 'vue'
+import { useLoadingStore } from '@/stores/loadingStore.js'
+import { fetchProducts } from '@/services/apiService.js'
+import { useCartQueryParamsStore } from '@/stores/cartQueryParamsStore.js'
 
 export const useCartStore = defineStore('cart', () => {
+
+  const loadingStore = useLoadingStore()
+  const cartQueryParamsStore = useCartQueryParamsStore()
   const state = reactive({
-    items: {} // Объект для хранения id товаров и их количества
+    items: {}, // Объект для хранения id товаров и их количества
+    products: [] // Массив для хранения информации о продуктах после запроса
+
   })
 
   const addItem = (itemId, quantity = 1) => {
@@ -29,6 +37,23 @@ export const useCartStore = defineStore('cart', () => {
 
   const clearCart = () => {
     state.items = {}
+    state.products = []
+  }
+
+  const loadCartProducts = async () => {
+    loadingStore.setLoading(true)
+    try {
+      if (itemIds.value.length > 0) {
+        cartQueryParamsStore.setItemIds(itemIds.value)
+        state.products = await fetchProducts('cart')
+      } else {
+        state.products = []
+      }
+    } catch (error) {
+      console.error('Failed to load cart products:', error)
+    } finally {
+      loadingStore.setLoading(false)
+    }
   }
 
   const totalItems = computed(() => Object.values(state.items).reduce((total, quantity) => total + quantity, 0))
@@ -43,6 +68,7 @@ export const useCartStore = defineStore('cart', () => {
     updateQuantity,
     clearCart,
     totalItems,
-    itemIds
+    itemIds,
+    loadCartProducts
   }
 })

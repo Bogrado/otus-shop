@@ -1,18 +1,27 @@
 import axios from 'axios'
 import { useQueryParamsStore } from '@/stores/queryParamsStore'
+import { useCartQueryParamsStore } from '@/stores/cartQueryParamsStore'
 
 const API_URL = 'https://6f8022cf47b3f024.mokky.dev/items'
 
-export const fetchProducts = async () => {
-  const queryParamsStore = useQueryParamsStore()
-  // console.log(queryParamsStore.params)
+export const fetchProducts = async (context = 'catalog') => {
+  let params = {}
+
+  if (context === 'catalog') {
+    const queryParamsStore = useQueryParamsStore()
+    params = {
+      ...queryParamsStore.params,
+      title: queryParamsStore.params.title ? `*${queryParamsStore.params.title}*` : null
+    }
+  } else if (context === 'cart') {
+    const cartQueryParamsStore = useCartQueryParamsStore()
+    params = {
+      ...cartQueryParamsStore.params
+    }
+  }
+
   try {
-    const response = await axios.get(API_URL, {
-      params: {
-        ...queryParamsStore.params,
-        title: queryParamsStore.params.title ? `*${queryParamsStore.params.title}*` : null
-      }
-    })
+    const response = await axios.get(API_URL, { params })
     return response.data
   } catch (error) {
     console.error('Error fetching products:', error)
