@@ -2,8 +2,6 @@
 
 ## [выпущено]
 
-ветка feature/home-product-list
-
 ### Добавлено
 - Компонент [App.vue](src%2FApp.vue) с SVG иконками и адаптивным дизайном.
 - Список продуктов на главной странице ([ProductsList.vue](src%2Fcomponents%2FProductsList.vue) и [ProductItem.vue](src%2Fcomponents%2FProductItem.vue)).
@@ -38,10 +36,14 @@
 ### Добавлено
 - `auto-animate`, потом буду использовать
 - [CartView.vue](src%2Fpages%2FCartView.vue) страница корзины
-
+- Компонент [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue)
+- Компонент [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue) для управления кол-вом товара
+- Компонент [OrderSummary.vue](src%2Fcomponents%2FOrderSummary.vue) общая информация о товарах в корзине
+- Компонент [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) контейнер для товаров корзине
 
 ### Изменено
-- ссылки в [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue)
+- Ссылки в [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue)
 - router-view в [App.vue](src%2FApp.vue)
+- [loadingStore.js](src%2Fstores%2FloadingStore.js) вызывается из [App.vue](src%2FApp.vue) и прокидывается во все компоненты.
 
 

@@ -8,7 +8,7 @@
       @updateTitle="updateTitle"
       @updateSort="updateSort"
     />
-    <div v-if="loadingStore.loading">
+    <div v-if="props.loading">
       <AppPreloader />
     </div>
     <div class="max-w-screen-lg mx-auto mt-4">
@@ -20,15 +20,20 @@
 <script setup>
 import { onMounted, watch, computed } from 'vue'
 import { useProductStore } from '../stores/productStore'
-import { useLoadingStore } from '../stores/loadingStore'
 import { updateSort, updateTitle } from '../utils/queryParamsUpdater'
 import ProductsList from '../components/ProductsList.vue'
 import AppPreloader from '../components/AppPreloader.vue'
 import { useQueryParamsStore } from '@/stores/queryParamsStore.js'
 import AppFiltersBar from '@/components/AppFiltersBar.vue'
 
+const props = defineProps({
+  loading: {
+    type: Boolean,
+    required: true
+  }
+})
+
 const productStore = useProductStore()
-const loadingStore = useLoadingStore()
 const queryParamsStore = useQueryParamsStore()
 
 const sortKey = computed(() => queryParamsStore.params.sortBy)
