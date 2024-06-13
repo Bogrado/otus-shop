@@ -31,5 +31,11 @@
 
 
 ## [Не выпущено]
+
+### Добавлено
+- Добавлен [cartStore.js](src%2Fstores%2FcartStore.js)
+- Добавлен [cartUtils.js](src%2Futils%2FcartUtils.js), управление корзиной будет отсюда (добавление/удаление)
+
 ### Изменено
+- Взаимодействие компонентов с [cartStore.js](src%2Fstores%2FcartStore.js)
 

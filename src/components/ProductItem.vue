@@ -3,23 +3,27 @@
     <img :src="product.image" alt="Product Image" class="w-36 h-36 object-cover mb-4" />
     <h3 class="text-lg font-bold mb-2">{{ product.name }}</h3>
     <p class="text-gray-700 mb-2">{{ product.price }} ₽</p>
-    <button @click="addToCart" class="bg-blue-500 text-white py-2 px-4 rounded">
+    <button @click="handleAddToCart" class="bg-blue-500 text-white py-2 px-4 rounded">
       Добавить в корзину
     </button>
   </div>
 </template>
 
 <script setup>
+
+
 const props = defineProps({
   product: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 })
 
-const addToCart = () => {
-  console.log(`Product added to cart: ${props.product.name}`)
-}
+const emit = defineEmits(['addToCart'])
+
+const handleAddToCart = () => emit('addToCart', props.product.id)
+
+
 </script>
 
 <style scoped></style>
