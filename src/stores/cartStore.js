@@ -23,6 +23,7 @@ export const useCartStore = defineStore('cart', () => {
 
   const removeItem = (itemId) => {
     delete state.items[itemId]
+    state.products = state.products.filter(product => product.id !== itemId)
   }
 
   const updateQuantity = (itemId, quantity) => {
@@ -56,7 +57,7 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   const totalItems = computed(() => Object.values(state.items).reduce((total, quantity) => total + quantity, 0))
-
+  const products = computed(() => state.products)
   const itemIds = computed(() => Object.keys(state.items))
 
   const itemQuantity = (itemId) =>  state.items[itemId] || 0
@@ -70,6 +71,7 @@ export const useCartStore = defineStore('cart', () => {
     totalItems,
     itemIds,
     loadCartProducts,
-    itemQuantity
+    itemQuantity,
+    products
   }
 })

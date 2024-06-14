@@ -2,7 +2,7 @@
 
 ## [выпущено]
 
-### Добавлено
+### Доб авлено
 - Компонент [App.vue](src%2FApp.vue) с SVG иконками и адаптивным дизайном.
 - Список продуктов на главной странице ([ProductsList.vue](src%2Fcomponents%2FProductsList.vue) и [ProductItem.vue](src%2Fcomponents%2FProductItem.vue)).
 - Компонент [AppSearchBar.vue](src%2Fcomponents%2FAppSearchBar.vue) для поиска по имени продуктов
@@ -55,10 +55,15 @@
 ## [Не выпущено]
 
 ### Добавлено
+- В [cartStore.js](src%2Fstores%2FcartStore.js) добавлен геттер products, который возвращает массив товаров в корзине
+- В [cartUtils.js](src%2Futils%2FcartUtils.js) добавлена функция, которая запрашивает удаление из стора
+- В [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) добавлены эмиты для удаления
+- В [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) вызывается функция удаления из [cartUtils.js](src%2Futils%2FcartUtils.js)
 
 
 
 ### Изменено
+- В [CartView.vue](src%2Fpages%2FCartView.vue) для получения товаров используется новый геттер из стора, вместо прямого обращения к состоянию
 
 
 

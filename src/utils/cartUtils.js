@@ -10,3 +10,4 @@ export const addToCart = (productId, quantity = 1) => {
 export const decreaseQuantity = (productId) => cartStore.updateQuantity(productId, currentQuantity(productId) - 1)
 export const increaseQuantity = (productId) => cartStore.updateQuantity(productId, currentQuantity(productId) + 1)
 
+export const removeFromCart = (productId) => cartStore.removeItem(productId)

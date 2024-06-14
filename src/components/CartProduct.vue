@@ -13,7 +13,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['ClickDecrease', 'ClickIncrease'])
+const emit = defineEmits(['ClickDecrease', 'ClickIncrease', 'ClickDelete'])
 
 
 const cartStore = useCartStore()
@@ -39,8 +39,8 @@ const quantity = computed(() => {
           <button>
             <like-icon class="hover:fill-gray-700" />
           </button>
-          <button>
-            <delete-icon class="hover:fill-gray-700" />
+          <button @click="emit('ClickDelete')">
+            <delete-icon class="hover:fill-gray-700"/>
           </button>
         </div>
       </div>

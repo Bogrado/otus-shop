@@ -1,6 +1,6 @@
 <script setup>
 import CartProduct from '@/components/CartProduct.vue'
-import { decreaseQuantity, increaseQuantity } from '@/utils/cartUtils.js'
+import { decreaseQuantity, increaseQuantity, removeFromCart } from '@/utils/cartUtils.js'
 
 
 defineProps({
@@ -20,6 +20,7 @@ defineProps({
       :product="product"
       @click-increase="increaseQuantity(product.id)"
       @click-decrease="decreaseQuantity(product.id)"
+      @click-delete="removeFromCart(product.id)"
     />
   </div>
 </template>

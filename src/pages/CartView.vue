@@ -7,14 +7,14 @@
     </div>
 
     <div v-else>
-      <div v-if="cartStore.state.products.length === 0" class="text-center text-gray-700">
+      <div v-if="cartStore.products.length === 0" class="text-center text-gray-700">
         Ваша корзина пуста.
       </div>
 
       <div v-else>
         <div class="max-w-screen-lg mx-auto flex flex-col lg:flex-row lg:space-x-8">
           <!-- Левая колонка - товары в корзине -->
-          <CartProductsList :products="cartStore.state.products" />
+          <CartProductsList :products="cartStore.products" />
           <!-- Правая колонка - информация о заказе -->
           <OrderSummary />
         </div>
