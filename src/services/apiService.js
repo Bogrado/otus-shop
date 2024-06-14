@@ -4,7 +4,8 @@ import { useCartQueryParamsStore } from '@/stores/cartQueryParamsStore'
 
 const API_URL = 'https://6f8022cf47b3f024.mokky.dev/items'
 
-export const fetchProducts = async (context = 'catalog') => {
+// Функция для получения параметров запроса
+const getRequestParams = (context, additionalParams) => {
   let params = {}
 
   if (context === 'catalog') {
@@ -19,6 +20,14 @@ export const fetchProducts = async (context = 'catalog') => {
       ...cartQueryParamsStore.params
     }
   }
+
+  // Добавляем любые дополнительные параметры
+  params = { ...params, ...additionalParams }
+  return params
+}
+
+export const fetchProducts = async (context = 'catalog', additionalParams = {}) => {
+  const params = getRequestParams(context, additionalParams)
 
   try {
     const response = await axios.get(API_URL, { params })

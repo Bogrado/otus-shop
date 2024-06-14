@@ -1,7 +1,7 @@
 <script setup>
 import CartProduct from '@/components/CartProduct.vue'
 
-const props = defineProps({
+defineProps({
   products: {
     type: Array,
     required: true
@@ -11,9 +11,6 @@ const props = defineProps({
 
 <template>
   <div class="flex-1">
-    <cart-product v-for="product in props.products" :key="product.id" :product="product" />
-
-
+    <cart-product v-for="product in products" :key="product.id" :product="product" />
   </div>
 </template>
-
