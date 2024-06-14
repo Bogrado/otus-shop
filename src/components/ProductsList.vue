@@ -6,14 +6,14 @@
       v-for="product in products"
       :key="product.id"
       :product="product"
-      @add-to-cart="handleAddToCart"
+      @add-to-cart="addItem"
     />
   </div>
 </template>
 
 <script setup>
 import ProductItem from './ProductItem.vue'
-import { addToCart } from '@/utils/cartUtils.js'
+import { useCart } from '@/composables/useCart'
 
 defineProps({
   products: {
@@ -22,7 +22,7 @@ defineProps({
   }
 })
 
-const handleAddToCart = (productId) => addToCart(productId, 1)
+const { addItem } = useCart()
 
 </script>
 

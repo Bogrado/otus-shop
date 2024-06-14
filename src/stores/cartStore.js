@@ -1,18 +1,18 @@
 import { defineStore } from 'pinia'
-import { reactive, computed } from 'vue'
+import { reactive, computed, watch } from 'vue'
 import { fetchProducts } from '@/services/apiService'
 import { useLoadingStore } from '@/stores/loadingStore'
 import { useCartQueryParamsStore } from '@/stores/cartQueryParamsStore'
 
 export const useCartStore = defineStore('cart', () => {
-  const state = reactive({
-    items: {},
-    products: []
-  })
 
   const loadingStore = useLoadingStore()
   const cartParamsStore = useCartQueryParamsStore()
 
+  const state = reactive({
+    items: JSON.parse(localStorage.getItem('cartItems')) || {},
+    products: []
+  })
   const addItem = (itemId, quantity = 1) => {
     if (state.items[itemId]) {
       state.items[itemId] += quantity
@@ -55,12 +55,14 @@ export const useCartStore = defineStore('cart', () => {
       loadingStore.setLoading(false)
     }
   }
-
+  // const itemQuantity = (itemId) =>  state.items[itemId] || 0
+  const itemQuantity = computed(() => (itemId) => state.items[itemId] ?? 0)
   const totalItems = computed(() => Object.values(state.items).reduce((total, quantity) => total + quantity, 0))
   const products = computed(() => state.products)
   const itemIds = computed(() => Object.keys(state.items))
 
-  const itemQuantity = (itemId) =>  state.items[itemId] || 0
+  const syncLocalStorage = (items) => localStorage.setItem('cartItems', JSON.stringify(items))
+  watch(() => state.items,(i) => syncLocalStorage(i),{ deep: true })
 
   return {
     state,

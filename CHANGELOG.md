@@ -60,9 +60,11 @@
 ## [Не выпущено]
 
 ### Добавлено
+- Делал локальное хранилище, а получился кастомный [хук](src%2Fcomposables%2FuseCart.js), бывает ┐(‘～` )┌
+- локальное хранилище корзины, кстати, тоже готово, 
 
 ### Изменено
+- вызовы в [ProductsList.vue](src%2Fcomponents%2FProductsList.vue) и [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue)
 
-
-
-
+### Удалено
+- `cartUtils.js` за ненадобностью, всё в кастомном хуке
