@@ -14,7 +14,7 @@
       <div v-else>
         <div class="max-w-screen-lg mx-auto flex flex-col lg:flex-row lg:space-x-8">
           <!-- Левая колонка - товары в корзине -->
-          <CartProductsList :products="cartStore.products" />
+          <CartProductsList :products="products" />
           <!-- Правая колонка - информация о заказе -->
           <OrderSummary />
         </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useCartStore } from '@/stores/cartStore.js'
 import { useLoadingStore } from '@/stores/loadingStore.js'
 import AppPreloader from '@/components/AppPreloader.vue'
@@ -33,7 +33,7 @@ import OrderSummary from '@/components/OrderSummary.vue'
 
 const cartStore = useCartStore()
 const loadingStore = useLoadingStore()
-
+const products = computed(() => cartStore.products)
 onMounted(() => {
   cartStore.loadCartProducts()
 })

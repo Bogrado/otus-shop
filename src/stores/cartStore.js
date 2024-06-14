@@ -10,34 +10,28 @@ export const useCartStore = defineStore('cart', () => {
   const cartParamsStore = useCartQueryParamsStore()
 
   const state = reactive({
-    items: JSON.parse(localStorage.getItem('cartItems')) || {},
-    products: []
+    items: [], // JSON.parse(localStorage.getItem('cartItems'))
   })
-  const addItem = (itemId, quantity = 1) => {
-    if (state.items[itemId]) {
-      state.items[itemId] += quantity
-    } else {
-      state.items[itemId] = quantity
-    }
+  const addItem = (itemId) => {
+    state.items.push(itemId)
   }
 
   const removeItem = (itemId) => {
-    delete state.items[itemId]
-    state.products = state.products.filter(product => product.id !== itemId)
+    const index = state.items.indexOf(itemId)
+    if (index > -1) {
+      state.items.splice(index, 1)
+    }
   }
 
   const updateQuantity = (itemId, quantity) => {
-    if (state.items[itemId]) {
-      state.items[itemId] = quantity
-      if (quantity <= 0) {
-        removeItem(itemId)
-      }
+    state.items = state.items.filter(id => id !== itemId)
+    for (let i = 0; i < quantity; i++) {
+      state.items.push(itemId)
     }
   }
 
   const clearCart = () => {
-    state.items = {}
-    state.products = []
+    state.items = []
   }
 
   const loadCartProducts = async () => {
@@ -55,14 +49,12 @@ export const useCartStore = defineStore('cart', () => {
       loadingStore.setLoading(false)
     }
   }
-  // const itemQuantity = (itemId) =>  state.items[itemId] || 0
-  const itemQuantity = computed(() => (itemId) => state.items[itemId] ?? 0)
-  const totalItems = computed(() => Object.values(state.items).reduce((total, quantity) => total + quantity, 0))
-  const products = computed(() => state.products)
-  const itemIds = computed(() => Object.keys(state.items))
+  const itemQuantity = (itemId) => state.items.filter(id => id === itemId).length
+  const totalItems = computed(() => state.items.length)
+  const itemIds = computed(() => Array.from(new Set(state.items))) // computed(() => state.items)
 
-  const syncLocalStorage = (items) => localStorage.setItem('cartItems', JSON.stringify(items))
-  watch(() => state.items,(i) => syncLocalStorage(i),{ deep: true })
+  // const syncLocalStorage = (items) => localStorage.setItem('cartItems', JSON.stringify(items))
+  // watch(() => state.items,(i) => syncLocalStorage(i),{ deep: true })
 
   return {
     state,
@@ -74,6 +66,5 @@ export const useCartStore = defineStore('cart', () => {
     itemIds,
     loadCartProducts,
     itemQuantity,
-    products
   }
 })
