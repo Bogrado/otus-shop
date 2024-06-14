@@ -28,6 +28,7 @@
 - В [cartUtils.js](src%2Futils%2FcartUtils.js) добавлена функция, которая запрашивает удаление из стора
 - В [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) добавлены эмиты для удаления
 - В [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) вызывается функция удаления из [cartUtils.js](src%2Futils%2FcartUtils.js)
+- Добавил немного анимашек
 
 ### Изменено
 - Обновлен [App.vue](src%2FApp.vue) для включения нового компонента [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue).
@@ -59,7 +60,6 @@
 ## [Не выпущено]
 
 ### Добавлено
-- Добавил немного анимашек
 
 ### Изменено
 
