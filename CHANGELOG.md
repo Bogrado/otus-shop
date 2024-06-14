@@ -24,6 +24,10 @@
 - [cartQueryParamsStore.js](src%2Fstores%2FcartQueryParamsStore.js) для корзины, чтобы не пересекаться с каталогом
 - computed поле в [cartStore.js](src%2Fstores%2FcartStore.js) для подсчета кол-ва товара
 - логика обновления кол-ва товаров в [cartUtils.js](src%2Futils%2FcartUtils.js)
+- В [cartStore.js](src%2Fstores%2FcartStore.js) добавлен геттер products, который возвращает массив товаров в корзине
+- В [cartUtils.js](src%2Futils%2FcartUtils.js) добавлена функция, которая запрашивает удаление из стора
+- В [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) добавлены эмиты для удаления
+- В [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) вызывается функция удаления из [cartUtils.js](src%2Futils%2FcartUtils.js)
 
 ### Изменено
 - Обновлен [App.vue](src%2FApp.vue) для включения нового компонента [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue).
@@ -50,20 +54,13 @@
 - Merge измененного запроса
 - Доделаны эмиты
 - Подкорректирована верстка
-
+- В [CartView.vue](src%2Fpages%2FCartView.vue) для получения товаров используется новый геттер из стора, вместо прямого обращения к состоянию
 
 ## [Не выпущено]
 
 ### Добавлено
-- В [cartStore.js](src%2Fstores%2FcartStore.js) добавлен геттер products, который возвращает массив товаров в корзине
-- В [cartUtils.js](src%2Futils%2FcartUtils.js) добавлена функция, которая запрашивает удаление из стора
-- В [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) добавлены эмиты для удаления
-- В [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) вызывается функция удаления из [cartUtils.js](src%2Futils%2FcartUtils.js)
-
-
 
 ### Изменено
-- В [CartView.vue](src%2Fpages%2FCartView.vue) для получения товаров используется новый геттер из стора, вместо прямого обращения к состоянию
 
 
 
