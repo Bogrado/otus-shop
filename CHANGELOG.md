@@ -21,6 +21,9 @@
 - Компонент [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue) для управления кол-вом товара
 - Компонент [OrderSummary.vue](src%2Fcomponents%2FOrderSummary.vue) общая информация о товарах в корзине
 - Компонент [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) контейнер для товаров корзине
+- [cartQueryParamsStore.js](src%2Fstores%2FcartQueryParamsStore.js) для корзины, чтобы не пересекаться с каталогом
+- computed поле в [cartStore.js](src%2Fstores%2FcartStore.js) для подсчета кол-ва товара
+- логика обновления кол-ва товаров в [cartUtils.js](src%2Futils%2FcartUtils.js)
 
 ### Изменено
 - Обновлен [App.vue](src%2FApp.vue) для включения нового компонента [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue).
@@ -38,19 +41,7 @@
 - router-view в [App.vue](src%2FApp.vue)
 - [loadingStore.js](src%2Fstores%2FloadingStore.js) вызывается из [App.vue](src%2FApp.vue) и прокидывается во все компоненты.
 - [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) обращается к [cartStore.js](src%2Fstores%2FcartStore.js) за кол-вом. товаров в корзине.
-
-
-
-## [Не выпущено]
-
-### Добавлено
-- [cartQueryParamsStore.js](src%2Fstores%2FcartQueryParamsStore.js) для корзины, чтобы не пересекаться с каталогом
-- computed поле в [cartStore.js](src%2Fstores%2FcartStore.js) для подсчета кол-ва товара
-- логика обновления кол-ва товаров в [cartUtils.js](src%2Futils%2FcartUtils.js)
-
-
-### Изменено
-- худо бедно функция с запросом написана
+- худо бедно функция с запросом переписана
 - в [cartQueryParamsStore.js](src%2Fstores%2FcartQueryParamsStore.js) изменен query параметр
 - в [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) прокинут массив с товарами
 - в [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) интерполированны свойства продукта
@@ -59,6 +50,16 @@
 - Merge измененного запроса
 - Доделаны эмиты
 - Подкорректирована верстка
+
+
+## [Не выпущено]
+
+### Добавлено
+
+
+
+### Изменено
+
 
 
 
