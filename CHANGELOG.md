@@ -29,6 +29,8 @@
 - В [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) добавлены эмиты для удаления
 - В [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) вызывается функция удаления из [cartUtils.js](src%2Futils%2FcartUtils.js)
 - Добавил немного анимашек
+- Делал локальное хранилище, а получился кастомный [хук](src%2Fcomposables%2FuseCart.js), бывает ┐(‘～` )┌
+- локальное хранилище корзины, кстати, тоже готово
 
 ### Изменено
 - Обновлен [App.vue](src%2FApp.vue) для включения нового компонента [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue).
@@ -56,15 +58,12 @@
 - Доделаны эмиты
 - Подкорректирована верстка
 - В [CartView.vue](src%2Fpages%2FCartView.vue) для получения товаров используется новый геттер из стора, вместо прямого обращения к состоянию
-
+- `cartUtils.js` за ненадобностью, всё в кастомном хуке
+- вызовы в [ProductsList.vue](src%2Fcomponents%2FProductsList.vue) и [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue)
 ## [Не выпущено]
 
 ### Добавлено
-- Делал локальное хранилище, а получился кастомный [хук](src%2Fcomposables%2FuseCart.js), бывает ┐(‘～` )┌
-- локальное хранилище корзины, кстати, тоже готово, 
 
 ### Изменено
-- вызовы в [ProductsList.vue](src%2Fcomponents%2FProductsList.vue) и [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue)
 
 ### Удалено
-- `cartUtils.js` за ненадобностью, всё в кастомном хуке
