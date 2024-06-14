@@ -46,6 +46,7 @@
 ### Добавлено
 - [cartQueryParamsStore.js](src%2Fstores%2FcartQueryParamsStore.js) для корзины, чтобы не пересекаться с каталогом
 - computed поле в [cartStore.js](src%2Fstores%2FcartStore.js) для подсчета кол-ва товара
+- логика обновления кол-ва товаров в [cartUtils.js](src%2Futils%2FcartUtils.js)
 
 
 ### Изменено
@@ -56,6 +57,8 @@
 - в [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue) прокинуто computed свойство
 - в [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue) начал делать эмиты, на этом остановился, продолжить с этого места
 - Merge измененного запроса
+- Доделаны эмиты
+- Подкорректирована верстка
 
 
 

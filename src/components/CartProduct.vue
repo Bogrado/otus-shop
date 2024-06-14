@@ -3,6 +3,8 @@ import LikeIcon from '@/components/icons/LikeIcon.vue'
 import DeleteIcon from '@/components/icons/DeleteIcon.vue'
 import QuantityManager from '@/components/QuantityManager.vue'
 import { useCartStore } from '@/stores/cartStore.js'
+import { computed } from 'vue'
+import StarIcon from '@/components/icons/StarIcon.vue'
 
 const props = defineProps({
   product: {
@@ -10,18 +12,28 @@ const props = defineProps({
     required: true
   }
 })
+
+const emit = defineEmits(['ClickDecrease', 'ClickIncrease'])
+
+
 const cartStore = useCartStore()
-const quantity = cartStore.itemQuantity(+props.product.id)
+const quantity = computed(() => {
+  const qty = cartStore.itemQuantity(props.product.id)
+  console.log('Quantity for product', props.product.id, ':', qty) // Дебажу
+  return qty
+})
 </script>
 
 <template>
   <div class="border-b py-4 flex flex-col md:flex-row justify-between items-start md:items-center">
     <div class="flex items-center">
-      <img :src="product.image" alt="Product Image" class="w-24 h-24 object-cover" />
+      <div class="w-32 h-32 flex items-center justify-center border border-shadow shadow-md rounded-lg p-2 min-w-32 max-w-32">
+        <img :src="product.image" alt="Product Image" class="w-full h-full object-contain" />
+      </div>
       <div class="ml-4">
         <h3 class="text-lg font-bold">{{ product.title }}</h3>
         <p class="text-gray-700">Категория: {{ product.category }}</p>
-        <p class="text-gray-700">Рейтинг: {{ product.rating.rate }}</p>
+        <p class="text-gray-700 flex items-center">Рейтинг: {{ product.rating.rate }}<star-icon class="w-4 h-4"/></p>
         <p class="text-gray-700">Количество оценок: {{ product.rating.count }}</p>
         <div class="flex items-center mt-2 space-x-2">
           <button>
@@ -38,11 +50,11 @@ const quantity = cartStore.itemQuantity(+props.product.id)
       <div class="text-right md:text-left mb-2 md:mb-0 md:mr-8">
         <p class="font-bold">{{ product.price }} ₽</p>
       </div>
-      <quantity-manager :quantity="quantity" />
+      <quantity-manager
+        :quantity="quantity"
+        @on-click-decrease="emit('ClickDecrease')"
+        @on-click-increase="emit('ClickIncrease')"
+      />
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

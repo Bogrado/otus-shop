@@ -23,12 +23,16 @@ const onClickIncrease = () => {
 
 <template>
   <div class="flex items-center">
-    <button>
-      <remove-icon class="hover:fill-gray-700" @click="onClickDecrease" />
+    <button
+      :disabled="quantity === 1"
+      :class="{ 'cursor-not-allowed': quantity === 1 }">
+      <remove-icon :class="{ 'fill-gray-700 hover:fill-red-900': quantity > 1 }" @click="onClickDecrease" />
     </button>
-    <div>{{ props.quantity }}</div>
+    <div class="w-6 h-6 border rounded-md border-gray-600 flex items-center justify-center">
+      {{ props.quantity }}
+    </div>
     <button>
-      <add-icon class="hover:fill-gray-700" @click="onClickIncrease" />
+      <add-icon class="fill-gray-700 hover:fill-blue-900" @click="onClickIncrease" />
     </button>
   </div>
 </template>
