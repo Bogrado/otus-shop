@@ -13,7 +13,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex-1">
+  <div class="flex-1" v-auto-animate>
     <cart-product
       v-for="product in products"
       :key="product.id"

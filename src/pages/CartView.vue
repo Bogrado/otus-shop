@@ -6,7 +6,7 @@
       <AppPreloader />
     </div>
 
-    <div v-else>
+    <div v-else v-auto-animate>
       <div v-if="cartStore.products.length === 0" class="text-center text-gray-700">
         Ваша корзина пуста.
       </div>
