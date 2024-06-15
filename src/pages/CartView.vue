@@ -16,7 +16,7 @@
           <!-- Левая колонка - товары в корзине -->
           <CartProductsList :products="products" />
           <!-- Правая колонка - информация о заказе -->
-          <OrderSummary />
+          <OrderSummary :total-price="totalPrice" :total-items="totalItems" />
         </div>
       </div>
     </div>
@@ -34,6 +34,8 @@ import OrderSummary from '@/components/OrderSummary.vue'
 const cartStore = useCartStore()
 const loadingStore = useLoadingStore()
 const products = computed(() => cartStore.products)
+const totalPrice = computed(() => cartStore.totalPrice)
+const totalItems = computed(() => cartStore.totalItems)
 onMounted(() => {
   cartStore.loadCartProducts()
 })

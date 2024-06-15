@@ -1,12 +1,24 @@
-<script setup></script>
+<script setup>
+defineProps({
+  totalPrice: {
+    type: Number,
+    required: true
+  },
+  totalItems: {
+    type: Number,
+    required: true
+  }
+})
+
+</script>
 
 <template>
   <div class="lg:w-1/3 lg:sticky lg:top-4 bg-gray-100 p-4 rounded-lg shadow-md h-max mt-8 lg:mt-0">
     <div class="text-lg font-bold mb-4">Ваша корзина</div>
-    <div class="text-gray-700 mb-2">Товаров: 7</div>
+    <div class="text-gray-700 mb-2">Товаров: {{ totalItems }}</div>
     <div class="flex justify-between items-center mb-2">
       <span>Товары:</span>
-      <span class="font-bold">73 014 ₽</span>
+      <span class="font-bold">{{ totalPrice }} ₽</span>
     </div>
 
     <button

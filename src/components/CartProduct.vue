@@ -17,6 +17,7 @@ const emit = defineEmits(['ClickDecrease', 'ClickIncrease', 'ClickDelete'])
 
 const cartStore = useCartStore()
 const quantity = computed(() => cartStore.itemQuantity(props.product.id))
+const itemTotalAmount = computed(() => (quantity.value * props.product.price).toFixed(2))
 </script>
 
 <template>
@@ -49,7 +50,7 @@ const quantity = computed(() => cartStore.itemQuantity(props.product.id))
 
     <div class="flex flex-col md:flex-row items-start md:items-center mt-4 md:mt-0 md:ml-auto">
       <div class="text-right md:text-left mb-2 md:mb-0 md:mr-8">
-        <p class="font-bold">{{ product.price }} ₽</p>
+        <p class="font-bold">{{ itemTotalAmount }} ₽</p>
       </div>
       <quantity-manager
         :quantity="quantity"

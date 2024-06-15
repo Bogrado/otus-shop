@@ -9,7 +9,7 @@ export const useCartStore = defineStore('cart', () => {
   const cartParamsStore = useCartQueryParamsStore()
 
   const state = reactive({
-    items: JSON.parse(localStorage.getItem('cartItems')) || [] // Массив для хранения объектов товаров
+    items: JSON.parse(localStorage.getItem('cartItems')) || []
   })
   const addItem = (itemId) => {
     const existingItem = state.items.find((item) => item.id === itemId)
@@ -66,6 +66,10 @@ export const useCartStore = defineStore('cart', () => {
     })
     return Object.values(uniqueProducts)
   })
+  const totalPrice = computed(() => {
+    const total = state.items.reduce((total, item) => total + item.price, 0)
+    return Number(total.toFixed(2))
+  })
 
   const syncLocalStorage = (items) => localStorage.setItem('cartItems', JSON.stringify(items))
   watch(
@@ -84,6 +88,7 @@ export const useCartStore = defineStore('cart', () => {
     loadCartProducts,
     itemQuantity,
     products,
-    removeAll
+    removeAll,
+    totalPrice
   }
 })

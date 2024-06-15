@@ -30,7 +30,7 @@ const onClickIncrease = () => {
       />
     </button>
     <div class="w-6 h-6 border rounded-md border-gray-600 flex items-center justify-center">
-      {{ props.quantity }}
+      {{ props.quantity < 10 ? `0${props.quantity}` : props.quantity }}
     </div>
     <button>
       <add-icon class="fill-gray-700 hover:fill-blue-900" @click="onClickIncrease" />

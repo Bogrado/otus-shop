@@ -72,7 +72,14 @@
 ## [Не выпущено]
 
 ### Добавлено
+- подсчеты цен в [cartStore.js](src%2Fstores%2FcartStore.js)
 
 ### Изменено
+- [CartView.vue](src%2Fpages%2FCartView.vue) - завершена
 
 ### Удалено
+
+### Нужно сделать
+1. [ ] отрефакторить [queryParamsUpdater.js](src%2Futils%2FqueryParamsUpdater.js) в кастомный хук
+2. [ ] навести порядок в компонентах
+3. [ ] В [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) вынести кнопки удаления и добавления в избранное в отдельный компонент
