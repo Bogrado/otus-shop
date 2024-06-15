@@ -55,7 +55,6 @@ export const useCartStore = defineStore('cart', () => {
       loadingStore.setLoading(false)
     }
   }
-  // const itemQuantity = (itemId) =>  state.items[itemId] || 0
   const itemQuantity = computed(() => (itemId) => state.items.filter(item => item.id === itemId).length)
   const totalItems = computed(() => state.items.length)
   const itemIds = computed(() => state.items.map(item => item.id))

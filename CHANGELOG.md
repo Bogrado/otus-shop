@@ -2,7 +2,7 @@
 
 ## [выпущено]
 
-### Доб авлено
+### Добавлено
 - Компонент [App.vue](src%2FApp.vue) с SVG иконками и адаптивным дизайном.
 - Список продуктов на главной странице ([ProductsList.vue](src%2Fcomponents%2FProductsList.vue) и [ProductItem.vue](src%2Fcomponents%2FProductItem.vue)).
 - Компонент [AppSearchBar.vue](src%2Fcomponents%2FAppSearchBar.vue) для поиска по имени продуктов
@@ -48,7 +48,7 @@
 - router-view в [App.vue](src%2FApp.vue)
 - [loadingStore.js](src%2Fstores%2FloadingStore.js) вызывается из [App.vue](src%2FApp.vue) и прокидывается во все компоненты.
 - [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) обращается к [cartStore.js](src%2Fstores%2FcartStore.js) за кол-вом. товаров в корзине.
-- худо бедно функция с запросом переписана
+- худо-бедно функция с запросом переписана
 - в [cartQueryParamsStore.js](src%2Fstores%2FcartQueryParamsStore.js) изменен query параметр
 - в [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue) прокинут массив с товарами
 - в [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) интерполированны свойства продукта
@@ -65,5 +65,10 @@
 ### Добавлено
 
 ### Изменено
-
+- Изменен [cartStore.js](src%2Fstores%2FcartStore.js).
+    Смысл: в стейте корзины хранится только один массив items, при добавлении товара из каталога в массив помещается объект вида {id: itemId}
+    После открытия корзины идет запрос и свойства, полученные с сервера, присваиваются по id к стейту, стейт при этом хранится в локальном хранилище,
+    computed products теперь возвращает массиив с уникальными товарами, чтобы его можно было интерполировать в [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue), сейчас компьютед проверяет только id, но в дальнейшем можно проверять любое свойство,
+    к примеру, размеры у футболок. Самое главное изменение, теперь не нужно отслеживать количество товаров.
+- изменены все функции в [cartStore.js](src%2Fstores%2FcartStore.js) и [useCart.js](src%2Fcomposables%2FuseCart.js) в соответствии с подходом
 ### Удалено
