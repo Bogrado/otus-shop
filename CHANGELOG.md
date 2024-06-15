@@ -58,8 +58,11 @@
 - Доделаны эмиты
 - Подкорректирована верстка
 - В [CartView.vue](src%2Fpages%2FCartView.vue) для получения товаров используется новый геттер из стора, вместо прямого обращения к состоянию
-- `cartUtils.js` за ненадобностью, всё в кастомном хуке
 - вызовы в [ProductsList.vue](src%2Fcomponents%2FProductsList.vue) и [CartProductsList.vue](src%2Fcomponents%2FCartProductsList.vue)
+
+### Удалено
+- `cartUtils.js` за ненадобностью, всё в кастомном хуке
+
 ## [Не выпущено]
 
 ### Добавлено
@@ -72,3 +75,4 @@
     к примеру, размеры у футболок. Самое главное изменение, теперь не нужно отслеживать количество товаров.
 - изменены все функции в [cartStore.js](src%2Fstores%2FcartStore.js) и [useCart.js](src%2Fcomposables%2FuseCart.js) в соответствии с подходом
 ### Удалено
+
