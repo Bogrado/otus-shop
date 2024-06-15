@@ -9,7 +9,7 @@ defineProps({
     required: true
   }
 })
-const { updateQuantity, removeItem } = useCart()
+const { addItem, removeItem, removeAllItemsWithId } = useCart()
 
 </script>
 
@@ -19,9 +19,9 @@ const { updateQuantity, removeItem } = useCart()
       v-for="product in products"
       :key="product.id"
       :product="product"
-      @click-increase="updateQuantity(product.id, 1)"
-      @click-decrease="updateQuantity(product.id, -1)"
-      @click-delete="removeItem(product.id)"
+      @click-increase="addItem(product.id)"
+      @click-decrease="removeItem(product.id)"
+      @click-delete="removeAllItemsWithId(product.id)"
     />
   </div>
 </template>

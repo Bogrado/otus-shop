@@ -3,20 +3,21 @@ import { useCartStore } from '@/stores/cartStore'
 export const useCart = () => {
 
   const cartStore = useCartStore()
-  const currentQuantity = (productId) => cartStore.itemQuantity(productId)
 
-  const addItem = (itemId, quantity = 1) => cartStore.addItem(itemId, quantity)
+  const addItem = (itemId) => cartStore.addItem(itemId)
+
 
   const removeItem = (itemId) => cartStore.removeItem(itemId)
 
-  const updateQuantity = (itemId, quantity) => cartStore.updateQuantity(itemId, currentQuantity(itemId) + quantity)
+
+  const removeAllItemsWithId = (itemId) => cartStore.removeAll(itemId)
 
   const clearCart = () => cartStore.clearCart()
 
   return {
     addItem,
     removeItem,
-    updateQuantity,
-    clearCart
+    clearCart,
+    removeAllItemsWithId
   }
 }
