@@ -8,6 +8,7 @@
       :key="product.id"
       :product="product"
       @add-to-cart="addItem"
+      @remove-from-cart="removeItem"
     />
   </div>
 </template>
@@ -23,7 +24,7 @@ defineProps({
   }
 })
 
-const { addItem } = useCart()
+const { addItem, removeItem } = useCart()
 </script>
 
 <style scoped></style>

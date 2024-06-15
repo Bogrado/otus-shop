@@ -39,10 +39,10 @@ const itemTotalAmount = computed(() => (quantity.value * props.product.price).to
         </p>
         <div class="flex items-center mt-2 space-x-2">
           <button>
-            <like-icon class="hover:fill-gray-700" />
+            <like-icon class="hover:fill-gray-700 transition duration-300" />
           </button>
           <button @click="emit('ClickDelete')">
-            <delete-icon class="hover:fill-gray-700" />
+            <delete-icon class="hover:fill-gray-700 transition duration-300" />
           </button>
         </div>
       </div>

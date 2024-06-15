@@ -22,7 +22,7 @@ defineProps({
     </div>
 
     <button
-      class="bg-gray-700 text-white py-2 px-4 rounded hover:bg-green-500 active:bg-green-700 focus:outline-none w-full"
+      class="bg-gray-700 text-white py-2 px-4 rounded hover:bg-green-500 transition duration-300 active:bg-green-700 focus:outline-none w-full"
     >
       Перейти к оформлению
     </button>
