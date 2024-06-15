@@ -4,7 +4,6 @@ import { useCartQueryParamsStore } from '@/stores/cartQueryParamsStore'
 
 const API_URL = 'https://6f8022cf47b3f024.mokky.dev/items'
 
-// Функция для получения параметров запроса
 const getRequestParams = (context, additionalParams) => {
   let params = {}
 
@@ -21,7 +20,6 @@ const getRequestParams = (context, additionalParams) => {
     }
   }
 
-  // Добавляем любые дополнительные параметры
   params = { ...params, ...additionalParams }
   return params
 }

@@ -2,7 +2,6 @@
 import CartProduct from '@/components/CartProduct.vue'
 import { useCart } from '@/composables/useCart.js'
 
-
 defineProps({
   products: {
     type: Array,
@@ -10,7 +9,6 @@ defineProps({
   }
 })
 const { addItem, removeItem, removeAllItemsWithId } = useCart()
-
 </script>
 
 <template>

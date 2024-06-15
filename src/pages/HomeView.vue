@@ -47,4 +47,3 @@ watch([sortKey, searchQuery], () => {
   productStore.loadProducts()
 })
 </script>
-

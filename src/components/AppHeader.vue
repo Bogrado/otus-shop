@@ -29,7 +29,8 @@ const totalItems = computed(() => cartStore.totalItems)
           <shopping-cart-icon class="w-6 h-6 fill-current" />
           <span class="text-sm">Корзина</span>
           <span
-            class="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+            class="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"
+          >
             {{ totalItems }}
           </span>
         </li>
@@ -39,4 +40,3 @@ const totalItems = computed(() => cartStore.totalItems)
 </template>
 
 <style scoped></style>
-
