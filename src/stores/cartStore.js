@@ -5,7 +5,6 @@ import { useLoadingStore } from '@/stores/loadingStore'
 import { useCartQueryParamsStore } from '@/stores/cartQueryParamsStore'
 
 export const useCartStore = defineStore('cart', () => {
-
   const loadingStore = useLoadingStore()
   const cartParamsStore = useCartQueryParamsStore()
 
@@ -13,7 +12,7 @@ export const useCartStore = defineStore('cart', () => {
     items: JSON.parse(localStorage.getItem('cartItems')) || [] // Массив для хранения объектов товаров
   })
   const addItem = (itemId) => {
-    const existingItem = state.items.find(item => item.id === itemId)
+    const existingItem = state.items.find((item) => item.id === itemId)
     if (existingItem) {
       const newItem = { ...existingItem }
       state.items.push(newItem)
@@ -23,14 +22,14 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   const removeItem = (itemId) => {
-    const index = state.items.findIndex(item => item.id === itemId)
+    const index = state.items.findIndex((item) => item.id === itemId)
     if (index > -1) {
       state.items.splice(index, 1)
     }
   }
 
   const removeAll = (itemId) => {
-    state.items = state.items.filter(item => item.id !== itemId)
+    state.items = state.items.filter((item) => item.id !== itemId)
   }
   const clearCart = () => {
     state.items = []
@@ -42,8 +41,8 @@ export const useCartStore = defineStore('cart', () => {
       if (itemIds.value.length > 0) {
         cartParamsStore.setItemIds(itemIds.value)
         const fetchedProducts = await fetchProducts('cart')
-        state.items = fetchedProducts.flatMap(product => {
-          const itemCount = itemIds.value.filter(id => id === product.id).length
+        state.items = fetchedProducts.flatMap((product) => {
+          const itemCount = itemIds.value.filter((id) => id === product.id).length
           return Array(itemCount).fill(product)
         })
       } else {
@@ -55,19 +54,25 @@ export const useCartStore = defineStore('cart', () => {
       loadingStore.setLoading(false)
     }
   }
-  const itemQuantity = computed(() => (itemId) => state.items.filter(item => item.id === itemId).length)
+  const itemQuantity = computed(
+    () => (itemId) => state.items.filter((item) => item.id === itemId).length
+  )
   const totalItems = computed(() => state.items.length)
-  const itemIds = computed(() => state.items.map(item => item.id))
+  const itemIds = computed(() => state.items.map((item) => item.id))
   const products = computed(() => {
     const uniqueProducts = {}
-    state.items.forEach(item => {
+    state.items.forEach((item) => {
       uniqueProducts[item.id] = item
     })
     return Object.values(uniqueProducts)
   })
 
   const syncLocalStorage = (items) => localStorage.setItem('cartItems', JSON.stringify(items))
-  watch(() => state.items, (i) => syncLocalStorage(i), { deep: true })
+  watch(
+    () => state.items,
+    (i) => syncLocalStorage(i),
+    { deep: true }
+  )
 
   return {
     state,

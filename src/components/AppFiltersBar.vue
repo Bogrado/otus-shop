@@ -1,6 +1,8 @@
 <template>
   <div class="max-w-screen-lg mx-auto">
-    <div class="flex flex-col sm:flex-row justify-between gap-4 w-full items-center border rounded-lg shadow p-4">
+    <div
+      class="flex flex-col sm:flex-row justify-between gap-4 w-full items-center border rounded-lg shadow p-4"
+    >
       <div class="w-full sm:w-1/2">
         <AppSearchBar :modelValue="searchQuery" @on-change-search="updateTitle" />
       </div>
