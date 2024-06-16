@@ -11,14 +11,8 @@ const props = defineProps({
 
 const emit = defineEmits(['onClickDecrease', 'onClickIncrease'])
 
-const onClickDecrease = () => {
-  if (props.quantity > 1) {
-    emit('onClickDecrease')
-  }
-}
-const onClickIncrease = () => {
-  emit('onClickIncrease')
-}
+const onClickDecrease = () => emit('onClickDecrease')
+const onClickIncrease = () => emit('onClickIncrease')
 </script>
 
 <template>
