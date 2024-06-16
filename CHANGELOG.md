@@ -70,6 +70,7 @@
 
 ### Удалено
 - `cartUtils.js` за ненадобностью, всё в кастомном хуке
+- проверка в [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue), не понимаю, как она туда попала
 
 ## [Не выпущено]
 
@@ -80,7 +81,7 @@
 
 
 ### Удалено
-- проверка в [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue), не понимаю, как она туда попала
+
 
 ### Нужно сделать
 1. [ ] отрефакторить [queryParamsUpdater.js](src%2Futils%2FqueryParamsUpdater.js) в кастомный хук
