@@ -2,6 +2,7 @@
 import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon.vue'
 import { useCartStore } from '@/stores/cartStore.js'
 import { computed } from 'vue'
+import AccountIcon from '@/components/icons/AccountIcon.vue'
 
 const cartStore = useCartStore()
 
@@ -26,7 +27,7 @@ const totalItems = computed(() => cartStore.totalItems)
         <li
           class="relative flex flex-col items-center text-slate-500 cursor-pointer hover:text-white"
         >
-          <shopping-cart-icon class="w-6 h-6 fill-current" />
+          <shopping-cart-icon class="w-8 h-8 fill-current" />
           <span class="text-sm">Корзина</span>
           <span
             class="absolute top-0 right-0 transform translate-x-2 -translate-y-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"
@@ -35,8 +36,12 @@ const totalItems = computed(() => cartStore.totalItems)
           </span>
         </li>
       </router-link>
+        <li
+          class="relative flex flex-col items-center text-slate-500 cursor-pointer hover:text-white"
+        >
+          <account-icon class="w-8 h-8 fill-current" />
+          <span class="text-sm">Войти</span>
+        </li>
     </ul>
   </header>
 </template>
-
-<style scoped></style>

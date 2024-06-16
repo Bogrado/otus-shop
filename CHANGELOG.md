@@ -75,6 +75,10 @@
 ## [Не выпущено]
 
 ### Добавлено
+- [AccountIcon.vue](src%2Fcomponents%2Ficons%2FAccountIcon.vue) иконка входа
+- [AppModal.vue](src%2Fcomponents%2FAppModal.vue) верстка
+- [LoginForm.vue](src%2Fcomponents%2FLoginForm.vue) верстка
+- [RegisterForm.vue](src%2Fcomponents%2FRegisterForm.vue) верстка
 
 
 ### Изменено

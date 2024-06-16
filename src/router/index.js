@@ -9,14 +9,15 @@ const router = createRouter({
       component: () => import('@/pages/HomeView.vue')
     },
     {
-      path: '/product/:id',
-      name: 'Product',
-      component: () => import('@/pages/ProductView.vue')
-    },
-    {
       path: '/cart',
       name: 'Cart',
       component: () => import('@/pages/CartView.vue')
+    },
+
+    {
+      path: '/product/:id',
+      name: 'Product',
+      component: () => import('@/pages/ProductView.vue')
     },
     {
       path: '/checkout',
