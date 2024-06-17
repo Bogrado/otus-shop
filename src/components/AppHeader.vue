@@ -2,7 +2,9 @@
 import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon.vue'
 import { useCartStore } from '@/stores/cartStore.js'
 import { useModalStore } from '@/stores/modalStore.js'
+import { useAuthStore } from '@/stores/authStore.js'
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import AccountIcon from '@/components/icons/AccountIcon.vue'
 import AppModal from '@/components/AppModal.vue'
 import LoginForm from '@/components/LoginForm.vue'
@@ -10,9 +12,10 @@ import RegisterForm from '@/components/RegisterForm.vue'
 
 const cartStore = useCartStore()
 const modalStore = useModalStore()
+const authStore = useAuthStore()
+const router = useRouter()
 
 const totalItems = computed(() => cartStore.totalItems)
-const showDropdown = ref(false)
 const modalType = ref('')
 
 const openLoginModal = () => {
@@ -29,7 +32,18 @@ const closeModal = () => modalStore.closeModal()
 
 const isLoginModalOpen = computed(() => modalStore.isOpen && modalType.value === 'login')
 const isRegisterModalOpen = computed(() => modalStore.isOpen && modalType.value === 'register')
+const isLoggedIn = computed(() => !!authStore.token)
+const user = computed(() => authStore.user)
+
+const handleAccountClick = () => {
+  if (isLoggedIn.value) {
+    router.push('/profile')
+  } else {
+    openLoginModal()
+  }
+}
 </script>
+
 <template>
   <header
     v-auto-animate
@@ -58,21 +72,12 @@ const isRegisterModalOpen = computed(() => modalStore.isOpen && modalType.value 
           </span>
         </li>
       </router-link>
-      <li
-        v-auto-animate
-        class="relative flex flex-col items-center text-slate-500 cursor-pointer hover:text-white"
-        @mouseenter="showDropdown = true"
-        @mouseleave="showDropdown = false"
-      >
+      <li class="relative flex flex-col items-center text-slate-500 cursor-pointer hover:text-white"
+          @click="handleAccountClick" v-auto-animate>
         <account-icon class="w-8 h-8 fill-current" />
-        <span class="text-sm">Войти</span>
-        <div v-if="showDropdown" class="absolute top-12 right-0 bg-white shadow-lg rounded-md p-4">
-          <button @click="openLoginModal" class="block w-full text-left mb-2 border-b border-slate-700 text-black">
-            Войти
-          </button>
-          <button @click="openRegisterModal" class="block w-full text-left border-b border-slate-700 text-black">
-            Зарегистрироваться
-          </button>
+        <span v-if="!isLoggedIn" class="text-sm">Войти</span>
+        <div v-else class="text-sm flex flex-col items-center">
+          <span class="text-sm">{{ user?.fullName }}</span>
         </div>
       </li>
     </ul>

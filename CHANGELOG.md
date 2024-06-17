@@ -81,6 +81,8 @@
 - [RegisterForm.vue](src%2Fcomponents%2FRegisterForm.vue) верстка
 - [modalStore.js](src%2Fstores%2FmodalStore.js) контроль состояния модалки
 - В [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) Добавлен новый li с открытием форм
+- [authStore.js](src%2Fstores%2FauthStore.js) простой стор для авторизации и регистрации
+- [App.vue](src%2FApp.vue) проверка авторизации по токену при маунте приложения
 
 ### Изменено
 - Переделал [AppSortBar.vue](src%2Fcomponents%2FAppSortBar.vue), чтобы красивенько было
@@ -88,6 +90,7 @@
 - Бэкграунд приложения в [App.vue](src%2FApp.vue)
 
 ### Удалено
+- Удален дропдаун из [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) слишком он муторный
 
 
 ### Нужно сделать

@@ -20,8 +20,17 @@
 import AppHeader from '@/components/AppHeader.vue'
 import { vAutoAnimate } from '@formkit/auto-animate'
 import { useLoadingStore } from '@/stores/loadingStore.js'
+import { useAuthStore } from '@/stores/authStore.js'
+import { onMounted } from 'vue'
 
 const loadingStore = useLoadingStore()
+const authStore = useAuthStore()
+
+onMounted(() => {
+  if (authStore.token) {
+    authStore.fetchUser()
+  }
+})
 </script>
 
 <style>

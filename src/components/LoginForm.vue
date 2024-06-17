@@ -1,11 +1,12 @@
 <template>
-  <form class="space-y-4 bg-gray-800 p-6 rounded shadow-lg">
+  <form @submit.prevent="login" class="space-y-4 bg-gray-800 p-6 rounded shadow-lg">
     <h2 class="text-white text-lg font-bold mb-4">Войти с учетной записью</h2>
     <div>
       <label for="login-email" class="block text-sm font-medium text-gray-300">Электронная почта</label>
       <input
         id="login-email"
         type="email"
+        v-model="email"
         class="mt-1 block w-full p-2 border rounded bg-gray-700 text-white border-gray-600"
         required
       />
@@ -15,6 +16,7 @@
       <input
         id="login-password"
         type="password"
+        v-model="password"
         class="mt-1 block w-full p-2 border rounded bg-gray-700 text-white border-gray-600"
         required
       />
@@ -27,6 +29,7 @@
       <a href="#" class="hover:text-white">Забыли пароль?</a>
     </div>
     <button
+      @click="login"
       type="submit"
       class="w-full bg-yellow-500 text-black py-2 rounded hover:bg-yellow-600 transition"
     >
@@ -42,5 +45,22 @@
         Зарегистрироваться
       </button>
     </div>
+    <p v-if="error" class="text-red-500 mt-4">{{ error }}</p>
   </form>
 </template>
+
+<script setup>
+import { computed, ref } from 'vue'
+import { useAuthStore } from '@/stores/authStore'
+
+const authStore = useAuthStore()
+const email = ref('')
+const password = ref('')
+
+const login = async () => {
+  console.log(1)
+  await authStore.login(email.value, password.value)
+}
+
+const error = computed(() => authStore.error)
+</script>
