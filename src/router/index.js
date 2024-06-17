@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '@/stores/authStore'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,8 +34,29 @@ const router = createRouter({
       path: '/favorites',
       name: 'FavoriteProducts',
       component: () => import('@/pages/FavoriteProductsView.vue')
+    },
+    {
+      path: '/admin',
+      name: 'AdminPanel',
+      component: () => import('@/pages/AdminView.vue'),
+      meta: {
+        requiresAdmin: true
+      }
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  if (to.matched.some((record) => record.meta.requiresAdmin)) {
+    if (!authStore.isAdmin) {
+      next({ name: 'Home' })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

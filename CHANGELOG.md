@@ -83,11 +83,14 @@
 - В [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) Добавлен новый li с открытием форм
 - [authStore.js](src%2Fstores%2FauthStore.js) простой стор для авторизации и регистрации
 - [App.vue](src%2FApp.vue) проверка авторизации по токену при маунте приложения
+- Страница [AdminView.vue](src%2Fpages%2FAdminView.vue)
 
 ### Изменено
 - Переделал [AppSortBar.vue](src%2Fcomponents%2FAppSortBar.vue), чтобы красивенько было
 - [LoginForm.vue](src%2Fcomponents%2FLoginForm.vue) [RegisterForm.vue](src%2Fcomponents%2FRegisterForm.vue) изменил верстку
 - Бэкграунд приложения в [App.vue](src%2FApp.vue)
+- Настроил роутер для переадресации, если у пользователя нет прав админа
+- В [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) появляется кнопка с админ панелью, при проверке роли
 
 ### Удалено
 - Удален дропдаун из [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) слишком он муторный

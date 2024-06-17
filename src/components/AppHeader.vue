@@ -9,6 +9,7 @@ import AccountIcon from '@/components/icons/AccountIcon.vue'
 import AppModal from '@/components/AppModal.vue'
 import LoginForm from '@/components/LoginForm.vue'
 import RegisterForm from '@/components/RegisterForm.vue'
+import AdminIcon from '@/components/icons/AdminIcon.vue'
 
 const cartStore = useCartStore()
 const modalStore = useModalStore()
@@ -34,6 +35,7 @@ const isLoginModalOpen = computed(() => modalStore.isOpen && modalType.value ===
 const isRegisterModalOpen = computed(() => modalStore.isOpen && modalType.value === 'register')
 const isLoggedIn = computed(() => !!authStore.token)
 const user = computed(() => authStore.user)
+const isAdmin = computed(() => authStore.isAdmin)
 
 const handleAccountClick = () => {
   if (isLoggedIn.value) {
@@ -80,6 +82,14 @@ const handleAccountClick = () => {
           <span class="text-sm">{{ user?.fullName }}</span>
         </div>
       </li>
+      <router-link v-if="isAdmin" to="/admin">
+        <li
+          class="relative flex flex-col items-center text-slate-500 cursor-pointer hover:text-white"
+        >
+          <admin-icon class="w-8 h-8 fill-current" />
+          <span class="text-sm">Админ панель</span>
+        </li>
+      </router-link>
     </ul>
 
     <AppModal :isOpen="isLoginModalOpen" @close="closeModal">
