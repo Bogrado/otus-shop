@@ -1,25 +1,9 @@
-<template>
-  <div class="mb-4">
-    <label for="sort" class="mr-2">Сортировка:</label>
-    <select
-      id="sort"
-      class="border p-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-gray-300"
-      @change="onChangeSort"
-    >
-      <option
-        v-for="filter in filters"
-        :key="filter.value"
-        :value="filter.value"
-        :selected="filter.value === sortKey"
-      >
-        {{ filter.label }}
-      </option>
-    </select>
-  </div>
-</template>
-
 <script setup>
-defineProps({
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import DropDownIcon from '@/components/icons/DropDownIcon.vue'
+import DropUpIcon from '@/components/icons/DropUpIcon.vue'
+
+const props = defineProps({
   sortKey: {
     type: String,
     required: true
@@ -28,17 +12,74 @@ defineProps({
 
 const emit = defineEmits(['onChangeSort'])
 
-const onChangeSort = (event) => {
-  emit('onChangeSort', event.target.value)
+const dropdownOpen = ref(false)
+
+const toggleDropdown = () => {
+  dropdownOpen.value = !dropdownOpen.value
+}
+
+const closeDropdown = () => {
+  dropdownOpen.value = false
+}
+
+const handleClickOutside = (event) => {
+  if (!event.target.closest('.relative')) {
+    closeDropdown()
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside) // очень плохо, надо будет это переделать
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
+
+const selectFilter = (filter) => {
+  emit('onChangeSort', filter.value)
+  dropdownOpen.value = false
 }
 
 const filters = [
   { label: 'По умолчанию', value: '' },
   { label: 'По названию', value: 'title' },
-  { label: 'По цене (Сначала недорогие)', value: 'price' },
-  { label: 'По цене (Подороже)', value: '-price' },
+  { label: 'Сначала недорогие', value: 'price' },
+  { label: 'Сначала дорогие', value: '-price' },
   { label: 'По категории', value: 'category' }
 ]
+
+const currentLabel = computed(() => {
+  const selectedFilter = filters.find(filter => filter.value === props.sortKey)
+  return selectedFilter ? selectedFilter.label : 'По умолчанию'
+})
 </script>
 
-<style scoped></style>
+<template>
+  <div class="mb-4 flex items-center space-x-2">
+    <span>Сортировка:</span>
+    <div class="relative" v-auto-animate="{ duration: 100 }">
+      <button
+        @mouseenter="toggleDropdown"
+        @click="toggleDropdown"
+        class="border p-2 rounded-lg shadow cursor-pointer flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-gray-300 w-64 bg-white group"
+      >
+        <span class="text-gray-400 group-focus:text-black  line-clamp-1 text-ellipsis overflow-hidden">{{ currentLabel }}</span>
+        <span v-auto-animate>
+          <drop-down-icon v-if="!dropdownOpen" class="w-8 fill-gray-300 group-focus:fill-black" />
+          <drop-up-icon v-else class="w-8 fill-gray-300 group-focus:fill-black" />
+        </span>
+      </button>
+      <ul v-if="dropdownOpen" class="absolute left-0 mt-1 border bg-white shadow-lg rounded-lg w-64 z-10">
+        <li
+          v-for="filter in filters"
+          :key="filter.value"
+          @click="selectFilter(filter)"
+          class="cursor-pointer px-4 py-2 hover:bg-gray-200"
+        >
+          {{ filter.label }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>

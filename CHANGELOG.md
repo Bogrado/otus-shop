@@ -79,10 +79,13 @@
 - [AppModal.vue](src%2Fcomponents%2FAppModal.vue) верстка
 - [LoginForm.vue](src%2Fcomponents%2FLoginForm.vue) верстка
 - [RegisterForm.vue](src%2Fcomponents%2FRegisterForm.vue) верстка
-
+- [modalStore.js](src%2Fstores%2FmodalStore.js) контроль состояния модалки
+- В [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) Добавлен новый li с открытием форм
 
 ### Изменено
-
+- Переделал [AppSortBar.vue](src%2Fcomponents%2FAppSortBar.vue), чтобы красивенько было
+- [LoginForm.vue](src%2Fcomponents%2FLoginForm.vue) [RegisterForm.vue](src%2Fcomponents%2FRegisterForm.vue) изменил верстку
+- Бэкграунд приложения в [App.vue](src%2FApp.vue)
 
 ### Удалено
 
@@ -91,3 +94,4 @@
 1. [ ] отрефакторить [queryParamsUpdater.js](src%2Futils%2FqueryParamsUpdater.js) в кастомный хук
 2. [ ] навести порядок в компонентах
 3. [ ] В [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) вынести кнопки удаления и добавления в избранное в отдельный компонент
+4. [ ] Переделать нативные слушатели в [AppSortBar.vue](src%2Fcomponents%2FAppSortBar.vue)

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="min-h-screen flex flex-col">
+  <div id="app" class="min-h-screen flex flex-col bg-gray-100">
     <app-header />
     <main class="flex-grow p-4">
       <div class="p-10">
