@@ -92,13 +92,14 @@
 - Настроил роутер для переадресации, если у пользователя нет прав админа
 - В [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) появляется кнопка с админ панелью, при проверке роли
 - Отрефакторил запросы, вынес логику запросов в кастомный хук [useApi.js](src%2Fcomposables%2FuseApi.js)
+- Изменено всё, что связано с [AppFiltersBar.vue](src%2Fcomponents%2FAppFiltersBar.vue)
 
 ### Удалено
 - Удален дропдаун из [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) слишком он муторный
 
 
 ### Нужно сделать
-1. [ ] отрефакторить [queryParamsUpdater.js](src%2Futils%2FqueryParamsUpdater.js) в кастомный хук
+1. [x] отрефакторить [queryParamsUpdater.js](src%2Futils%2FqueryParamsUpdater.js) в кастомный хук
 2. [ ] навести порядок в компонентах
 3. [ ] В [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) вынести кнопки удаления и добавления в избранное в отдельный компонент
 4. [ ] Переделать нативные слушатели в [AppSortBar.vue](src%2Fcomponents%2FAppSortBar.vue)

@@ -4,10 +4,10 @@
       class="flex flex-col sm:flex-row justify-between gap-4 w-full items-center border rounded-lg shadow p-4"
     >
       <div class="w-full sm:w-1/2">
-        <AppSearchBar />
+        <AppSearchBar :title="title" @on-input-change="updateSearch"  />
       </div>
       <div class="w-full sm:w-1/2 flex justify-end">
-        <AppSortBar @on-change-sort="updateSort" :sortKey="sortKey" />
+        <AppSortBar :filters="filtersList" :sortBy="sortBy" @on-sort-change="updateSortBy" />
       </div>
     </div>
   </div>
@@ -16,25 +16,7 @@
 <script setup>
 import AppSearchBar from './AppSearchBar.vue'
 import AppSortBar from './AppSortBar.vue'
+import { useCatalogParams } from '@/composables/useCatalogParams.js'
 
-defineProps({
-  searchQuery: {
-    type: String,
-    required: true
-  },
-  sortKey: {
-    type: String,
-    required: true
-  }
-})
-
-const emit = defineEmits(['updateTitle', 'updateSort'])
-
-const updateTitle = (title) => {
-  emit('updateTitle', title)
-}
-
-const updateSort = (sortBy) => {
-  emit('updateSort', sortBy)
-}
+const { updateSearch, updateSortBy, filtersList, title, sortBy } = useCatalogParams()
 </script>

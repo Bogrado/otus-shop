@@ -3,10 +3,6 @@
     <h1 class="text-3xl font-bold mb-4 w-1/3 mx-auto text-center">Товары</h1>
 
     <app-filters-bar
-      :searchQuery="searchQuery"
-      :sortKey="sortKey"
-      @updateTitle="updateTitle"
-      @updateSort="updateSort"
     />
     <div v-if="props.loading">
       <AppPreloader />

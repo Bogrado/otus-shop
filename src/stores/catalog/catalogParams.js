@@ -12,20 +12,17 @@ export const useCatalogParamsStore = defineStore('catalogParams', () => {
 
   const setSortBy = (sortBy) => (params.sortBy = sortBy)
 
-  const setTitle = (title) => {
-    titleVal.value = title
-  }
-
-  const setId = (id) => (params.id = id)
+  const setTitle = (title) => titleVal.value = title
 
   const getParams = computed(() => params)
   const getTitle = computed(() => titleVal.value)
+  const getSortBy = computed(() => params.sortBy)
 
   return {
     setSortBy,
     setTitle,
-    setId,
     getParams,
-    getTitle
+    getTitle,
+    getSortBy
   }
 })
