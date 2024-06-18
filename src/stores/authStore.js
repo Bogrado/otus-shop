@@ -1,15 +1,28 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
-import { authenticate, fetchUserData } from '@/services/apiService'
+import { computed, reactive, ref } from 'vue'
+import { useApi } from '@/composables/useApi'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
   const token = ref(localStorage.getItem('token') || null)
   const error = ref(null)
 
+  const { postData, getData } = useApi()
+  const AUTH_PARAMS = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }
+  const TOKEN_PARAMS = reactive({
+    headers: {
+      Authorization: `Bearer ${token.value}`
+    }
+  })
+
   const login = async (email, password) => {
     try {
-      const data = await authenticate('auth', { email, password })
+      const data = await postData?.('auth', { email, password }, AUTH_PARAMS)
       user.value = data.data
       token.value = data.token
       error.value = null
@@ -21,7 +34,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const register = async (fullName, email, password) => {
     try {
-      const data = await authenticate('register', { fullName, email, password })
+      const data = await postData?.('register', { fullName, email, password }, AUTH_PARAMS)
       user.value = data.data
       token.value = data.token
       error.value = null
@@ -30,15 +43,15 @@ export const useAuthStore = defineStore('auth', () => {
       error.value = err
     }
   }
-
   const fetchUser = async () => {
     if (!token.value) return
 
     try {
-      user.value = await fetchUserData(token.value)
+      user.value = await getData?.('auth_me', TOKEN_PARAMS)
+      console.log(TOKEN_PARAMS)
     } catch (err) {
       error.value = err
-      logout()
+      // logout()
     }
   }
 

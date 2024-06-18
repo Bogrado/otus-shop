@@ -40,7 +40,7 @@ export const useCartStore = defineStore('cart', () => {
     loadingStore.setLoading(true)
     try {
       if (itemIds.value.length > 0) {
-        const fetchedProducts = await getData?.('items', { id: itemIds.value })
+        const fetchedProducts = await getData?.('items', { params: { id: itemIds.value, _select: '-description' } })
         state.items = fetchedProducts.flatMap((product) => {
           const itemCount = itemIds.value.filter((id) => id === product.id).length
           return Array(itemCount).fill(product)

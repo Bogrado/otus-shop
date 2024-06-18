@@ -3,10 +3,11 @@ import axios from 'axios'
 export const useApi = () => {
 
   const API_URL = 'https://6f8022cf47b3f024.mokky.dev'
-  const getData = async (endpoint, params = {}) => {
+  const getData = async (endpoint, params) => {
 
     try {
-      const response = await axios.get(`${API_URL}/${endpoint}`, { params })
+      console.log({ params })
+      const response = await axios.get(`${API_URL}/${endpoint}`, params)
       return response.data
     } catch (error) {
       console.error('Error fetching products:', error)
@@ -14,9 +15,9 @@ export const useApi = () => {
     }
   }
 
-  const postData = async (endpoint, payload = {}, params = {}) => {
+  const postData = async (endpoint, payload, params = {}) => {
     try {
-      const response = await axios.post(`${API_URL}/${endpoint}`, { payload }, { params })
+      const response = await axios.post(`${API_URL}/${endpoint}`, payload, { params })
       return response.data
     } catch (error) {
       console.error('Error fetching products:', error)
