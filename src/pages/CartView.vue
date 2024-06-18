@@ -25,7 +25,7 @@
 
 <script setup>
 import { computed, onMounted } from 'vue'
-import { useCartStore } from '@/stores/cartStore.js'
+import { useCartStore } from '@/stores/cart/cartStore.js'
 import { useLoadingStore } from '@/stores/loadingStore.js'
 import AppPreloader from '@/components/AppPreloader.vue'
 import CartProductsList from '@/components/CartProductsList.vue'

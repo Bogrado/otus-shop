@@ -91,6 +91,7 @@
 - Бэкграунд приложения в [App.vue](src%2FApp.vue)
 - Настроил роутер для переадресации, если у пользователя нет прав админа
 - В [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) появляется кнопка с админ панелью, при проверке роли
+- Отрефакторил запросы, вынес логику запросов в кастомный хук [useApi.js](src%2Fcomposables%2FuseApi.js)
 
 ### Удалено
 - Удален дропдаун из [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) слишком он муторный

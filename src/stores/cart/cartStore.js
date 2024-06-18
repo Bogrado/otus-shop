@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
 import { reactive, computed, watch } from 'vue'
-import { fetchProducts } from '@/services/apiService'
-import { useLoadingStore } from '@/stores/loadingStore'
-import { useCartQueryParamsStore } from '@/stores/cartQueryParamsStore'
+import { useApi } from '@/composables/useApi.js'
+import { useLoadingStore } from '@/stores/loadingStore.js'
 
 export const useCartStore = defineStore('cart', () => {
+
+  const { getData } = useApi()
   const loadingStore = useLoadingStore()
-  const cartParamsStore = useCartQueryParamsStore()
 
   const state = reactive({
     items: JSON.parse(localStorage.getItem('cartItems')) || []
@@ -40,15 +40,14 @@ export const useCartStore = defineStore('cart', () => {
     loadingStore.setLoading(true)
     try {
       if (itemIds.value.length > 0) {
-        cartParamsStore.setItemIds(itemIds.value)
-        const fetchedProducts = await fetchProducts('cart')
+        const fetchedProducts = await getData?.('items', { id: itemIds.value })
         state.items = fetchedProducts.flatMap((product) => {
           const itemCount = itemIds.value.filter((id) => id === product.id).length
           return Array(itemCount).fill(product)
         })
-      } else {
-        state.items = []
+        return
       }
+      state.items = []
     } catch (error) {
       console.error('Failed to load cart products:', error)
     } finally {

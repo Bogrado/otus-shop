@@ -2,7 +2,7 @@
 import LikeIcon from '@/components/icons/LikeIcon.vue'
 import DeleteIcon from '@/components/icons/DeleteIcon.vue'
 import QuantityManager from '@/components/QuantityManager.vue'
-import { useCartStore } from '@/stores/cartStore.js'
+import { useCartStore } from '@/stores/cart/cartStore.js'
 import { computed } from 'vue'
 import StarIcon from '@/components/icons/StarIcon.vue'
 

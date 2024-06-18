@@ -1,6 +1,6 @@
 <script setup>
 import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon.vue'
-import { useCartStore } from '@/stores/cartStore.js'
+import { useCartStore } from '@/stores/cart/cartStore.js'
 import { useModalStore } from '@/stores/modalStore.js'
 import { useAuthStore } from '@/stores/authStore.js'
 import { ref, computed } from 'vue'
