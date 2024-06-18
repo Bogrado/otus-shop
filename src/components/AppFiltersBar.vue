@@ -4,7 +4,7 @@
       class="flex flex-col sm:flex-row justify-between gap-4 w-full items-center border rounded-lg shadow p-4"
     >
       <div class="w-full sm:w-1/2">
-        <AppSearchBar :modelValue="searchQuery" @on-change-search="updateTitle" />
+        <AppSearchBar />
       </div>
       <div class="w-full sm:w-1/2 flex justify-end">
         <AppSortBar @on-change-sort="updateSort" :sortKey="sortKey" />

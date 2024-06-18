@@ -1,9 +1,9 @@
 <template>
   <div class="mb-4">
     <input
+      :value="title"
+      @input="updateSearch"
       type="text"
-      v-model="searchVal"
-      @input="onInputHandler"
       placeholder="Поиск по названию..."
       class="border p-2 w-full rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-gray-300"
     />
@@ -11,27 +11,17 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-const emit = defineEmits(['on-change-search'])
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: true
-  }
-})
+import { useCatalogParamsStore } from '@/stores/catalog/catalogParams.js'
+import debounce from 'lodash.debounce'
+import { computed } from 'vue'
 
-const searchVal = ref(props.modelValue)
+const catalogParamsStore = useCatalogParamsStore()
+const title = computed(() => catalogParamsStore.getTitle)
 
-const onInputHandler = (event) => {
-  emit('on-change-search', event.target.value)
-}
+const updateSearch = debounce((evt) => {
+  catalogParamsStore.setTitle(evt.target.value)
+}, 600)
 
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    searchVal.value = newVal
-  }
-)
 </script>
 
 <style scoped></style>

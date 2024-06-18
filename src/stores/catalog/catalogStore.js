@@ -15,7 +15,7 @@ export const useCatalogStore = defineStore('catalog', () => {
   const loadProducts = async () => {
     loadingStore.setLoading(true)
     try {
-      state.products = await getData?.('items', catalogParams.params)
+      state.products = await getData?.('items', catalogParams.getParams)
     } catch (error) {
       console.error('Error loading products:', error)
     } finally {
