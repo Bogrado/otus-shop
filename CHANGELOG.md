@@ -101,7 +101,10 @@
 - В [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) Добавлен новый li с открытием форм
 - [authStore.js](src%2Fstores%2FauthStore.js) простой стор для авторизации и регистрации
 - [App.vue](src%2FApp.vue) проверка авторизации по токену при маунте приложения
-- Страница [AdminView.vue](src%2Fpages%2FAdminView.vue)
+- Добавил страницу админки, настроил ее в роутере, чтобы без роли админа не попасть, компоненты к ней [AdminSidebar.vue](src%2Fcomponents%2Fadmin%2FAdminSidebar.vue) 
+[AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue) [THead.vue](src%2Fcomponents%2Fadmin%2Ftable%2FTHead.vue)[TBody.vue](src%2Fcomponents%2Fadmin%2Ftable%2FTBody.vue)
+[AdminProductTable.vue](src%2Fcomponents%2Fadmin%2Ftable%2FAdminProductTable.vue)
+- [useModal.js](src%2Fcomposables%2FuseModal.js) для переиспользования модалок, ох и задолбался с этим, надеюсь, все корректно
 
 ### Изменено
 
@@ -115,6 +118,7 @@
 - Изменено всё, что связано с [AppFiltersBar.vue](src%2Fcomponents%2FAppFiltersBar.vue)
 - Изменены запросы на логин, проверку пользователя и регистрацию, как же я задолбался приводить в порядок запросы...
   по крайней мере, за них теперь отвечает только [useApi.js](src%2Fcomposables%2FuseApi.js)
+- перелопатил [modalStore.js](src%2Fstores%2FmodalStore.js) 
 
 ### Удалено
 
@@ -128,6 +132,6 @@
 3. [ ] В [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) вынести кнопки удаления и добавления в избранное в
    отдельный компонент
 4. [ ] Переделать нативные слушатели в [AppSortBar.vue](src%2Fcomponents%2FAppSortBar.vue)
-5. [ ] Стандартизировать запросы
+5. [] Стандартизировать запросы
    в [authStore.js](src%2Fstores%2FauthStore.js), [catalogStore.js](src%2Fstores%2Fcatalog%2FcatalogStore.js), [cartStore.js](src%2Fstores%2Fcart%2FcartStore.js) 
 6. [ ] Куда-нибудь определить все константы

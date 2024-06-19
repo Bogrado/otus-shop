@@ -31,11 +31,11 @@ const productStore = useCatalogStore()
 const catalogParamsStore = useCatalogParamsStore()
 const params = computed(() => catalogParamsStore.getParams)
 
-
+const load = () => productStore.loadProducts({ params: params.value })
 
 onMounted(() => {
-  productStore.loadProducts()
+  load()
 })
 
-watch([params], productStore.loadProducts, { deep: true })
+watch([params], load, { deep: true })
 </script>

@@ -38,10 +38,20 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'AdminPanel',
-      component: () => import('@/pages/AdminView.vue'),
+      component: () => import('@/pages/admin/AdminView.vue'),
       meta: {
         requiresAdmin: true
-      }
+      },
+      children: [
+        {
+          path: 'dashboard',
+          component: () => import('@/pages/admin/AdminDashboard.vue')
+        },
+        {
+          path: 'products',
+          component: () => import('@/pages/admin/AdminProducts.vue')
+        }
+      ]
     }
   ]
 })

@@ -51,7 +51,7 @@ export const useAuthStore = defineStore('auth', () => {
       console.log(TOKEN_PARAMS)
     } catch (err) {
       error.value = err
-      // logout()
+      logout()
     }
   }
 

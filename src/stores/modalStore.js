@@ -1,23 +1,23 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { ref, computed } from 'vue'
 
 export const useModalStore = defineStore('modal', () => {
-  const isOpen = ref(false)
+  const modalStates = ref({})
 
-  const openModal = () => {
-    isOpen.value = true
+  const openModal = (modalKey) => {
+    modalStates.value = { ...modalStates.value, [modalKey]: true }
   }
 
-  const closeModal = () => {
-    isOpen.value = false
+  const closeModal = (modalKey) => {
+    modalStates.value = { ...modalStates.value, [modalKey]: false }
   }
 
-  const getIsOpen = computed(() => isOpen.value)
+  const isOpen = (modalKey) => computed(() => !!modalStates.value[modalKey])
 
   return {
-    isOpen,
-    getIsOpen,
+    modalStates,
     openModal,
-    closeModal
+    closeModal,
+    isOpen
   }
 })

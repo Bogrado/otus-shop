@@ -1,38 +1,24 @@
 <script setup>
 import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon.vue'
 import { useCartStore } from '@/stores/cart/cartStore.js'
-import { useModalStore } from '@/stores/modalStore.js'
 import { useAuthStore } from '@/stores/authStore.js'
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import AccountIcon from '@/components/icons/AccountIcon.vue'
 import AppModal from '@/components/AppModal.vue'
 import LoginForm from '@/components/LoginForm.vue'
 import RegisterForm from '@/components/RegisterForm.vue'
 import AdminIcon from '@/components/icons/AdminIcon.vue'
+import { useModal } from '@/composables/useModal.js'
 
 const cartStore = useCartStore()
-const modalStore = useModalStore()
 const authStore = useAuthStore()
 const router = useRouter()
 
 const totalItems = computed(() => cartStore.totalItems)
-const modalType = ref('')
+const loginModal = useModal('login')
+const registerModal = useModal('register')
 
-const openLoginModal = () => {
-  modalStore.openModal()
-  modalType.value = 'login'
-}
-
-const openRegisterModal = () => {
-  modalStore.openModal()
-  modalType.value = 'register'
-}
-
-const closeModal = () => modalStore.closeModal()
-
-const isLoginModalOpen = computed(() => modalStore.isOpen && modalType.value === 'login')
-const isRegisterModalOpen = computed(() => modalStore.isOpen && modalType.value === 'register')
 const isLoggedIn = computed(() => !!authStore.token)
 const user = computed(() => authStore.user)
 const isAdmin = computed(() => authStore.isAdmin)
@@ -41,7 +27,7 @@ const handleAccountClick = () => {
   if (isLoggedIn.value) {
     router.push('/profile')
   } else {
-    openLoginModal()
+    loginModal.openModal()
   }
 }
 </script>
@@ -92,15 +78,15 @@ const handleAccountClick = () => {
       </router-link>
     </ul>
 
-    <AppModal :isOpen="isLoginModalOpen" @close="closeModal">
-      <template #modalTitle>
-        <LoginForm @switchToRegister="openRegisterModal" />
+    <AppModal :isOpen="loginModal.isModalOpen.value" @close="loginModal.closeModal">
+      <template #modalContent>
+        <LoginForm @switchToRegister="() => loginModal.switchModal('register')" @closeModal="loginModal.closeModal" />
       </template>
     </AppModal>
 
-    <AppModal :isOpen="isRegisterModalOpen" @close="closeModal">
-      <template #modalTitle>
-        <RegisterForm @switchToLogin="openLoginModal" />
+    <AppModal :isOpen="registerModal.isModalOpen.value" @close="registerModal.closeModal">
+      <template #modalContent>
+        <RegisterForm @switchToLogin="() => registerModal.switchModal('login')" />
       </template>
     </AppModal>
   </header>

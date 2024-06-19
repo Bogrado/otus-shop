@@ -40,7 +40,7 @@
       <button
         type="button"
         class="w-full mt-2 py-2 border border-gray-600 rounded text-gray-300 hover:bg-gray-700 transition"
-        @click="$emit('switchToRegister')"
+        @click="emit('switchToRegister')"
       >
         Зарегистрироваться
       </button>
@@ -57,9 +57,15 @@ const authStore = useAuthStore()
 const email = ref('')
 const password = ref('')
 
+const emit = defineEmits(['switchToRegister', 'closeModal'])
+
 const login = async () => {
-  console.log(1)
   await authStore.login(email.value, password.value)
+  if (!authStore.error) {
+    email.value = ''
+    password.value = ''
+    emit('closeModal')
+  }
 }
 
 const error = computed(() => authStore.error)
