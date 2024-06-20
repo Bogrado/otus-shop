@@ -36,6 +36,20 @@
 - Делал локальное хранилище, а получился кастомный [хук](src%2Fcomposables%2FuseCart.js), бывает ┐(‘～` )┌
 - локальное хранилище корзины, кстати, тоже готово
 - подсчеты цен в [cartStore.js](src%2Fstores%2FcartStore.js)
+- [AccountIcon.vue](src%2Fcomponents%2Ficons%2FAccountIcon.vue) иконка входа
+- [AppModal.vue](src%2Fcomponents%2FAppModal.vue) верстка
+- [LoginForm.vue](src%2Fcomponents%2FLoginForm.vue) верстка
+- [RegisterForm.vue](src%2Fcomponents%2FRegisterForm.vue) верстка
+- [modalStore.js](src%2Fstores%2FmodalStore.js) контроль состояния модалки
+- В [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) Добавлен новый li с открытием форм
+- [authStore.js](src%2Fstores%2FauthStore.js) простой стор для авторизации и регистрации
+- [App.vue](src%2FApp.vue) проверка авторизации по токену при маунте приложения
+- Добавил страницу админки, настроил ее в роутере, чтобы без роли админа не попасть, компоненты к ней [AdminSidebar.vue](src%2Fcomponents%2Fadmin%2FAdminSidebar.vue)
+  [AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue) [THead.vue](src%2Fcomponents%2Fadmin%2Ftable%2FTHead.vue)[TBody.vue](src%2Fcomponents%2Fadmin%2Ftable%2FTBody.vue)
+  [AdminProductTable.vue](src%2Fcomponents%2Fadmin%2Ftable%2FAdminProductTable.vue)
+- [useModal.js](src%2Fcomposables%2FuseModal.js) для переиспользования модалок, ох и задолбался с этим, надеюсь, все корректно
+- [useLoginForm.js](src%2Fcomposables%2Fauth%2FuseLoginForm.js) хук для формы, если бы я знал, что хуки, так круто, юзал бы их раньше
+- Добавлена Валидация и хук [useValidation.js](src%2Fcomposables%2FuseValidation.js)
 
 ### Изменено
 
@@ -83,33 +97,6 @@
 - изменены все функции в [cartStore.js](src%2Fstores%2FcartStore.js) и [useCart.js](src%2Fcomposables%2FuseCart.js) в
   соответствии с подходом
 - [CartView.vue](src%2Fpages%2FCartView.vue) - завершена
-
-### Удалено
-
-- `cartUtils.js` за ненадобностью, всё в кастомном хуке
-- проверка в [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue), не понимаю, как она туда попала
-
-## [Не выпущено]
-
-### Добавлено
-
-- [AccountIcon.vue](src%2Fcomponents%2Ficons%2FAccountIcon.vue) иконка входа
-- [AppModal.vue](src%2Fcomponents%2FAppModal.vue) верстка
-- [LoginForm.vue](src%2Fcomponents%2FLoginForm.vue) верстка
-- [RegisterForm.vue](src%2Fcomponents%2FRegisterForm.vue) верстка
-- [modalStore.js](src%2Fstores%2FmodalStore.js) контроль состояния модалки
-- В [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) Добавлен новый li с открытием форм
-- [authStore.js](src%2Fstores%2FauthStore.js) простой стор для авторизации и регистрации
-- [App.vue](src%2FApp.vue) проверка авторизации по токену при маунте приложения
-- Добавил страницу админки, настроил ее в роутере, чтобы без роли админа не попасть, компоненты к ней [AdminSidebar.vue](src%2Fcomponents%2Fadmin%2FAdminSidebar.vue) 
-[AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue) [THead.vue](src%2Fcomponents%2Fadmin%2Ftable%2FTHead.vue)[TBody.vue](src%2Fcomponents%2Fadmin%2Ftable%2FTBody.vue)
-[AdminProductTable.vue](src%2Fcomponents%2Fadmin%2Ftable%2FAdminProductTable.vue)
-- [useModal.js](src%2Fcomposables%2FuseModal.js) для переиспользования модалок, ох и задолбался с этим, надеюсь, все корректно
-- [useLoginForm.js](src%2Fcomposables%2Fauth%2FuseLoginForm.js) хук для формы, если бы я знал, что хуки, так круто, юзал бы их раньше
-- Добавлена Валидация и хук [useValidation.js](src%2Fcomposables%2FuseValidation.js)
-
-### Изменено
-
 - Переделал [AppSortBar.vue](src%2Fcomponents%2FAppSortBar.vue), чтобы красивенько было
 - [LoginForm.vue](src%2Fcomponents%2FLoginForm.vue) [RegisterForm.vue](src%2Fcomponents%2FRegisterForm.vue) изменил
   верстку
@@ -126,8 +113,18 @@
 
 ### Удалено
 
+- `cartUtils.js` за ненадобностью, всё в кастомном хуке
+- проверка в [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue), не понимаю, как она туда попала
 - Удален дропдаун из [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) слишком он муторный
 - Удален `apiService.js`, заменен на хук [useApi.js](src%2Fcomposables%2FuseApi.js)
+
+## [Не выпущено]
+
+### Добавлено
+
+### Изменено
+
+### Удалено
 
 ### Нужно сделать
 
