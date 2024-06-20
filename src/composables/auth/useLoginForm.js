@@ -1,44 +1,64 @@
-// src/composables/useLoginForm.js
-import { ref } from 'vue';
-import { useAuthStore } from '@/stores/authStore';
+import { ref, reactive, computed } from 'vue'
+import { useAuthStore } from '@/stores/authStore'
+import { useValidation } from '@/composables/useValidation'
+import { required, email  } from '@vuelidate/validators'
 
 export const useLoginForm = (emit) => {
-  const authStore = useAuthStore();
-  const email = ref('');
-  const password = ref('');
-  const rememberMe = ref(false);
-  const error = ref(null);
-  const isLoggedIn = ref(false);
+  const authStore = useAuthStore()
+  const state = reactive({
+    email: '',
+    password: ''
+  })
+  const rememberMe = ref(false)
+  const error = ref('')
+  const isLoggedIn = ref(false)
+
+  const schema = {
+    email: { required, email  },
+    password: { required }
+  }
+
+  const { v$, validateForm } = useValidation(schema, state)
 
   const resetForm = () => {
-    email.value = '';
-    password.value = '';
-    rememberMe.value = false;
-    error.value = null;
-    isLoggedIn.value = false;
-  };
+    state.email = ''
+    state.password = ''
+    rememberMe.value = false
+    error.value = null
+    isLoggedIn.value = false
+    v$.value.$reset()
+  }
 
   const submitForm = async () => {
+    const isValid = await validateForm?.()
+    if (!isValid) return
+
     try {
-      await authStore.login(email.value, password.value, rememberMe.value);
+      await authStore.login?.(state.email, state.password, rememberMe.value)
       if (!authStore.error) {
-        isLoggedIn.value = true;
-        emit('closeModal');
+        isLoggedIn.value = true
+        setTimeout(() => {
+          emit('closeModal')
+        }, 1000)
+
       } else {
-        error.value = authStore.error;
+        error.value = authStore.error
       }
     } catch (err) {
-      error.value = 'ошибочка';
+      console.log('ошибочка', err)
+      error.value = 'ошибочка'
     }
-  };
+  }
+
+  const logged = computed(() => isLoggedIn.value)
 
   return {
-    email,
-    password,
+    state,
     rememberMe,
     error,
-    isLoggedIn,
+    logged,
+    v$,
     submitForm,
-    resetForm,
-  };
-};
+    resetForm
+  }
+}

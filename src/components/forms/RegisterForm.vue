@@ -1,48 +1,67 @@
+<script setup>
+import { useRegisterForm } from '@/composables/auth/useRegisterForm.js'
+
+const emits = defineEmits(['closeModal', 'switchToLogin'])
+
+const { state, error, v$, submitForm } = useRegisterForm(emits)
+</script>
+
 <template>
-  <form @submit.prevent="register" class="space-y-4 bg-gray-800 p-6 rounded shadow-lg w-96">
+  <form @submit.prevent="submitForm" class="space-y-4 bg-gray-800 p-6 rounded shadow-lg w-96">
     <h2 class="text-white text-lg font-bold mb-4">Создать учетную запись</h2>
-    <div>
+    <div class="min-h-[6rem]">
       <label for="register-fullName" class="block text-sm font-medium text-gray-300">Полное имя</label>
       <input
         id="register-fullName"
         type="text"
-        v-model="fullName"
+        v-model="state.fullName"
+        @blur="v$.fullName.$touch"
+        :class="{ 'border-red-500': v$.fullName.$error }"
         class="mt-1 block w-full p-2 border rounded bg-gray-700 text-white border-gray-600"
         required
       />
+      <span v-if="v$.fullName.$error" class="text-red-500 text-sm">Некорректное имя</span>
     </div>
-    <div>
+    <div class="min-h-[6rem]">
       <label for="register-email" class="block text-sm font-medium text-gray-300">Электронная почта</label>
       <input
         id="register-email"
         type="email"
-        v-model="email"
+        v-model="state.email"
+        @blur="v$.email.$touch"
+        :class="{ 'border-red-500': v$.email.$error }"
         class="mt-1 block w-full p-2 border rounded bg-gray-700 text-white border-gray-600"
         required
       />
+      <span v-if="v$.email.$error" class="text-red-500 text-sm">Некорректный email</span>
     </div>
-    <div>
+    <div class="min-h-[6rem]">
       <label for="register-password" class="block text-sm font-medium text-gray-300">Пароль</label>
       <input
         id="register-password"
         type="password"
-        v-model="password"
+        v-model="state.password"
+        @blur="v$.password.$touch"
+        :class="{ 'border-red-500': v$.password.$error }"
         class="mt-1 block w-full p-2 border rounded bg-gray-700 text-white border-gray-600"
         required
       />
+      <span v-if="v$.password.$error" class="text-red-500 text-sm">Некорректный пароль</span>
     </div>
-    <div>
+    <div class="min-h-[6rem]">
       <label for="register-confirm-password" class="block text-sm font-medium text-gray-300">Подтвердите пароль</label>
       <input
         id="register-confirm-password"
         type="password"
-        v-model="confirmPassword"
+        v-model="state.confirmPassword"
+        @blur="v$.confirmPassword.$touch"
+        :class="{ 'border-red-500': v$.confirmPassword.$error }"
         class="mt-1 block w-full p-2 border rounded bg-gray-700 text-white border-gray-600"
         required
       />
+      <span v-if="v$.confirmPassword.$error" class="text-red-500 text-sm">Пароли не совпадают или поле пустое</span>
     </div>
     <button
-      @click="register"
       type="submit"
       class="w-full bg-yellow-500 text-black py-2 rounded hover:bg-yellow-600 transition"
     >
@@ -58,28 +77,8 @@
         Войти
       </button>
     </div>
-    <p v-if="error" class="text-red-500 mt-4">{{ error }}</p>
+    <div class="min-h-[1rem]">
+      <p v-if="error" class="text-red-500 mt-4">{{ error }}</p>
+    </div>
   </form>
 </template>
-
-<script setup>
-import { ref, computed } from 'vue'
-import { useAuthStore } from '@/stores/authStore.js'
-
-const authStore = useAuthStore()
-const fullName = ref('')
-const email = ref('')
-const password = ref('')
-const confirmPassword = ref('')
-
-const register = async () => {
-  console.log(1)
-  if (password.value !== confirmPassword.value) {
-    authStore.error = "Passwords don't match"
-    return
-  }
-  await authStore.register(fullName.value, email.value, password.value)
-}
-
-const error = computed(() => authStore.error)
-</script>

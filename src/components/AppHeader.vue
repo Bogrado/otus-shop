@@ -86,7 +86,7 @@ const handleAccountClick = () => {
 
     <AppModal :isOpen="registerModal.isModalOpen.value" @close="registerModal.closeModal">
       <template #modalContent>
-        <RegisterForm @switchToLogin="() => registerModal.switchModal('login')" />
+        <RegisterForm @switchToLogin="() => registerModal.switchModal('login')" @close-modal="registerModal.closeModal"/>
       </template>
     </AppModal>
   </header>
