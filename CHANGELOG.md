@@ -44,11 +44,14 @@
 - В [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) Добавлен новый li с открытием форм
 - [authStore.js](src%2Fstores%2FauthStore.js) простой стор для авторизации и регистрации
 - [App.vue](src%2FApp.vue) проверка авторизации по токену при маунте приложения
-- Добавил страницу админки, настроил ее в роутере, чтобы без роли админа не попасть, компоненты к ней [AdminSidebar.vue](src%2Fcomponents%2Fadmin%2FAdminSidebar.vue)
+- Добавил страницу админки, настроил ее в роутере, чтобы без роли админа не попасть, компоненты к
+  ней [AdminSidebar.vue](src%2Fcomponents%2Fadmin%2FAdminSidebar.vue)
   [AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue) [THead.vue](src%2Fcomponents%2Fadmin%2Ftable%2FTHead.vue)[TBody.vue](src%2Fcomponents%2Fadmin%2Ftable%2FTBody.vue)
   [AdminProductTable.vue](src%2Fcomponents%2Fadmin%2Ftable%2FAdminProductTable.vue)
-- [useModal.js](src%2Fcomposables%2FuseModal.js) для переиспользования модалок, ох и задолбался с этим, надеюсь, все корректно
-- [useLoginForm.js](src%2Fcomposables%2Fauth%2FuseLoginForm.js) хук для формы, если бы я знал, что хуки, так круто, юзал бы их раньше
+- [useModal.js](src%2Fcomposables%2FuseModal.js) для переиспользования модалок, ох и задолбался с этим, надеюсь, все
+  корректно
+- [useLoginForm.js](src%2Fcomposables%2Fauth%2FuseLoginForm.js) хук для формы, если бы я знал, что хуки, так круто, юзал
+  бы их раньше
 - Добавлена Валидация и хук [useValidation.js](src%2Fcomposables%2FuseValidation.js)
 
 ### Изменено
@@ -122,6 +125,8 @@
 
 ### Добавлено
 
+- Логика изменения и добавления товаров, с валидацией полей
+
 ### Изменено
 
 ### Удалено
@@ -134,5 +139,7 @@
    отдельный компонент
 4. [ ] Переделать нативные слушатели в [AppSortBar.vue](src%2Fcomponents%2FAppSortBar.vue)
 5. [ ] Стандартизировать запросы
-   в [authStore.js](src%2Fstores%2FauthStore.js), [catalogStore.js](src%2Fstores%2Fcatalog%2FcatalogStore.js), [cartStore.js](src%2Fstores%2Fcart%2FcartStore.js) 
+   в [authStore.js](src%2Fstores%2FauthStore.js), [catalogStore.js](src%2Fstores%2Fcatalog%2FcatalogStore.js), [cartStore.js](src%2Fstores%2Fcart%2FcartStore.js)
 6. [ ] Куда-нибудь определить все константы
+7. [ ] Что-то сделать с разросшимися [AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue)
+   и [AdminProducts.vue](src%2Fpages%2Fadmin%2FAdminProducts.vue)

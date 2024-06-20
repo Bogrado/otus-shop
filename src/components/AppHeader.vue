@@ -9,7 +9,7 @@ import AppModal from '@/components/AppModal.vue'
 import LoginForm from '@/components/forms/LoginForm.vue'
 import RegisterForm from '@/components/forms/RegisterForm.vue'
 import AdminIcon from '@/components/icons/AdminIcon.vue'
-import { useModal } from '@/composables/useModal.js'
+import { useModal } from '@/composables/forms/useModal.js'
 
 const cartStore = useCartStore()
 const authStore = useAuthStore()

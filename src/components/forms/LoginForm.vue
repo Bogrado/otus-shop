@@ -1,5 +1,5 @@
 <script setup>
-import { useLoginForm } from '@/composables/auth/useLoginForm.js'
+import { useLoginForm } from '@/composables/forms/useLoginForm.js'
 
 const emit = defineEmits(['closeModal', 'switchToRegister'])
 

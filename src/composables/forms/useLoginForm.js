@@ -1,7 +1,7 @@
 import { ref, reactive, computed } from 'vue'
-import { useAuthStore } from '@/stores/authStore'
-import { useValidation } from '@/composables/useValidation'
-import { required, email  } from '@vuelidate/validators'
+import { useAuthStore } from '@/stores/authStore.js'
+import { useValidation } from '@/composables/useValidation.js'
+import { required, email } from '@vuelidate/validators'
 
 export const useLoginForm = (emit) => {
   const authStore = useAuthStore()
@@ -14,7 +14,7 @@ export const useLoginForm = (emit) => {
   const isLoggedIn = ref(false)
 
   const schema = {
-    email: { required, email  },
+    email: { required, email },
     password: { required }
   }
 

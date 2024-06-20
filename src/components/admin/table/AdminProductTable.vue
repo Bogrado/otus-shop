@@ -3,6 +3,8 @@ import THead from '@/components/admin/table/THead.vue'
 import TBody from '@/components/admin/table/TBody.vue'
 import { computed } from 'vue'
 
+defineEmits(['on-click-edit'])
+
 const props = defineProps({
   items: {
     type: Array,
@@ -16,7 +18,7 @@ const keys = computed(() => props.items.length ? Object.keys(props.items[0]) : [
   <div class="border-t border-gray-200">
     <table class="min-w-full divide-y divide-gray-200">
       <t-head :keys="keys" />
-      <t-body :items="items" />
+      <t-body :items="items" @on-click-edit="$emit('on-click-edit', $event)" />
     </table>
   </div>
 </template>

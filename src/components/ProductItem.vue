@@ -20,7 +20,8 @@
     </div>
     <div class="flex items-center mt-2 space-x-2">
       <star-icon class="w-4 h-4" />
-      <p class="text-gray-500">{{ product.rating.rate }} • {{ product.rating.count }} оценок</p>
+      <p class="text-gray-500">{{ product.rating ? product.rating.rate : 0 }} •
+        {{ product.rating ? product.rating.count : 0 }} оценок</p>
     </div>
     <div v-auto-animate class="mt-4">
       <div
