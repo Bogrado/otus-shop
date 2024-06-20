@@ -105,6 +105,7 @@
 [AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue) [THead.vue](src%2Fcomponents%2Fadmin%2Ftable%2FTHead.vue)[TBody.vue](src%2Fcomponents%2Fadmin%2Ftable%2FTBody.vue)
 [AdminProductTable.vue](src%2Fcomponents%2Fadmin%2Ftable%2FAdminProductTable.vue)
 - [useModal.js](src%2Fcomposables%2FuseModal.js) для переиспользования модалок, ох и задолбался с этим, надеюсь, все корректно
+- [useLoginForm.js](src%2Fcomposables%2Fauth%2FuseLoginForm.js) хук для формы, если бы я знал, что хуки, так круто, юзал бы их раньше
 
 ### Изменено
 
@@ -118,7 +119,8 @@
 - Изменено всё, что связано с [AppFiltersBar.vue](src%2Fcomponents%2FAppFiltersBar.vue)
 - Изменены запросы на логин, проверку пользователя и регистрацию, как же я задолбался приводить в порядок запросы...
   по крайней мере, за них теперь отвечает только [useApi.js](src%2Fcomposables%2FuseApi.js)
-- перелопатил [modalStore.js](src%2Fstores%2FmodalStore.js) 
+- перелопатил [modalStore.js](src%2Fstores%2FmodalStore.js)
+- [LoginForm.vue](src%2Fcomponents%2FLoginForm.vue) перенес логику в хук
 
 ### Удалено
 

@@ -64,7 +64,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useAuthStore } from '@/stores/authStore'
+import { useAuthStore } from '@/stores/authStore.js'
 
 const authStore = useAuthStore()
 const fullName = ref('')
