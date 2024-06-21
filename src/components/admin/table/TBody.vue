@@ -1,6 +1,6 @@
 <script setup>
 
-defineEmits(['onClickEdit'])
+defineEmits(['onClickEdit', 'onClickDelete'])
 
 defineProps({
   items: {
@@ -20,7 +20,7 @@ defineProps({
       <button class="text-yellow-600 hover:text-yellow-900 bg-yellow-100 px-2 py-1 rounded-md w-16"
               @click="$emit('onClickEdit', item.id)">Edit
       </button>
-      <button class="text-red-600 hover:text-red-900 bg-red-100 px-2 py-1 rounded-md w-16">Delete</button>
+      <button class="text-red-600 hover:text-red-900 bg-red-100 px-2 py-1 rounded-md w-16" @click="$emit('onClickDelete', item.id)">Delete</button>
     </td>
   </tr>
   </tbody>

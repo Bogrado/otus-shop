@@ -6,6 +6,7 @@ import { useApi } from '@/composables/useApi.js'
 import AppModal from '@/components/AppModal.vue'
 import AdminProductForm from '@/components/admin/AdminProductForm.vue'
 import { useModal } from '@/composables/forms/useModal.js'
+import AppConfirm from '@/components/forms/AppConfirm.vue'
 
 defineProps({
   loading: {
@@ -14,11 +15,12 @@ defineProps({
   }
 })
 
-const { getData } = useApi()
+const { getData, deleteData } = useApi()
 const items = ref([])
 
 const addProductModal = useModal('addProduct')
 const editProductModal = useModal('editProduct')
+const deleteProductModal = useModal('deleteProduct')
 const currentProductId = ref()
 
 const loadProducts = async () => {
@@ -46,6 +48,21 @@ const handleProductSaved = () => {
   editProductModal.closeModal()
 }
 
+const handleDeleteProduct = (productId) => {
+  currentProductId.value = productId;
+  deleteProductModal.openModal();
+};
+
+const confirmDeleteProduct = async () => {
+  try {
+    await deleteData(`items/${currentProductId.value}`);
+    loadProducts();
+    deleteProductModal.closeModal();
+  } catch (error) {
+    console.error('Error deleting product:', error);
+  }
+};
+
 const currProdId = computed(() => {
   console.log(currentProductId.value)
   return currentProductId.value
@@ -67,8 +84,18 @@ onMounted(() => {
                   @click="addProductModal.openModal()">Добавить товар
           </button>
         </div>
-        <admin-product-table :items="items" @on-click-edit="handleEditProduct($event)" />
+        <admin-product-table
+          :items="items"
+          @on-click-edit="handleEditProduct"
+          @on-click-delete="handleDeleteProduct"
+        />
         <div v-auto-animate>
+          <app-modal :is-open="deleteProductModal.isModalOpen.value" @close="deleteProductModal.closeModal">
+            <template #modalContent>
+              <app-confirm @close="deleteProductModal.closeModal" @confirm="confirmDeleteProduct()" />
+            </template>
+          </app-modal>
+
           <app-modal :is-open="addProductModal.isModalOpen.value" @close="addProductModal.closeModal">
             <template #modalContent>
               <admin-product-form @close="addProductModal.closeModal" @productSaved="handleProductSaved" />

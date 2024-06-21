@@ -35,9 +35,20 @@ export const useApi = () => {
     }
   }
 
+  const deleteData = async (endpoint) => {
+    try {
+      const response = await axios.delete(`${API_URL}/${endpoint}`)
+      return response.data
+    } catch (error) {
+      console.error('Error fetching products:', error)
+      throw error
+    }
+  }
+
   return {
     getData,
     postData,
-    patchData
+    patchData,
+    deleteData
   }
 }
