@@ -1,12 +1,12 @@
 <script setup>
 import AppPreloader from '@/components/AppPreloader.vue'
 import AdminProductTable from '@/components/admin/table/AdminProductTable.vue'
-import { computed, onMounted, ref } from 'vue'
-import { useApi } from '@/composables/useApi.js'
 import AppModal from '@/components/AppModal.vue'
-import AdminProductForm from '@/components/admin/AdminProductForm.vue'
-import { useModal } from '@/composables/forms/useModal.js'
+import AdminProductForm from '@/components/forms/AdminProductForm.vue'
 import AppConfirm from '@/components/forms/AppConfirm.vue'
+import { useAdminProductForms } from '@/composables/forms/useAdminProductForms.js'
+import { useApi } from '@/composables/useApi.js'
+import { onMounted, ref } from 'vue'
 
 defineProps({
   loading: {
@@ -15,13 +15,21 @@ defineProps({
   }
 })
 
+const {
+  addProductModal,
+  editProductModal,
+  deleteProductModal,
+  openAddProductModal,
+  openEditProductModal,
+  openDeleteProductModal,
+  closeAddProductModal,
+  closeEditProductModal,
+  closeDeleteProductModal,
+  currProdId
+} = useAdminProductForms()
+
 const { getData, deleteData } = useApi()
 const items = ref([])
-
-const addProductModal = useModal('addProduct')
-const editProductModal = useModal('editProduct')
-const deleteProductModal = useModal('deleteProduct')
-const currentProductId = ref()
 
 const loadProducts = async () => {
   try {
@@ -31,42 +39,21 @@ const loadProducts = async () => {
   }
 }
 
-const handleEditProduct = (productId) => {
-  currentProductId.value = productId
-  setTimeout(() => {
-    if (currentProductId.value === productId) {
-      editProductModal.openModal()
-    }
-  }, 200)
-  console.log(currentProductId.value)
-  console.log('ловлю айдишник из table edit:' + productId)
-}
-
 const handleProductSaved = () => {
   loadProducts()
-  addProductModal.closeModal()
-  editProductModal.closeModal()
+  closeAddProductModal?.()
+  closeEditProductModal?.()
 }
-
-const handleDeleteProduct = (productId) => {
-  currentProductId.value = productId;
-  deleteProductModal.openModal();
-};
 
 const confirmDeleteProduct = async () => {
   try {
-    await deleteData(`items/${currentProductId.value}`);
-    loadProducts();
-    deleteProductModal.closeModal();
+    await deleteData?.(`items/${currProdId.value}`)
+    await loadProducts()
+    closeDeleteProductModal?.()
   } catch (error) {
-    console.error('Error deleting product:', error);
+    console.error('Error deleting product:', error)
   }
-};
-
-const currProdId = computed(() => {
-  console.log(currentProductId.value)
-  return currentProductId.value
-})
+}
 
 onMounted(() => {
   loadProducts()
@@ -81,32 +68,32 @@ onMounted(() => {
         <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
           <h3 class="text-lg leading-6 font-medium text-gray-900">Товары</h3>
           <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                  @click="addProductModal.openModal()">Добавить товар
+                  @click="openAddProductModal">Добавить товар
           </button>
         </div>
         <admin-product-table
           :items="items"
-          @on-click-edit="handleEditProduct"
-          @on-click-delete="handleDeleteProduct"
+          @on-click-edit="openEditProductModal"
+          @on-click-delete="openDeleteProductModal"
         />
         <div v-auto-animate>
-          <app-modal :is-open="deleteProductModal.isModalOpen.value" @close="deleteProductModal.closeModal">
+          <app-modal :is-open="deleteProductModal.isModalOpen.value" @close="closeDeleteProductModal">
             <template #modalContent>
-              <app-confirm @close="deleteProductModal.closeModal" @confirm="confirmDeleteProduct()" />
+              <app-confirm @close="closeDeleteProductModal" @confirm="confirmDeleteProduct" />
             </template>
           </app-modal>
 
-          <app-modal :is-open="addProductModal.isModalOpen.value" @close="addProductModal.closeModal">
+          <app-modal :is-open="addProductModal.isModalOpen.value" @close="closeAddProductModal">
             <template #modalContent>
-              <admin-product-form @close="addProductModal.closeModal" @productSaved="handleProductSaved" />
+              <admin-product-form @close="closeAddProductModal" @productSaved="handleProductSaved" />
             </template>
           </app-modal>
 
-          <app-modal :is-open="editProductModal.isModalOpen.value" @close="editProductModal.closeModal">
+          <app-modal :is-open="editProductModal.isModalOpen.value" @close="closeEditProductModal">
             <template #modalContent>
               <admin-product-form
                 :productId="currProdId"
-                @close="editProductModal.closeModal"
+                @close="closeEditProductModal"
                 @productSaved="handleProductSaved" />
             </template>
           </app-modal>

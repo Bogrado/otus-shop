@@ -127,6 +127,7 @@
 
 - Логика изменения и добавления товаров, с валидацией полей
 - Реализовал удаление товара по id с проверкой перед удалением
+- Хук [useAdminProductForms.js](src%2Fcomposables%2Fforms%2FuseAdminProductForms.js), чтоб не засорять компонент
 
 ### Изменено
 
@@ -142,5 +143,6 @@
 5. [ ] Стандартизировать запросы
    в [authStore.js](src%2Fstores%2FauthStore.js), [catalogStore.js](src%2Fstores%2Fcatalog%2FcatalogStore.js), [cartStore.js](src%2Fstores%2Fcart%2FcartStore.js)
 6. [ ] Куда-нибудь определить все константы
-7. [ ] Что-то сделать с разросшимися [AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue)
+7. [x] Что-то сделать с разросшимися [AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue)
    и [AdminProducts.vue](src%2Fpages%2Fadmin%2FAdminProducts.vue)
+8. [ ] Убрать дублирующийся код из [useAdminProductForms.js](src%2Fcomposables%2Fforms%2FuseAdminProductForms.js)
