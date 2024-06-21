@@ -6,6 +6,7 @@ import AdminProductForm from '@/components/forms/AdminProductForm.vue'
 import AppConfirm from '@/components/forms/AppConfirm.vue'
 import { useAdminProductForms } from '@/composables/forms/useAdminProductForms.js'
 import { useApi } from '@/composables/useApi.js'
+import { useDeleteForm } from '@/composables/forms/useDeleteForm.js'
 import { onMounted, ref } from 'vue'
 
 defineProps({
@@ -28,7 +29,7 @@ const {
   currProdId
 } = useAdminProductForms()
 
-const { getData, deleteData } = useApi()
+const { getData } = useApi()
 const items = ref([])
 
 const loadProducts = async () => {
@@ -45,15 +46,7 @@ const handleProductSaved = () => {
   closeEditProductModal?.()
 }
 
-const confirmDeleteProduct = async () => {
-  try {
-    await deleteData?.(`items/${currProdId.value}`)
-    await loadProducts()
-    closeDeleteProductModal?.()
-  } catch (error) {
-    console.error('Error deleting product:', error)
-  }
-}
+const { deleteProduct, error } = useDeleteForm(currProdId, closeDeleteProductModal, loadProducts)
 
 onMounted(() => {
   loadProducts()
@@ -79,7 +72,8 @@ onMounted(() => {
         <div v-auto-animate>
           <app-modal :is-open="deleteProductModal.isModalOpen.value" @close="closeDeleteProductModal">
             <template #modalContent>
-              <app-confirm @close="closeDeleteProductModal" @confirm="confirmDeleteProduct" />
+              <app-confirm @close="closeDeleteProductModal" @confirm="deleteProduct" />
+              <div v-if="error" class="text-red-500">{{ error }}</div>
             </template>
           </app-modal>
 

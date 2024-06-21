@@ -128,6 +128,7 @@
 - Логика изменения и добавления товаров, с валидацией полей
 - Реализовал удаление товара по id с проверкой перед удалением
 - Хук [useAdminProductForms.js](src%2Fcomposables%2Fforms%2FuseAdminProductForms.js), чтоб не засорять компонент
+- Хук [useDeleteForm.js](src%2Fcomposables%2Fforms%2FuseDeleteForm.js) для удаления товара
 
 ### Изменено
 
