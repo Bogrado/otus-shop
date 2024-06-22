@@ -2,7 +2,7 @@
   <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold mb-4 text-center">Корзина</h1>
 
-    <div v-if="loadingStore.loading" class="text-center">
+    <div v-if="loading" class="text-center">
       <AppPreloader />
     </div>
 
@@ -16,7 +16,27 @@
           <!-- Левая колонка - товары в корзине -->
           <CartProductsList :products="products" />
           <!-- Правая колонка - информация о заказе -->
-          <OrderSummary :total-price="totalPrice" :total-items="totalItems" />
+<!--          <OrderSummary-->
+<!--            :total-price="totalPrice"-->
+<!--          >-->
+<!--            <template #header>-->
+<!--              <div class="text-lg font-bold mb-4">Ваша корзина</div>-->
+<!--            </template>-->
+<!--            <template #body>-->
+<!--              <div class="text-gray-700 mb-2">Товаров: {{ totalItems }}</div>-->
+<!--              <div class="flex justify-between items-center mb-2">-->
+<!--                <span>Товары:</span>-->
+<!--                <span class="font-bold">{{ totalPrice }} ₽</span>-->
+<!--              </div>-->
+<!--            </template>-->
+<!--            <template #footer>-->
+<!--              <button-->
+<!--                class="bg-gray-700 text-white py-2 px-4 rounded hover:bg-green-500 transition duration-300 active:bg-green-700 focus:outline-none w-full"-->
+<!--              >-->
+<!--                Перейти к оформлению-->
+<!--              </button>-->
+<!--            </template>-->
+<!--          </OrderSummary>-->
         </div>
       </div>
     </div>
@@ -26,10 +46,16 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useCartStore } from '@/stores/cart/cartStore.js'
-import { useLoadingStore } from '@/stores/loadingStore.js'
 import AppPreloader from '@/components/AppPreloader.vue'
 import CartProductsList from '@/components/CartProductsList.vue'
-import OrderSummary from '@/components/OrderSummary.vue'
+import OrderSummary from '@/components/AppSummary.vue'
+import { useLoadingStore } from '@/stores/loadingStore.js'
+
+defineProps({
+  loading: {
+    type: Boolean,
+    required: true}
+})
 
 const cartStore = useCartStore()
 const loadingStore = useLoadingStore()

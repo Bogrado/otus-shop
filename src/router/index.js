@@ -14,7 +14,6 @@ const router = createRouter({
       name: 'Cart',
       component: () => import('@/pages/CartView.vue')
     },
-
     {
       path: '/product/:id',
       name: 'Product',
@@ -52,6 +51,11 @@ const router = createRouter({
           component: () => import('@/pages/admin/AdminProducts.vue')
         }
       ]
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('@/pages/NotFound.vue')
     }
   ]
 })

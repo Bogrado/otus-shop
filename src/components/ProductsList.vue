@@ -9,6 +9,7 @@
       :product="product"
       @add-to-cart="addItem"
       @remove-from-cart="removeItem"
+      @navigate-to="navigateToProduct"
     />
   </div>
 </template>
@@ -16,6 +17,7 @@
 <script setup>
 import ProductItem from './ProductItem.vue'
 import { useCart } from '@/composables/useCart'
+import { useProductStore } from '@/stores/product/productStore.js'
 
 defineProps({
   products: {
@@ -25,6 +27,5 @@ defineProps({
 })
 
 const { addItem, removeItem } = useCart()
+const { navigateToProduct } = useProductStore()
 </script>
-
-<style scoped></style>
