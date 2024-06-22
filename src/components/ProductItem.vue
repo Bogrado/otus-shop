@@ -31,13 +31,13 @@
         class="border-2 border-blue-600 text-blue-600 py-0.5 px-6 rounded-2xl hover:border-blue-900 hover:text-blue-900 hover:bg-blue-100 transition duration-300 min-w-40 flex justify-center items-center">
         <quantity-manager
           :quantity="quantity"
-          @on-click-decrease="removeItem"
-          @on-click-increase="addItem"
+          @on-click-decrease="handleRemoveFromCart"
+          @on-click-increase="handleAddToCart"
         />
       </div>
       <button
         v-else
-        @click="addItem"
+        @click="handleAddToCart"
         class="border-2 border-blue-600 text-blue-600 py-1.5 px-6 rounded-2xl hover:border-blue-900 hover:text-blue-900 hover:bg-blue-100 transition duration-300 active:bg-green-700 min-w-40 flex justify-center items-center"
       >
         Купить
@@ -52,7 +52,6 @@ import LikeIcon from '@/components/icons/LikeIcon.vue'
 import { computed } from 'vue'
 import { useCartStore } from '@/stores/cart/cartStore.js'
 import QuantityManager from '@/components/QuantityManager.vue'
-import { useCart } from '@/composables/useCart.js'
 
 const props = defineProps({
   product: {
@@ -67,12 +66,10 @@ const cartStore = useCartStore()
 const isInCart = computed(() => cartStore.itemIds.includes(props.product.id))
 const quantity = computed(() => cartStore.itemQuantity(props.product.id))
 
-const { addItem, removeItem } = useCart()
+const handleNavigateTo = () => emit('navigateTo', props.product.id)
 
-const handleNavigateTo = () => {
-  emit('navigateTo', props.product.id)
-  console.log(props.product.id)
-}
+const handleAddToCart = () => emit('addToCart', props.product.id)
+const handleRemoveFromCart = () => emit('removeFromCart', props.product.id)
 </script>
 
 <style scoped></style>
