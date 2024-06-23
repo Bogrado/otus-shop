@@ -129,6 +129,8 @@
 - Реализовал удаление товара по id с проверкой перед удалением
 - Хук [useAdminProductForms.js](src%2Fcomposables%2Fforms%2FuseAdminProductForms.js), чтоб не засорять компонент
 - Хук [useDeleteForm.js](src%2Fcomposables%2Fforms%2FuseDeleteForm.js) для удаления товара
+- Страница товара [ProductView.vue](src%2Fpages%2FProductView.vue), стор [productStore.js](src%2Fstores%2Fproduct%2FproductStore.js)
+- Линки на [ProductItem.vue](src%2Fcomponents%2FProductItem.vue)
 
 ### Изменено
 

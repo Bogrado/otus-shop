@@ -10,6 +10,7 @@ export const useProductStore = defineStore('product', () => {
     product: {},
     error: ''
   })
+
   const { push } = useRouter()
   const { setLoading } = useLoadingStore()
   const { getData } = useApi()
@@ -33,9 +34,7 @@ export const useProductStore = defineStore('product', () => {
     }
   }
 
-  const navigateToProduct = (id) => push({ name: 'Product', params: { id } })
-
   const getProduct = computed(() => state.product)
 
-  return { state, loadProduct, navigateToProduct, getProduct }
+  return { state, loadProduct, getProduct }
 })
