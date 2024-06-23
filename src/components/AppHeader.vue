@@ -23,7 +23,7 @@ const isLoggedIn = computed(() => !!authStore.token)
 const user = computed(() => authStore.user)
 const isAdmin = computed(() => authStore.isAdmin)
 
-const handleAccountClick = () => {
+const handleAccountCheck = () => {
   if (isLoggedIn.value) {
     router.push('/profile')
   } else {
@@ -61,7 +61,7 @@ const handleAccountClick = () => {
         </li>
       </router-link>
       <li class="relative flex flex-col items-center text-slate-500 cursor-pointer hover:text-white"
-          @click="handleAccountClick" v-auto-animate>
+          @click="handleAccountCheck" v-auto-animate>
         <account-icon class="w-8 h-8 fill-current" />
         <span v-if="!isLoggedIn" class="text-sm">Войти</span>
         <div v-else class="text-sm flex flex-col items-center">
