@@ -1,63 +1,29 @@
 <template>
-  <div class="container mx-auto p-4">
+  <div class="container mx-auto p-4" v-auto-animate>
     <h1 class="text-3xl font-bold mb-4 text-center">Оформление заказа</h1>
-    <div class="max-w-screen-lg mx-auto flex flex-col lg:flex-row lg:space-x-8">
+    <div v-if="createdSuccess" class="text-center text-gray-700">
+      Заказ размещен, вернуться на главную
+      <router-link to="/">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Вернуться на главную</button>
+      </router-link>
+    </div>
+    <div v-else-if="cartStore.products.length === 0" class="text-center text-gray-700">
+      Ваша корзина пуста.
+    </div>
+    <div v-else class="max-w-screen-lg mx-auto flex flex-col lg:flex-row lg:space-x-8">
       <!-- Левая колонка - информация о доставке -->
-      <div class="w-full lg:w-2/3 bg-white p-4 rounded-lg shadow-md">
-        <h2 class="text-xl font-bold mb-4">Информация о доставке</h2>
-        <form class="space-y-4">
-          <div>
-            <label for="firstName" class="block text-sm font-medium text-gray-700">Имя</label>
-            <input type="text" id="firstName" name="firstName"
-                   class="mt-1 block w-full p-2 border rounded bg-gray-100" />
-          </div>
-          <div>
-            <label for="lastName" class="block text-sm font-medium text-gray-700">Фамилия</label>
-            <input type="text" id="lastName" name="lastName" class="mt-1 block w-full p-2 border rounded bg-gray-100" />
-          </div>
-          <div>
-            <label for="country" class="block text-sm font-medium text-gray-700">Страна</label>
-            <input type="text" id="country" name="country" class="mt-1 block w-full p-2 border rounded bg-gray-100" />
-          </div>
-          <div>
-            <label for="city" class="block text-sm font-medium text-gray-700">Город</label>
-            <input type="text" id="city" name="city" class="mt-1 block w-full p-2 border rounded bg-gray-100" />
-          </div>
-          <div>
-            <label for="postalCode" class="block text-sm font-medium text-gray-700">Почтовый индекс</label>
-            <input type="text" id="postalCode" name="postalCode"
-                   class="mt-1 block w-full p-2 border rounded bg-gray-100" />
-          </div>
-          <div>
-            <label for="addressLine1" class="block text-sm font-medium text-gray-700">Улица</label>
-            <input type="text" id="addressLine1" name="addressLine1"
-                   class="mt-1 block w-full p-2 border rounded bg-gray-100" />
-          </div>
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div>
-              <label for="houseNumber" class="block text-sm font-medium text-gray-700">Номер дома</label>
-              <input type="text" id="houseNumber" name="houseNumber"
-                     class="mt-1 block w-full p-2 border rounded bg-gray-100" />
-            </div>
-            <div>
-              <label for="apartmentNumber" class="block text-sm font-medium text-gray-700">Квартира</label>
-              <input type="text" id="apartmentNumber" name="apartmentNumber"
-                     class="mt-1 block w-full p-2 border rounded bg-gray-100" />
-            </div>
-          </div>
-        </form>
-      </div>
+      <CheckoutForm />
 
-      <!--       Правая колонка - информация о заказе-->
+      <!-- Правая колонка - информация о заказе -->
       <app-summary class="bg-white">
         <template #header>
-          <div class="text-lg font-bold mb-4">Ваша заказ</div>
+          <div class="text-lg font-bold mb-4">Ваш заказ</div>
         </template>
         <template #body>
           <div class="space-y-4">
             <div class="flex justify-between">
               <span>Подытог</span>
-              <span>₽397.48</span>
+              <span>{{ totalPrice }} ₽</span>
             </div>
             <div class="flex justify-between">
               <span>Доставка</span>
@@ -65,14 +31,15 @@
             </div>
             <div class="flex justify-between font-bold text-lg">
               <span>Итого</span>
-              <span>₽421.33</span>
+              <span>{{ totalPrice }} ₽</span>
             </div>
           </div>
         </template>
         <template #footer>
           <button
-
-            class="w-full bg-gray-700 text-white py-2 rounded hover:bg-green-500 transition duration-300 active:bg-green-700 mt-4">
+            @click="submitForm"
+            :disabled="!isFormValid"
+            class="w-full bg-gray-700 text-white py-2 rounded hover:bg-green-500 transition duration-300 active:bg-green-700 mt-4 disabled:bg-gray-300 disabled:cursor-not-allowed">
             Разместить заказ
           </button>
         </template>
@@ -82,5 +49,27 @@
 </template>
 
 <script setup>
+import { watch } from 'vue'
+import { useRouter } from 'vue-router'
 import AppSummary from '@/components/AppSummary.vue'
+import CheckoutForm from '@/components/forms/CheckoutForm.vue'
+import { useCartStore } from '@/stores/cart/cartStore.js'
+import { computed } from 'vue'
+import { useCheckout } from '@/composables/forms/useCheckout.js'
+import { useOrderStore } from '@/stores/orderStore.js'
+
+const { submitForm, isFormValid } = useCheckout()
+const cartStore = useCartStore()
+const orderStore = useOrderStore()
+const createdSuccess = computed(() => orderStore.createdSuccess)
+const totalPrice = computed(() => cartStore.totalPrice)
+const router = useRouter()
+
+watch(createdSuccess, (newVal) => {
+  if (newVal) {
+    setTimeout(() => {
+      router.push('/')
+    }, 3000)
+  }
+})
 </script>
