@@ -22,7 +22,10 @@ const router = createRouter({
     {
       path: '/checkout',
       name: 'Checkout',
-      component: () => import('@/pages/CheckoutView.vue')
+      component: () => import('@/pages/CheckoutView.vue'),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/profile',
@@ -64,6 +67,19 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   if (to.matched.some((record) => record.meta.requiresAdmin)) {
     if (!authStore.isAdmin) {
+      next({ name: 'Home' })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!authStore.token) {
       next({ name: 'Home' })
     } else {
       next()

@@ -131,6 +131,7 @@
 - Хук [useDeleteForm.js](src%2Fcomposables%2Fforms%2FuseDeleteForm.js) для удаления товара
 - Страница товара [ProductView.vue](src%2Fpages%2FProductView.vue), стор [productStore.js](src%2Fstores%2Fproduct%2FproductStore.js)
 - Линки на [ProductItem.vue](src%2Fcomponents%2FProductItem.vue)
+- Форма в [ProductView.vue](src%2Fpages%2FProductView.vue), navigation guard на странице чекаута
 
 ### Изменено
 
@@ -149,3 +150,4 @@
 7. [x] Что-то сделать с разросшимися [AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue)
    и [AdminProducts.vue](src%2Fpages%2Fadmin%2FAdminProducts.vue)
 8. [ ] Убрать дублирующийся код из [useAdminProductForms.js](src%2Fcomposables%2Fforms%2FuseAdminProductForms.js)
+9. [ ] Убрать дублирующийся код navigation guard в  [index.js](src%2Frouter%2Findex.js)
