@@ -1,9 +1,9 @@
 <template>
-  <div class="container mx-auto p-4" v-auto-animate>
+  <div v-auto-animate>
     <div v-if="loading" class="flex justify-center items-center h-screen">
       <AppPreloader />
     </div>
-    <div class="max-w-screen-lg mx-auto mt-4" v-else>
+    <div v-else>
       <h1 class="text-3xl font-bold mb-4 w-full text-center">{{ product.title }}</h1>
 
       <div class="container mx-auto p-4">

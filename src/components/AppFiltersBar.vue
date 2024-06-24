@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen-lg mx-auto">
+  <div>
     <div
       class="flex flex-col sm:flex-row justify-between gap-4 w-full items-center border rounded-lg shadow p-4"
     >

@@ -3,10 +3,10 @@
     <app-header />
     <main class="flex-grow p-4">
       <div class="p-10">
-        <div v-auto-animate>
-          <router-view :loading="loadingStore.loading" v-slot="{ Component }">
-            <component :is="Component" />
-          </router-view>
+          <div class="container mx-auto p-4 min-h-screen" v-auto-animate>
+            <router-view :loading="loadingStore.loading" v-slot="{ Component }">
+              <component :is="Component" />
+            </router-view>
         </div>
       </div>
     </main>

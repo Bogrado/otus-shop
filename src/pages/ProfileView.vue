@@ -1,5 +1,4 @@
 <template>
-  <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold mb-4">{{ user?.fullName }}</h1>
     <p class="text-lg mb-4">{{ user?.email }}</p>
     <div class="flex space-x-4">
@@ -12,7 +11,6 @@
         Выйти
       </button>
     </div>
-  </div>
 </template>
 
 <script setup>

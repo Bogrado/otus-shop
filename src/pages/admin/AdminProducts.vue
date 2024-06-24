@@ -8,6 +8,7 @@ import { useAdminProductForms } from '@/composables/forms/useAdminProductForms.j
 import { useApi } from '@/composables/useApi.js'
 import { useDeleteForm } from '@/composables/forms/useDeleteForm.js'
 import { onMounted, ref } from 'vue'
+import { useLoadingStore } from '@/stores/loadingStore.js'
 
 defineProps({
   loading: {
@@ -31,12 +32,16 @@ const {
 
 const { getData } = useApi()
 const items = ref([])
+const loadingStore = useLoadingStore()
 
 const loadProducts = async () => {
+  loadingStore.setLoading(true)
   try {
     items.value = await getData?.('items', { params: { _select: 'id,title,price,category' } })
   } catch (error) {
     console.error('Error loading products:', error)
+  } finally {
+    loadingStore.setLoading(false)
   }
 }
 

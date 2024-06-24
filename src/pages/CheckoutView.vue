@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto p-4" v-auto-animate>
+  <div v-auto-animate>
     <h1 class="text-3xl font-bold mb-4 text-center">Оформление заказа</h1>
     <div v-if="createdSuccess" class="text-center text-gray-700">
       Заказ размещен, вернуться на главную
