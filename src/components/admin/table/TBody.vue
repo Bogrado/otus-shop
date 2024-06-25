@@ -1,6 +1,6 @@
 <script setup>
 
-defineEmits(['handleEditClick', 'handleDeleteClick'])
+defineEmits(['onEditClick', 'onDeleteClick'])
 
 defineProps({
   items: {
@@ -18,9 +18,9 @@ defineProps({
     <td class="px-6 py-4 text-center text-sm text-gray-500">{{ item.category }}</td>
     <td class="px-6 py-4 text-center text-sm font-medium  flex flex-col justify-center items-center space-y-1">
       <button class="text-yellow-600 hover:text-yellow-900 bg-yellow-100 px-2 py-1 rounded-md w-16"
-              @click="$emit('handleEditClick', item.id)">Edit
+              @click="$emit('onEditClick', item.id)">Edit
       </button>
-      <button class="text-red-600 hover:text-red-900 bg-red-100 px-2 py-1 rounded-md w-16" @click="$emit('handleDeleteClick', item.id)">Delete</button>
+      <button class="text-red-600 hover:text-red-900 bg-red-100 px-2 py-1 rounded-md w-16" @click="$emit('onDeleteClick', item.id)">Delete</button>
     </td>
   </tr>
   </tbody>

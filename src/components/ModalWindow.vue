@@ -9,9 +9,8 @@ const closeModal = () => {
   modalStore.closeModal()
 }
 
-const Component = computed(() => {
-  return modalStore.currentComponent
-})
+const Component = computed(() => modalStore.currentComponent)
+const componentProps = computed(() => modalStore.state.itemId ? { itemId: modalStore.state.itemId } : null) // я даже не знал, что так можно пропсы баиндить, ахренеть
 </script>
 
 <template>
@@ -23,7 +22,12 @@ const Component = computed(() => {
         <button class="absolute top-1 right-1" @click="closeModal">
           <CrossIcon class="hover:fill-gray-700 transition duration-300 w-6 h-6" />
         </button>
-        <component :is="Component" @close-modal="closeModal" @switch-to="modalStore.switchModal" />
+        <component
+          :is="Component"
+          v-bind="componentProps"
+          @close-modal="closeModal"
+          @switch-to="modalStore.switchModal"
+        />
       </div>
     </div>
   </Teleport>

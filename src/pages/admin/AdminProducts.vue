@@ -1,10 +1,9 @@
 <script setup>
 import AppPreloader from '@/components/AppPreloader.vue'
 import AdminProductTable from '@/components/admin/table/AdminProductTable.vue'
-import { useApi } from '@/composables/useApi.js'
-import { onMounted, ref } from 'vue'
-import { useLoadingStore } from '@/stores/loadingStore.js'
+import { computed, onMounted } from 'vue'
 import { useModalStore } from '@/stores/modalStore.js'
+import { useItemsManagerStore } from '@/stores/itemsManagerStore.js'
 
 
 defineProps({
@@ -14,23 +13,24 @@ defineProps({
   }
 })
 const modalStore = useModalStore()
-const { getData } = useApi()
-const items = ref([])
-const loadingStore = useLoadingStore()
+const itemsManagerStore = useItemsManagerStore()
 
-const loadProducts = async () => {
-  loadingStore.setLoading(true)
-  try {
-    items.value = await getData?.('items', { params: { _select: 'id,title,price,category' } })
-  } catch (error) {
-    console.error('Error loading products:', error)
-  } finally {
-    loadingStore.setLoading(false)
-  }
+const getItems = computed(() => itemsManagerStore.getItems)
+
+
+const editItem = (id) => {
+  console.log(id)
+  itemsManagerStore.setItemId(id)
+  modalStore.openModal('editItem', id)
+}
+
+const createItem = () => {
+  itemsManagerStore.setItemId(null)
+  modalStore.openModal('createItem')
 }
 
 onMounted(() => {
-  loadProducts()
+  itemsManagerStore.loadProducts()
 })
 </script>
 
@@ -42,13 +42,13 @@ onMounted(() => {
         <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
           <h3 class="text-lg leading-6 font-medium text-gray-900">Товары</h3>
           <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                  @click="modalStore.openModal('createItem')"
+                  @click="createItem"
           >Добавить товар
           </button>
         </div>
         <admin-product-table
-          :items="items"
-          @handle-edit-click="modalStore.openModal('editItem')"
+          :items="getItems"
+          @handle-edit-click="editItem"
         />
       </div>
     </div>

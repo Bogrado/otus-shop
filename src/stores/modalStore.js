@@ -7,29 +7,33 @@ import AdminProductForm from '@/components/forms/AdminProductForm.vue'
 export const useModalStore = defineStore('modal', () => {
   const state = reactive({
     isOpen: false,
-    modalKey: ''
+    modalKey: '',
+    itemId: null
   })
 
   const formsContainer = {
     login: LoginForm,
     register: RegisterForm,
-    createItem: AdminProductForm
+    createItem: AdminProductForm,
+    editItem: AdminProductForm
   }
 
-  const openModal = (key) => {
+  const openModal = (key, id = null) => {
     state.modalKey = key
     state.isOpen = true
+    state.itemId = id
   }
 
   const closeModal = () => {
     state.modalKey = ''
     state.isOpen = false
+    state.itemId = null
   }
 
-  const switchModal = (newKey) => {
+  const switchModal = (newKey, id = null) => {
     closeModal()
     setTimeout(() => {
-      openModal(newKey)
+      openModal(newKey, id)
     }, 500)
   }
 

@@ -4,7 +4,7 @@ import { useProductForm } from '@/composables/forms/useProductForm.js'
 import { useApi } from '@/composables/useApi.js'
 
 const props = defineProps({
-  productId: {
+  itemId: {
     type: Number,
     required: false
   }
@@ -16,31 +16,31 @@ const { getData } = useApi()
 
 const loadProductData = async (id) => {
   if (id) {
-    console.log('Ловлю ид из props:' + id)
     try {
-      console.log('Ловлю ид из формы перед загрузкой:' + id)
       const productData = await getData?.(`items/${id}`)
-      console.log('Product data loaded:', productData)
       setFormData?.(productData)
+      isEditing.value = true
     } catch (err) {
       console.error('Error loading product data:', err)
     }
   } else {
-    console.log('айдишника нету')
+    resetForm?.()
   }
 }
 
-watch(() => props.productId, (newId) => {
-  console.log('Смотрю за изменением айди:' + newId)
+watch(() => props.itemId, (newId) => {
   if (newId) {
     loadProductData(newId)
+  } else {
+    resetForm?.()
   }
 })
 
 onMounted(() => {
-  console.log('монтирую с айди' + props.productId)
-  if (props.productId) {
-    loadProductData(props.productId)
+  if (props.itemId) {
+    loadProductData(props.itemId)
+  } else {
+    resetForm?.()
   }
 })
 </script>
@@ -125,4 +125,3 @@ onMounted(() => {
     </div>
   </form>
 </template>
-
