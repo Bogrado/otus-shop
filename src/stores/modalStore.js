@@ -1,23 +1,48 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { reactive, computed } from 'vue'
+import LoginForm from '@/components/forms/LoginForm.vue'
+import RegisterForm from '@/components/forms/RegisterForm.vue'
+import AdminProductForm from '@/components/forms/AdminProductForm.vue'
 
 export const useModalStore = defineStore('modal', () => {
-  const modalStates = ref({})
+  const state = reactive({
+    isOpen: false,
+    modalKey: ''
+  })
 
-  const openModal = (modalKey) => {
-    modalStates.value = { ...modalStates.value, [modalKey]: true }
+  const formsContainer = {
+    login: LoginForm,
+    register: RegisterForm,
+    createItem: AdminProductForm
   }
 
-  const closeModal = (modalKey) => {
-    modalStates.value = { ...modalStates.value, [modalKey]: false }
+  const openModal = (key) => {
+    state.modalKey = key
+    state.isOpen = true
   }
 
-  const isOpen = (modalKey) => computed(() => !!modalStates.value[modalKey])
+  const closeModal = () => {
+    state.modalKey = ''
+    state.isOpen = false
+  }
+
+  const switchModal = (newKey) => {
+    closeModal()
+    setTimeout(() => {
+      openModal(newKey)
+    }, 500)
+  }
+
+  const currentComponent = computed(() => {
+    return formsContainer[state.modalKey] || null
+  })
 
   return {
-    modalStates,
+    state,
+    formsContainer,
     openModal,
     closeModal,
-    isOpen
+    switchModal,
+    currentComponent
   }
 })

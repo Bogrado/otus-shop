@@ -47,7 +47,7 @@ export const useProductForm = (emit) => {
         await postData?.('items', state)
       }
       emit('productSaved')
-      emit('close')
+      emit('closeModal')
       resetForm()
     } catch (err) {
       console.error('Ошибка при сохранении:', err)

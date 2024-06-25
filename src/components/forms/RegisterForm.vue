@@ -1,7 +1,7 @@
 <script setup>
 import { useRegisterForm } from '@/composables/forms/useRegisterForm.js'
 
-const emits = defineEmits(['closeModal', 'switchToLogin'])
+const emits = defineEmits(['closeModal', 'switchTo'])
 
 const { state, error, v$, submitForm } = useRegisterForm(emits)
 </script>
@@ -72,7 +72,7 @@ const { state, error, v$, submitForm } = useRegisterForm(emits)
       <button
         type="button"
         class="w-full mt-2 py-2 border border-gray-600 rounded text-gray-300 hover:bg-gray-700 transition"
-        @click="$emit('switchToLogin')"
+        @click="$emit('switchTo', 'login')"
       >
         Войти
       </button>

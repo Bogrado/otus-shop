@@ -4,12 +4,9 @@ import { useCartStore } from '@/stores/cart/cartStore.js'
 import AppPreloader from '@/components/AppPreloader.vue'
 import CartProductsList from '@/components/CartProductsList.vue'
 import OrderSummary from '@/components/AppSummary.vue'
-import RegisterForm from '@/components/forms/RegisterForm.vue'
-import AppModal from '@/components/AppModal.vue'
-import LoginForm from '@/components/forms/LoginForm.vue'
 import { useAuthStore } from '@/stores/authStore.js'
 import router from '@/router/index.js'
-import { useModal } from '@/composables/forms/useModal.js'
+import { useModalStore } from '@/stores/modalStore.js'
 
 defineProps({
   loading: {
@@ -19,21 +16,19 @@ defineProps({
 })
 const authStore = useAuthStore()
 const cartStore = useCartStore()
+const modalStore = useModalStore()
 const products = computed(() => cartStore.products)
 const totalPrice = computed(() => cartStore.totalPrice)
 const totalItems = computed(() => cartStore.totalItems)
 const isLoggedIn = computed(() => !!authStore.token)
-const loginModal = useModal('login')
-const registerModal = useModal('register')
 
 const handleAccountCheck = () => {
-  if (isLoggedIn.value) {
-    router.push('/checkout')
-  } else {
-    loginModal.openModal()
+  if (!isLoggedIn.value) {
+    modalStore.openModal('login')
+    return
   }
+  router.push('/checkout')
 }
-
 onMounted(() => {
   cartStore.loadCartProducts()
 })
@@ -81,29 +76,5 @@ onMounted(() => {
         </OrderSummary>
       </div>
     </div>
-
-    <AppModal
-      :isOpen="loginModal.isModalOpen.value"
-      @close="loginModal.closeModal"
-    >
-      <template #modalContent>
-        <LoginForm
-          @switchToRegister="() => loginModal.switchModal('register')"
-          @closeModal="loginModal.closeModal"
-        />
-      </template>
-    </AppModal>
-
-    <AppModal
-      :isOpen="registerModal.isModalOpen.value"
-      @close="registerModal.closeModal"
-    >
-      <template #modalContent>
-        <RegisterForm
-          @switchToLogin="() => registerModal.switchModal('login')"
-          @close-modal="registerModal.closeModal"
-        />
-      </template>
-    </AppModal>
   </div>
 </template>

@@ -3,7 +3,7 @@ import THead from '@/components/admin/table/THead.vue'
 import TBody from '@/components/admin/table/TBody.vue'
 import { computed } from 'vue'
 
-defineEmits(['on-click-edit', 'on-click-delete'])
+defineEmits(['handle-delete-click', 'handle-delete-click'])
 
 const props = defineProps({
   items: {
@@ -20,8 +20,8 @@ const keys = computed(() => props.items.length ? Object.keys(props.items[0]) : [
       <t-head :keys="keys" />
       <t-body
         :items="items"
-        @on-click-edit="$emit('on-click-edit', $event)"
-        @on-click-delete="$emit('on-click-delete', $event)"
+        @handle-edit-click="$emit('handle-delete-click', $event)"
+        @handle-delete-click="$emit('handle-delete-click', $event)"
       />
     </table>
   </div>

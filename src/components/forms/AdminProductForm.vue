@@ -10,7 +10,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['close', 'productSaved'])
+const emits = defineEmits(['closeModal', 'productSaved'])
 const { state, error, v$, isEditing, submitForm, resetForm, setFormData } = useProductForm(emits)
 const { getData } = useApi()
 
@@ -115,7 +115,7 @@ onMounted(() => {
     </div>
     <div class="flex justify-end space-x-4">
       <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
-              @click="resetForm; $emit('close')">Отмена
+              @click="resetForm; $emit('closeModal')">Отмена
       </button>
       <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">Сохранить
       </button>
@@ -125,3 +125,4 @@ onMounted(() => {
     </div>
   </form>
 </template>
+

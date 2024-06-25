@@ -1,7 +1,7 @@
 <script setup>
 import { useLoginForm } from '@/composables/forms/useLoginForm.js'
 
-const emit = defineEmits(['closeModal', 'switchToRegister'])
+const emit = defineEmits(['closeModal', 'switchTo'])
 
 const { state, rememberMe, error, logged, v$, submitForm, resetForm } = useLoginForm(emit)
 
@@ -68,7 +68,7 @@ const handleCancel = () => {
         <button
           type="button"
           class="w-full mt-2 py-2 border border-gray-600 rounded text-gray-300 hover:bg-gray-700 transition"
-          @click="emit('switchToRegister')"
+          @click="emit('switchTo', 'register')"
         >
           Зарегистрироваться
         </button>
