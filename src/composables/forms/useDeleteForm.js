@@ -1,23 +1,24 @@
 import { ref } from 'vue'
 import { useApi } from '@/composables/useApi.js'
+import { useItemsManagerStore } from '@/stores/itemsManagerStore.js'
 
-export const useDeleteForm = (currentProductId, closeDeleteProductModal, loadProducts) => {
+export const useDeleteForm = (emit) => {
   const { deleteData } = useApi()
+  const itemsManagerStore = useItemsManagerStore()
   const error = ref('')
 
-  const deleteProduct = async () => {
+  const confirmDelete = async (id) => {
     try {
-      await deleteData?.(`items/${currentProductId.value}`)
-      await loadProducts()
-      closeDeleteProductModal()
+      await deleteData?.(`items/${id}`)
+      emit('closeModal')
+      await itemsManagerStore.loadProducts()
     } catch (err) {
-      console.error('Ошибка при удалении: ' + err)
-      error.value = 'Ошибка при удалении'
+      error.value = 'Ошибка при удалении товара: ' + err.message
     }
   }
 
   return {
-    deleteProduct,
+    confirmDelete,
     error
   }
 }

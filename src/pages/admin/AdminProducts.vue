@@ -5,18 +5,17 @@ import { computed, onMounted } from 'vue'
 import { useModalStore } from '@/stores/modalStore.js'
 import { useItemsManagerStore } from '@/stores/itemsManagerStore.js'
 
-
 defineProps({
   loading: {
     type: Boolean,
     required: true
   }
 })
+
 const modalStore = useModalStore()
 const itemsManagerStore = useItemsManagerStore()
 
 const getItems = computed(() => itemsManagerStore.getItems)
-
 
 const editItem = (id) => {
   console.log(id)
@@ -27,6 +26,11 @@ const editItem = (id) => {
 const createItem = () => {
   itemsManagerStore.setItemId(null)
   modalStore.openModal('createItem')
+}
+
+const deleteItem = (id) => {
+  itemsManagerStore.setItemId(id)
+  modalStore.openModal('deleteItem', id)
 }
 
 onMounted(() => {
@@ -49,6 +53,7 @@ onMounted(() => {
         <admin-product-table
           :items="getItems"
           @handle-edit-click="editItem"
+          @handle-delete-click="deleteItem"
         />
       </div>
     </div>
