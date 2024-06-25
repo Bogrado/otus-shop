@@ -1,4 +1,3 @@
-// src/stores/authStore.js
 import { defineStore } from 'pinia';
 import { computed, reactive, ref } from 'vue';
 import { useApi } from '@/composables/useApi';
@@ -69,6 +68,7 @@ export const useAuthStore = defineStore('auth', () => {
   };
 
   const isAdmin = computed(() => user.value?.role === 'admin');
+  const userEmail = computed(() => user.value?.email);
 
   return {
     user,
@@ -79,5 +79,6 @@ export const useAuthStore = defineStore('auth', () => {
     logout,
     fetchUser,
     isAdmin,
+    userEmail
   };
 });

@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useApi } from '@/composables/useApi'
 import AppPreloader from '@/components/AppPreloader.vue'
+import { useLoadingStore } from '@/stores/loadingStore.js'
 
 defineProps({
   loading: {
@@ -11,12 +12,13 @@ defineProps({
 })
 
 const { getData } = useApi()
-
+const loadingStore = useLoadingStore()
 const totalProducts = ref(0)
 const totalUsers = ref(0)
 // const latestOrders = ref([])
 
 const fetchDashboardData = async () => {
+  loadingStore.setLoading(true)
   try {
     const productsData = await getData('items', {})
     const usersData = await getData('users')
@@ -27,6 +29,8 @@ const fetchDashboardData = async () => {
     // latestOrders.value = ordersData
   } catch (error) {
     console.error('Failed to fetch dashboard data:', error)
+  } finally {
+    loadingStore.setLoading(false)
   }
 }
 

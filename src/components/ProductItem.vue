@@ -1,13 +1,15 @@
 <template>
-  <div
+  <router-link
+    :to="{ name: 'Product', params: { id: product.id } }"
     class="relative border rounded-lg p-4 flex flex-col items-center hover:-translate-y-2 hover:shadow-xl transition bg-white group"
   >
     <div class="relative w-52 h-52 flex items-center justify-center p-2">
       <img :src="product.image" alt="Product Image" class="w-full h-full object-contain" />
-      <button class="absolute top-0 right-0 bg-white p-1 rounded-md shadow hover:shadow-md">
+      <button @click.prevent class="absolute top-0 right-0 bg-white p-1 rounded-md shadow hover:shadow-md">
         <like-icon class="w-6 h-6 hover:fill-gray-700" />
       </button>
       <button
+        @click.prevent
         class="absolute bottom-0 left-0 w-full bg-black bg-opacity-40 text-white py-1 text-center opacity-0 group-hover:opacity-70 transition-opacity duration-300 backdrop-blur-sm hover:bg-opacity-75 active:bg-opacity-90"
       >
         Быстрый просмотр
@@ -20,9 +22,10 @@
     </div>
     <div class="flex items-center mt-2 space-x-2">
       <star-icon class="w-4 h-4" />
-      <p class="text-gray-500">{{ product.rating.rate }} • {{ product.rating.count }} оценок</p>
+      <p class="text-gray-500">{{ product.rating ? product.rating.rate : 0 }} •
+        {{ product.rating ? product.rating.count : 0 }} оценок</p>
     </div>
-    <div v-auto-animate class="mt-4">
+    <div v-auto-animate class="mt-4" @click.prevent>
       <div
         v-if="isInCart"
         class="border-2 border-blue-600 text-blue-600 py-0.5 px-6 rounded-2xl hover:border-blue-900 hover:text-blue-900 hover:bg-blue-100 transition duration-300 min-w-40 flex justify-center items-center">
@@ -40,7 +43,7 @@
         Купить
       </button>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script setup>
@@ -57,13 +60,12 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['addToCart', 'removeFromCart'])
-
 const cartStore = useCartStore()
 const isInCart = computed(() => cartStore.itemIds.includes(props.product.id))
 const quantity = computed(() => cartStore.itemQuantity(props.product.id))
-const handleAddToCart = () => emit('addToCart', props.product.id)
-const handleRemoveFromCart = () => emit('removeFromCart', props.product.id)
+
+const handleAddToCart = () => cartStore.addItem(props.product.id)
+const handleRemoveFromCart = () => cartStore.removeItem(props.product.id)
 </script>
 
 <style scoped></style>

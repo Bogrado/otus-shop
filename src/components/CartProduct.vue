@@ -24,15 +24,15 @@ const itemTotalAmount = computed(() => (quantity.value * props.product.price).to
   <div class="border-b py-4 flex flex-col md:flex-row justify-between items-start md:items-center">
     <div class="flex items-center">
       <div
-        class="w-32 h-32 flex items-center justify-center border border-shadow shadow-md rounded-lg p-2 min-w-32 max-w-32"
-      >
+        class="w-32 h-32 flex items-center justify-center border border-shadow shadow-md rounded-lg p-2 min-w-32 max-w-32 bg-white">
         <img :src="product.image" alt="Product Image" class="w-full h-full object-contain" />
       </div>
       <div class="ml-4">
         <h3 class="text-lg font-bold">{{ product.title }}</h3>
         <p class="text-gray-700">Категория: {{ product.category }}</p>
         <p class="text-gray-700 flex items-center">
-          Рейтинг: {{ product.rating ? product.rating.rate : 0 }}<star-icon class="w-4 h-4" />
+          Рейтинг: {{ product.rating ? product.rating.rate : 0 }}
+          <star-icon class="w-4 h-4" />
         </p>
         <p class="text-gray-700">
           Количество оценок: {{ product.rating ? product.rating.count : 0 }}

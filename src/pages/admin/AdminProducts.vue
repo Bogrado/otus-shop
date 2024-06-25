@@ -1,11 +1,9 @@
 <script setup>
 import AppPreloader from '@/components/AppPreloader.vue'
 import AdminProductTable from '@/components/admin/table/AdminProductTable.vue'
-import { onMounted, ref } from 'vue'
-import { useApi } from '@/composables/useApi.js'
-import AppModal from '@/components/AppModal.vue'
-import AdminProductForm from '@/components/admin/AdminProductForm.vue'
-import { useModal } from '@/composables/useModal.js'
+import { computed, onMounted } from 'vue'
+import { useModalStore } from '@/stores/modalStore.js'
+import { useItemsManagerStore } from '@/stores/itemsManagerStore.js'
 
 defineProps({
   loading: {
@@ -13,21 +11,30 @@ defineProps({
     required: true
   }
 })
-const { getData } = useApi()
-const items = ref([])
 
-const addProductModal = useModal('addProduct')
+const modalStore = useModalStore()
+const itemsManagerStore = useItemsManagerStore()
 
-const loadProducts = async () => {
-  try {
-    items.value = await getData?.('items', { params: { _select: 'id,title,price,category' } })
-  } catch (error) {
-    console.error('Error loading products:', error)
-  }
+const getItems = computed(() => itemsManagerStore.getItems)
+
+const editItem = (id) => {
+  console.log(id)
+  itemsManagerStore.setItemId(id)
+  modalStore.openModal('editItem', id)
+}
+
+const createItem = () => {
+  itemsManagerStore.setItemId(null)
+  modalStore.openModal('createItem')
+}
+
+const deleteItem = (id) => {
+  itemsManagerStore.setItemId(id)
+  modalStore.openModal('deleteItem', id)
 }
 
 onMounted(() => {
-  loadProducts()
+  itemsManagerStore.loadProducts()
 })
 </script>
 
@@ -37,15 +44,17 @@ onMounted(() => {
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8" v-else>
       <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
-          <h3 class="text-lg leading-6 font-medium text-gray-900">Products</h3>
-          <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" @click="addProductModal.openModal('addProduct')">Add Product</button>
+          <h3 class="text-lg leading-6 font-medium text-gray-900">Товары</h3>
+          <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                  @click="createItem"
+          >Добавить товар
+          </button>
         </div>
-        <admin-product-table :items="items" />
-        <div v-auto-animate>
-          <app-modal :is-open="addProductModal.isModalOpen.value" @close="addProductModal.closeModal">
-            <template #modalContent><admin-product-form @close="addProductModal.closeModal" /></template>
-          </app-modal>
-        </div>
+        <admin-product-table
+          :items="getItems"
+          @handle-edit-click="editItem"
+          @handle-delete-click="deleteItem"
+        />
       </div>
     </div>
   </div>

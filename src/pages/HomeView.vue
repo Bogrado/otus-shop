@@ -1,14 +1,14 @@
 <template>
-  <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-4 w-1/3 mx-auto text-center">Товары</h1>
+  <h1 class="text-3xl font-bold mb-4 w-1/3 mx-auto text-center">Товары</h1>
 
-    <app-filters-bar
-    />
-    <div v-if="props.loading">
-      <AppPreloader />
-    </div>
-    <div class="max-w-screen-lg mx-auto mt-4">
-      <ProductsList :products="productStore.getCatalogProducts" />
+
+  <div class="pt-4">
+    <app-filters-bar />
+    <div v-auto-animate="{ duration: 500 }" class="pt-4">
+      <div v-if="props.loading">
+        <AppPreloader />
+      </div>
+      <ProductsList v-else :products="productStore.getCatalogProducts" />
     </div>
   </div>
 </template>
@@ -20,6 +20,7 @@ import ProductsList from '../components/ProductsList.vue'
 import AppPreloader from '../components/AppPreloader.vue'
 import AppFiltersBar from '@/components/AppFiltersBar.vue'
 import { useCatalogParamsStore } from '@/stores/catalog/catalogParams.js'
+
 const props = defineProps({
   loading: {
     type: Boolean,

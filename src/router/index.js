@@ -14,7 +14,6 @@ const router = createRouter({
       name: 'Cart',
       component: () => import('@/pages/CartView.vue')
     },
-
     {
       path: '/product/:id',
       name: 'Product',
@@ -23,7 +22,10 @@ const router = createRouter({
     {
       path: '/checkout',
       name: 'Checkout',
-      component: () => import('@/pages/CheckoutView.vue')
+      component: () => import('@/pages/CheckoutView.vue'),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/profile',
@@ -52,6 +54,11 @@ const router = createRouter({
           component: () => import('@/pages/admin/AdminProducts.vue')
         }
       ]
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('@/pages/NotFound.vue')
     }
   ]
 })
@@ -60,6 +67,19 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   if (to.matched.some((record) => record.meta.requiresAdmin)) {
     if (!authStore.isAdmin) {
+      next({ name: 'Home' })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!authStore.token) {
       next({ name: 'Home' })
     } else {
       next()
