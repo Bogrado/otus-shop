@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useApi } from '@/composables/useApi'
-import AppPreloader from '@/components/AppPreloader.vue'
+import AppPreloader from '@/components/main/AppPreloader.vue'
 import { useLoadingStore } from '@/stores/loadingStore.js'
 
 defineProps({

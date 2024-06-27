@@ -18,12 +18,12 @@
 </template>
 
 <script setup>
-import AppHeader from '@/components/AppHeader.vue'
+import AppHeader from '@/components/main/AppHeader.vue'
 import { vAutoAnimate } from '@formkit/auto-animate'
 import { useLoadingStore } from '@/stores/loadingStore.js'
 import { useAuthStore } from '@/stores/authStore.js'
 import { onMounted } from 'vue'
-import ModalWindow from '@/components/ModalWindow.vue'
+import ModalWindow from '@/components/main/ModalWindow.vue'
 
 const loadingStore = useLoadingStore()
 const authStore = useAuthStore()

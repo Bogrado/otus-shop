@@ -145,20 +145,20 @@
 ### Нужно сделать
 
 1. [x] отрефакторить [queryParamsUpdater.js](src%2Futils%2FqueryParamsUpdater.js) в кастомный хук
-2. [ ] навести порядок в компонентах
-3. [ ] В [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) вынести кнопки удаления и добавления в избранное в
+2. [x] навести порядок в компонентах
+3. [x] В [CartProduct.vue](src%2Fcomponents%2FCartProduct.vue) вынести кнопки удаления и добавления в избранное в
    отдельный компонент
-4. [ ] Переделать нативные слушатели в [AppSortBar.vue](src%2Fcomponents%2FAppSortBar.vue)
-5. [ ] Стандартизировать запросы
    в [authStore.js](src%2Fstores%2FauthStore.js), [catalogStore.js](src%2Fstores%2Fcatalog%2FcatalogStore.js), [cartStore.js](src%2Fstores%2Fcart%2FcartStore.js)
-6. [x] Куда-нибудь определить все константы
-7. [x] Что-то сделать с разросшимися [AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue)
+4. [x] Куда-нибудь определить все константы
+5. [x] Что-то сделать с разросшимися [AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue)
    и [AdminProducts.vue](src%2Fpages%2Fadmin%2FAdminProducts.vue)
-8. [x] Убрать дублирующийся код из [useAdminProductForms.js](src%2Fcomposables%2Fforms%2FuseAdminProductForms.js)
-9. [x] Убрать дублирующийся код navigation guard в  [index.js](src%2Frouter%2Findex.js)
-10. [ ] Перелопатить стор корзины, сделать проще
-11. [ ] В ордере отправлять только необходимые данные товаров: id, title, price, (параметры товара, цвет, размер и т.д)
-12. [ ] Сохранять адрес юзеру и либо автозаполнять при монтировании чекаута либо добавить что-нибудь по типа сохраненных
+6. [x] Убрать дублирующийся код из [useAdminProductForms.js](src%2Fcomposables%2Fforms%2FuseAdminProductForms.js)
+7. [x] Убрать дублирующийся код navigation guard в  [index.js](src%2Frouter%2Findex.js)
+8. [x] Сделать общую схему для vuelidate
+9. [x] вынести formContainer из [modalStore.js](src%2Fstores%2FmodalStore.js)
+10. [ ] Переделать нативные слушатели в [AppSortBar.vue](src%2Fcomponents%2FAppSortBar.vue)
+11. [ ] Стандартизировать запросы
+12. [ ] Перелопатить стор корзины, сделать проще
+13. [ ] В ордере отправлять только необходимые данные товаров: id, title, price, (параметры товара, цвет, размер и т.д)
+14. [ ] Сохранять адрес юзеру и либо автозаполнять при монтировании чекаута либо добавить что-нибудь по типа сохраненных
     адресов
-13. [x] Сделать общую схему для vuelidate
-14. [x] вынести formContainer из [modalStore.js](src%2Fstores%2FmodalStore.js)
