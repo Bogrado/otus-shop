@@ -6,7 +6,7 @@ import CartProductsList from '@/components/CartProductsList.vue'
 import OrderSummary from '@/components/AppSummary.vue'
 import { useAuthStore } from '@/stores/authStore.js'
 import router from '@/router/index.js'
-import { useModalStore } from '@/stores/modalStore.js'
+import { useModalStore } from '@/stores/modal/modalStore.js'
 
 defineProps({
   loading: {

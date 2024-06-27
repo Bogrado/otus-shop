@@ -5,7 +5,7 @@ import { useAuthStore } from '@/stores/authStore.js'
 import { computed } from 'vue'
 import AccountIcon from '@/components/icons/AccountIcon.vue'
 import AdminIcon from '@/components/icons/AdminIcon.vue'
-import { useModalStore } from '@/stores/modalStore.js'
+import { useModalStore } from '@/stores/modal/modalStore.js'
 import router from '@/router/index.js'
 
 const cartStore = useCartStore()
