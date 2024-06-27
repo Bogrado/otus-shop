@@ -135,8 +135,11 @@
 - Форма в [ProductView.vue](src%2Fpages%2FProductView.vue), navigation guard на странице чекаута
 
 ### Изменено
+
 - Сделал логику модальных окон более адекватной
+
 ### Удалено
+
 - куча старых хуков для формы
 
 ### Нужно сделать
@@ -148,13 +151,14 @@
 4. [ ] Переделать нативные слушатели в [AppSortBar.vue](src%2Fcomponents%2FAppSortBar.vue)
 5. [ ] Стандартизировать запросы
    в [authStore.js](src%2Fstores%2FauthStore.js), [catalogStore.js](src%2Fstores%2Fcatalog%2FcatalogStore.js), [cartStore.js](src%2Fstores%2Fcart%2FcartStore.js)
-6. [ ] Куда-нибудь определить все константы
+6. [x] Куда-нибудь определить все константы
 7. [x] Что-то сделать с разросшимися [AdminProductForm.vue](src%2Fcomponents%2Fadmin%2FAdminProductForm.vue)
    и [AdminProducts.vue](src%2Fpages%2Fadmin%2FAdminProducts.vue)
 8. [x] Убрать дублирующийся код из [useAdminProductForms.js](src%2Fcomposables%2Fforms%2FuseAdminProductForms.js)
 9. [ ] Убрать дублирующийся код navigation guard в  [index.js](src%2Frouter%2Findex.js)
 10. [ ] Перелопатить стор корзины, сделать проще
 11. [ ] В ордере отправлять только необходимые данные товаров: id, title, price, (параметры товара, цвет, размер и т.д)
-12. [ ] Сохранять адрес юзеру и либо автозаполнять при монтировании чекаута либо добавить что-нибудь по типа сохраненных адресов
+12. [ ] Сохранять адрес юзеру и либо автозаполнять при монтировании чекаута либо добавить что-нибудь по типа сохраненных
+    адресов
 13. [ ] Сделать общую схему для vuelidate
 14. [x] вынести formContainer из [modalStore.js](src%2Fstores%2FmodalStore.js)

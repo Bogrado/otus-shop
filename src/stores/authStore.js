@@ -1,74 +1,69 @@
-import { defineStore } from 'pinia';
-import { computed, reactive, ref } from 'vue';
-import { useApi } from '@/composables/useApi';
+import { defineStore } from 'pinia'
+import { computed, reactive, ref } from 'vue'
+import { useApi } from '@/composables/useApi'
+import { AUTH_PARAMS } from '@/composables/constants.js'
 
 export const useAuthStore = defineStore('auth', () => {
-  const user = ref(null);
-  const token = ref(localStorage.getItem('token') || null);
-  const error = ref(null);
+  const user = ref(null)
+  const token = ref(localStorage.getItem('token') || null)
+  const error = ref(null)
 
-  const { postData, getData } = useApi();
-  const AUTH_PARAMS = {
+  const { postData, getData } = useApi()
+  const tokenParams = reactive({
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  };
-  const TOKEN_PARAMS = reactive({
-    headers: {
-      Authorization: `Bearer ${token.value}`,
-    },
-  });
+      Authorization: `Bearer ${token.value}`
+    }
+  })
 
   const login = async (email, password, rememberMe = false) => {
     try {
-      const data = await postData?.('auth', { email, password }, AUTH_PARAMS);
-      user.value = data.data;
-      token.value = data.token;
-      error.value = null;
+      const data = await postData?.('auth', { email, password }, AUTH_PARAMS)
+      user.value = data.data
+      token.value = data.token
+      error.value = null
       if (rememberMe) {
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('token', data.token)
       } else {
-        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('token', data.token)
       }
     } catch (err) {
-      error.value = err;
+      error.value = err
     }
-  };
+  }
 
   const register = async (fullName, email, password) => {
     try {
-      const data = await postData?.('register', { fullName, email, password }, AUTH_PARAMS);
-      user.value = data.data;
-      token.value = data.token;
-      error.value = null;
-      localStorage.setItem('token', data.token);
+      const data = await postData?.('register', { fullName, email, password }, AUTH_PARAMS)
+      user.value = data.data
+      token.value = data.token
+      error.value = null
+      localStorage.setItem('token', data.token)
     } catch (err) {
-      error.value = err;
+      error.value = err
     }
-  };
+  }
 
   const fetchUser = async () => {
-    if (!token.value) return;
+    if (!token.value) return
 
     try {
-      user.value = await getData?.('auth_me', TOKEN_PARAMS);
+      user.value = await getData?.('auth_me', tokenParams)
     } catch (err) {
-      error.value = err;
-      logout();
+      error.value = err
+      logout()
     }
-  };
+  }
 
   const logout = () => {
-    user.value = null;
-    token.value = null;
-    error.value = null;
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
-  };
+    user.value = null
+    token.value = null
+    error.value = null
+    localStorage.removeItem('token')
+    sessionStorage.removeItem('token')
+  }
 
-  const isAdmin = computed(() => user.value?.role === 'admin');
-  const userEmail = computed(() => user.value?.email);
+  const isAdmin = computed(() => user.value?.role === 'admin')
+  const userEmail = computed(() => user.value?.email)
 
   return {
     user,
@@ -80,5 +75,5 @@ export const useAuthStore = defineStore('auth', () => {
     fetchUser,
     isAdmin,
     userEmail
-  };
-});
+  }
+})
