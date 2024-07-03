@@ -38,7 +38,6 @@ export const useCartStore = defineStore('cart', () => {
     const anonCart = JSON.parse(localStorage.getItem('cartItems')) || []
     state.items = [...state.items, ...anonCart]
     localStorage.removeItem('cartItems')
-    syncLocalStorage()
   }
 
   const addItem = (itemId) => {
@@ -49,7 +48,6 @@ export const useCartStore = defineStore('cart', () => {
     } else {
       state.items.push({ id: itemId })
     }
-    syncLocalStorage()
   }
 
   const removeItem = (itemId) => {
@@ -57,16 +55,13 @@ export const useCartStore = defineStore('cart', () => {
     if (index !== -1) {
       state.items.splice(index, 1)
     }
-    syncLocalStorage()
   }
 
   const removeAll = (itemId) => {
     state.items = state.items.filter((item) => item.id !== itemId)
-    syncLocalStorage()
   }
   const clearCart = () => {
     state.items = []
-    syncLocalStorage()
   }
 
   const loadCartProducts = async () => {
