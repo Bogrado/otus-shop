@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { computed, reactive, ref } from 'vue'
 import { useApi } from '@/composables/useApi'
 import { AUTH_PARAMS } from '@/composables/constants.js'
+import { useCartStore } from '@/stores/cart/cartStore.js'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
@@ -9,6 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
   const error = ref(null)
 
   const { postData, getData } = useApi()
+  const { loadUserCart, clearCart } = useCartStore()
   const tokenParams = reactive({
     headers: {
       Authorization: `Bearer ${token.value}`
@@ -26,6 +28,7 @@ export const useAuthStore = defineStore('auth', () => {
       } else {
         sessionStorage.setItem('token', data.token)
       }
+      loadUserCart()
     } catch (err) {
       error.value = err
     }
@@ -38,6 +41,7 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = data.token
       error.value = null
       localStorage.setItem('token', data.token)
+      loadUserCart()
     } catch (err) {
       error.value = err
     }
@@ -48,6 +52,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     try {
       user.value = await getData?.('auth_me', tokenParams)
+      loadUserCart()
     } catch (err) {
       error.value = err
       logout()
@@ -60,10 +65,12 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
     localStorage.removeItem('token')
     sessionStorage.removeItem('token')
+    clearCart()
   }
 
   const isAdmin = computed(() => user.value?.role === 'admin')
   const userEmail = computed(() => user.value?.email)
+  const userId = computed(() => user.value?.id)
 
   return {
     user,
@@ -74,6 +81,7 @@ export const useAuthStore = defineStore('auth', () => {
     logout,
     fetchUser,
     isAdmin,
-    userEmail
+    userEmail,
+    userId
   }
 })

@@ -2,15 +2,36 @@ import { defineStore } from 'pinia'
 import { reactive, computed, watch } from 'vue'
 import { useApi } from '@/composables/useApi.js'
 import { useLoadingStore } from '@/stores/loadingStore.js'
+import { useAuthStore } from '@/stores/authStore.js'
 
 export const useCartStore = defineStore('cart', () => {
 
   const { getData } = useApi()
   const loadingStore = useLoadingStore()
+  const authStore = useAuthStore()
 
   const state = reactive({
-    items: JSON.parse(localStorage.getItem('cartItems')) || []
+    items: []
   })
+
+  const loadUserCart = () => {
+    const userId = authStore.userId
+    console.log(userId)
+    if (userId) {
+      const cart = JSON.parse(localStorage.getItem(`cart_${userId}`))
+      if (cart) {
+        state.items = cart
+      }
+    }
+  }
+
+  const syncLocalStorage = () => {
+    const userId = authStore.userId
+    if (userId) {
+      localStorage.setItem(`cart_${userId}`, JSON.stringify(state.items))
+    }
+  }
+
   const addItem = (itemId) => {
     const existingItem = state.items.find((item) => item.id === itemId)
     if (existingItem) {
@@ -19,6 +40,7 @@ export const useCartStore = defineStore('cart', () => {
     } else {
       state.items.push({ id: itemId })
     }
+    syncLocalStorage()
   }
 
   const removeItem = (itemId) => {
@@ -26,14 +48,16 @@ export const useCartStore = defineStore('cart', () => {
     if (index !== -1) {
       state.items.splice(index, 1)
     }
-
+    syncLocalStorage()
   }
 
   const removeAll = (itemId) => {
     state.items = state.items.filter((item) => item.id !== itemId)
+    syncLocalStorage()
   }
   const clearCart = () => {
     state.items = []
+    syncLocalStorage()
   }
 
   const loadCartProducts = async () => {
@@ -71,10 +95,9 @@ export const useCartStore = defineStore('cart', () => {
     return Number(total.toFixed(2))
   })
 
-  const syncLocalStorage = (items) => localStorage.setItem('cartItems', JSON.stringify(items))
   watch(
     () => state.items,
-    (i) => syncLocalStorage(i),
+    () => syncLocalStorage(),
     { deep: true }
   )
 
@@ -89,6 +112,8 @@ export const useCartStore = defineStore('cart', () => {
     itemQuantity,
     products,
     removeAll,
-    totalPrice
+    totalPrice,
+    loadUserCart,
+    syncLocalStorage
   }
 })
