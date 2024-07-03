@@ -1,8 +1,7 @@
 import axios from 'axios'
+import { API_URL } from '@/composables/constants.js'
 
 export const useApi = () => {
-
-  const API_URL = 'https://6f8022cf47b3f024.mokky.dev'
   const getData = async (endpoint, params) => {
 
     try {

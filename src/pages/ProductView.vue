@@ -75,10 +75,10 @@
 import { useRoute } from 'vue-router'
 import { computed, onMounted } from 'vue'
 import { useProductStore } from '@/stores/product/productStore'
-import AppPreloader from '@/components/AppPreloader.vue'
+import AppPreloader from '@/components/main/AppPreloader.vue'
 import StarIcon from '@/components/icons/StarIcon.vue'
-import AppSummary from '@/components/AppSummary.vue'
-import QuantityManager from '@/components/QuantityManager.vue'
+import AppSummary from '@/components/common/AppSummary.vue'
+import QuantityManager from '@/components/common/QuantityManager.vue'
 import { useCartStore } from '@/stores/cart/cartStore.js'
 import { useCart } from '@/composables/useCart.js'
 

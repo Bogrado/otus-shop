@@ -51,7 +51,7 @@ import StarIcon from '@/components/icons/StarIcon.vue'
 import LikeIcon from '@/components/icons/LikeIcon.vue'
 import { computed } from 'vue'
 import { useCartStore } from '@/stores/cart/cartStore.js'
-import QuantityManager from '@/components/QuantityManager.vue'
+import QuantityManager from '@/components/common/QuantityManager.vue'
 
 const props = defineProps({
   product: {

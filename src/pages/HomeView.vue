@@ -16,9 +16,9 @@
 <script setup>
 import { computed, onMounted, watch } from 'vue'
 import { useCatalogStore } from '@/stores/catalog/catalogStore.js'
-import ProductsList from '../components/ProductsList.vue'
-import AppPreloader from '../components/AppPreloader.vue'
-import AppFiltersBar from '@/components/AppFiltersBar.vue'
+import ProductsList from '../components/homePage/ProductsList.vue'
+import AppPreloader from '../components/main/AppPreloader.vue'
+import AppFiltersBar from '@/components/homePage/AppFiltersBar.vue'
 import { useCatalogParamsStore } from '@/stores/catalog/catalogParams.js'
 
 const props = defineProps({

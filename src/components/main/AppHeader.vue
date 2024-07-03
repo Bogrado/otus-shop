@@ -5,7 +5,7 @@ import { useAuthStore } from '@/stores/authStore.js'
 import { computed } from 'vue'
 import AccountIcon from '@/components/icons/AccountIcon.vue'
 import AdminIcon from '@/components/icons/AdminIcon.vue'
-import { useModalStore } from '@/stores/modalStore.js'
+import { useModalStore } from '@/stores/modal/modalStore.js'
 import router from '@/router/index.js'
 
 const cartStore = useCartStore()
@@ -34,7 +34,7 @@ const handleAccountCheck = () => {
   >
     <router-link to="/">
       <div class="flex items-center gap-2 sm:gap-4 text-white">
-        <img src="@/assets/logo.png" alt="Logo" class="w-8 sm:w-10" />
+        <img src="../../assets/logo.png" alt="Logo" class="w-8 sm:w-10" />
         <div>
           <h2 class="text-lg sm:text-xl font-bold uppercase">Otus Shop</h2>
           <p class="text-slate-400 text-xs sm:text-base">Магазин чего-то</p>

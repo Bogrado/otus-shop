@@ -1,7 +1,7 @@
 import { useAuthStore } from '@/stores/authStore.js'
 import { reactive, ref } from 'vue'
-import { useValidation } from '@/composables/useValidation.js'
-import { required, email } from '@vuelidate/validators'
+import { useValidation } from '@/composables/validation/useValidation.js'
+import { registerSchema } from '@/composables/validation/validationSchemas.js'
 
 export const useRegisterForm = (emit) => {
   const authStore = useAuthStore()
@@ -13,12 +13,7 @@ export const useRegisterForm = (emit) => {
   })
   const error = ref('')
 
-  const schema = {
-    fullName: { required, length: value => value.length >= 3 || value === 'Ян' },
-    email: { required, email },
-    password: { required, length: value => value.length >= 5 },
-    confirmPassword: { required, sameAsPassword: value => value === state.password }
-  }
+  const schema = registerSchema(state)
 
   const { v$, validateForm } = useValidation(schema, state)
 
@@ -38,7 +33,7 @@ export const useRegisterForm = (emit) => {
       await authStore.register(state.fullName, state.email, state.password)
       if (!authStore.error) {
         resetForm()
-        emit('closeModal') // Убедитесь, что emit вызывается здесь
+        emit('closeModal')
       } else {
         error.value = authStore.error
       }

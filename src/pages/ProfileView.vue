@@ -25,7 +25,7 @@
 import { useAuthStore } from '@/stores/authStore.js'
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
-import { useModalStore } from '@/stores/modalStore.js'
+import { useModalStore } from '@/stores/modal/modalStore.js'
 
 defineProps({
   loading: {

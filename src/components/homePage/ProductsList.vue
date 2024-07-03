@@ -14,7 +14,7 @@
 
 <script setup>
 import ProductItem from './ProductItem.vue'
-import { useCart } from '@/composables/useCart'
+import { useCart } from '@/composables/useCart.js'
 import { useProductStore } from '@/stores/product/productStore.js'
 
 defineProps({

@@ -1,8 +1,8 @@
 <script setup>
-import AppPreloader from '@/components/AppPreloader.vue'
+import AppPreloader from '@/components/main/AppPreloader.vue'
 import AdminProductTable from '@/components/admin/table/AdminProductTable.vue'
 import { computed, onMounted } from 'vue'
-import { useModalStore } from '@/stores/modalStore.js'
+import { useModalStore } from '@/stores/modal/modalStore.js'
 import { useItemsManagerStore } from '@/stores/itemsManagerStore.js'
 
 defineProps({
