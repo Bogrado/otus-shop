@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { useCartStore } from '@/stores/cart/cartStore.js'
 import AppPreloader from '@/components/main/AppPreloader.vue'
 import CartProductsList from '@/components/cartPage/CartProductsList.vue'
@@ -30,6 +30,10 @@ const handleAccountCheck = () => {
   router.push('/checkout')
 }
 onMounted(() => {
+  cartStore.loadCartProducts()
+})
+
+watch(isLoggedIn, () => { // На коленке поправил баг, в некоторых случаях при логине из корзины некорректно отображаются товары
   cartStore.loadCartProducts()
 })
 </script>
