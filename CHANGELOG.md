@@ -134,6 +134,7 @@
 - Линки на [ProductItem.vue](src%2Fcomponents%2FProductItem.vue)
 - Форма в [ProductView.vue](src%2Fpages%2FProductView.vue), navigation guard на странице чекаута
 - Функционал уникальной корзины для пользователя в [cartStore.js](src%2Fstores%2Fcart%2FcartStore.js) и [authStore.js](src%2Fstores%2FauthStore.js)
+- Объединение анонимной корзины с корзиной пользователя при логине
 
 ### Изменено
 

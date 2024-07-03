@@ -11,7 +11,7 @@ export const useCartStore = defineStore('cart', () => {
   const authStore = useAuthStore()
 
   const state = reactive({
-    items: []
+    items: JSON.parse(localStorage.getItem('cartItems')) || []
   })
 
   const loadUserCart = () => {
@@ -29,7 +29,16 @@ export const useCartStore = defineStore('cart', () => {
     const userId = authStore.userId
     if (userId) {
       localStorage.setItem(`cart_${userId}`, JSON.stringify(state.items))
+      return
     }
+    localStorage.setItem('cartItems', JSON.stringify(state.items))
+  }
+
+  const mergeAnonCart = () => {
+    const anonCart = JSON.parse(localStorage.getItem('cartItems')) || []
+    state.items = [...state.items, ...anonCart]
+    localStorage.removeItem('cartItems')
+    syncLocalStorage()
   }
 
   const addItem = (itemId) => {
@@ -114,6 +123,7 @@ export const useCartStore = defineStore('cart', () => {
     removeAll,
     totalPrice,
     loadUserCart,
-    syncLocalStorage
+    syncLocalStorage,
+    mergeAnonCart
   }
 })

@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
   const error = ref(null)
 
   const { postData, getData } = useApi()
-  const { loadUserCart, clearCart } = useCartStore()
+  const { loadUserCart, clearCart, mergeAnonCart } = useCartStore()
   const tokenParams = reactive({
     headers: {
       Authorization: `Bearer ${token.value}`
@@ -29,6 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
         sessionStorage.setItem('token', data.token)
       }
       loadUserCart()
+      mergeAnonCart()
     } catch (err) {
       error.value = err
     }
@@ -42,6 +43,7 @@ export const useAuthStore = defineStore('auth', () => {
       error.value = null
       localStorage.setItem('token', data.token)
       loadUserCart()
+      mergeAnonCart()
     } catch (err) {
       error.value = err
     }
