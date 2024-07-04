@@ -3,6 +3,7 @@ import { computed, reactive, ref } from 'vue'
 import { useApi } from '@/composables/useApi'
 import { AUTH_PARAMS } from '@/composables/constants.js'
 import { useCartStore } from '@/stores/cart/cartStore.js'
+import { useUserSetup } from '@/composables/useUserSetup.js'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
@@ -11,6 +12,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const { postData, getData } = useApi()
   const { loadUserCart, clearCart, mergeAnonCart } = useCartStore()
+  const { createCartForUser, createFavoritesForUser } = useUserSetup()
   const tokenParams = reactive({
     headers: {
       Authorization: `Bearer ${token.value}`
@@ -42,6 +44,8 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = data.token
       error.value = null
       localStorage.setItem('token', data.token)
+      await createCartForUser(email) // Создаю корзину и избранное на сервере для каждого пользователя
+      await createFavoritesForUser(email)
       loadUserCart()
       mergeAnonCart()
     } catch (err) {
