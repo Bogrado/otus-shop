@@ -24,9 +24,9 @@ export const useApi = () => {
     }
   }
 
-  const patchData = async (endpoint, payload, params = {}) => {
+  const patchData = async (endpoint, payload, params = null) => {
     try {
-      const response = await axios.patch(`${API_URL}/${endpoint}`, payload, { params })
+      const response = await axios.patch(`${API_URL}/${endpoint}`, payload, params)
       return response.data
     } catch (error) {
       console.error('Error fetching products:', error)

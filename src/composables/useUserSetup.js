@@ -5,7 +5,7 @@ export const useUserSetup = () => {
 
   const createCartForUser = async (email, userId) => {
     try {
-      await postData?.('cart', { user: email, user_id: userId, cart: [] })
+      await postData?.('cart', { user: email, user_id: userId, items: [] })
     } catch (err) {
       console.error('Error creating cart for user:', err)
     }
@@ -13,7 +13,7 @@ export const useUserSetup = () => {
 
   const createFavoritesForUser = async (email, userId) => {
     try {
-      await postData?.('favorites', { user: email, user_id: userId, favorites: [] })
+      await postData?.('favorites', { user: email, user_id: userId, items: [] })
     } catch (err) {
       console.error('Error creating favorites for user:', err)
     }
