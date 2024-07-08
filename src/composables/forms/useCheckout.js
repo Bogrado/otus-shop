@@ -1,25 +1,13 @@
 import { computed } from 'vue'
-import { useValidation } from '@/composables/useValidation.js'
-import { required, minLength, email as emailValidator, numeric, maxLength } from '@vuelidate/validators'
+import { useValidation } from '@/composables/validation/useValidation.js'
 import { useOrderStore } from '@/stores/orderStore'
+import { checkoutSchema } from '@/composables/validation/validationSchemas.js'
 
 export const useCheckout = () => {
   const orderStore = useOrderStore()
   const state = orderStore.state
 
-  const schema = {
-    firstName: { required, minLength: minLength(3) },
-    lastName: { required },
-    email: { required, email: emailValidator, minLength: minLength(5) },
-    country: { required, minLength: minLength(3) },
-    city: { required, minLength: minLength(3) },
-    postalCode: { required, numeric, minLength: minLength(6), maxLength: maxLength(6) },
-    addressLine1: { required, minLength: minLength(3) },
-    houseNumber: { required },
-    apartmentNumber: { required }
-  }
-
-  const { v$, validateForm } = useValidation(schema, state)
+  const { v$, validateForm } = useValidation(checkoutSchema, state)
 
   const isFormValid = computed(() => !v$.value.$invalid && state.agreeToTerms)
 

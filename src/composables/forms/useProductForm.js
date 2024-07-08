@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue'
 import { useApi } from '@/composables/useApi.js'
-import { useValidation } from '@/composables/useValidation.js'
-import { required, url, minLength, numeric, maxLength } from '@vuelidate/validators'
+import { useValidation } from '@/composables/validation/useValidation.js'
+import { productSchema } from '@/composables/validation/validationSchemas.js'
 
 export const useProductForm = (emit) => {
   const { postData, patchData } = useApi()
@@ -16,15 +16,7 @@ export const useProductForm = (emit) => {
   })
   const error = ref('')
 
-  const schema = {
-    title: { required, minLength: minLength(5) },
-    price: { required, numeric, price: value => value > 10 },
-    category: { required, minLength: minLength(3), maxLength: maxLength(20) },
-    description: { required, minLength: minLength(10) },
-    image: { required, url, minLength: minLength(5) }
-  }
-
-  const { v$, validateForm } = useValidation(schema, state)
+  const { v$, validateForm } = useValidation(productSchema, state)
 
   const resetForm = () => {
     state.id = null

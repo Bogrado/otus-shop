@@ -51,7 +51,7 @@
 <script setup>
 import { watch } from 'vue'
 import { useRouter } from 'vue-router'
-import AppSummary from '@/components/AppSummary.vue'
+import AppSummary from '@/components/common/AppSummary.vue'
 import CheckoutForm from '@/components/forms/CheckoutForm.vue'
 import { useCartStore } from '@/stores/cart/cartStore.js'
 import { computed } from 'vue'

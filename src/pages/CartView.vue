@@ -1,12 +1,12 @@
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { useCartStore } from '@/stores/cart/cartStore.js'
-import AppPreloader from '@/components/AppPreloader.vue'
-import CartProductsList from '@/components/CartProductsList.vue'
-import OrderSummary from '@/components/AppSummary.vue'
+import AppPreloader from '@/components/main/AppPreloader.vue'
+import CartProductsList from '@/components/cartPage/CartProductsList.vue'
+import OrderSummary from '@/components/common/AppSummary.vue'
 import { useAuthStore } from '@/stores/authStore.js'
 import router from '@/router/index.js'
-import { useModalStore } from '@/stores/modalStore.js'
+import { useModalStore } from '@/stores/modal/modalStore.js'
 
 defineProps({
   loading: {
@@ -30,6 +30,10 @@ const handleAccountCheck = () => {
   router.push('/checkout')
 }
 onMounted(() => {
+  cartStore.loadCartProducts()
+})
+
+watch(isLoggedIn, () => { // На коленке поправил баг, в некоторых случаях при логине из корзины некорректно отображаются товары
   cartStore.loadCartProducts()
 })
 </script>

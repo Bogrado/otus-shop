@@ -1,5 +1,5 @@
 <script setup>
-import CartProduct from '@/components/CartProduct.vue'
+import CartProduct from '@/components/cartPage/CartProduct.vue'
 import { useCart } from '@/composables/useCart.js'
 
 defineProps({

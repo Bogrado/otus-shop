@@ -1,5 +1,5 @@
 <script setup>
-import { useModalStore } from '@/stores/modalStore'
+import { useModalStore } from '@/stores/modal/modalStore.js'
 import { computed } from 'vue'
 import CrossIcon from '@/components/icons/CrossIcon.vue'
 
