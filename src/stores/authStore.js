@@ -30,8 +30,8 @@ export const useAuthStore = defineStore('auth', () => {
       } else {
         sessionStorage.setItem('token', data.token)
       }
-      loadUserCart()
-      mergeAnonCart()
+      loadUserCart?.()
+      mergeAnonCart?.()
     } catch (err) {
       error.value = err
     }
@@ -44,10 +44,10 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = data.token
       error.value = null
       localStorage.setItem('token', data.token)
-      await createCartForUser(email) // Создаю корзину и избранное на сервере для каждого пользователя
-      await createFavoritesForUser(email)
-      loadUserCart()
-      mergeAnonCart()
+      await createCartForUser?.(email, data.data.id) // Создаю корзину и избранное на сервере для каждого пользователя
+      await createFavoritesForUser?.(email, data.data.id)
+      loadUserCart?.()
+      mergeAnonCart?.()
     } catch (err) {
       error.value = err
     }
@@ -58,7 +58,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     try {
       user.value = await getData?.('auth_me', tokenParams)
-      loadUserCart()
+      loadUserCart?.()
     } catch (err) {
       error.value = err
       logout()
@@ -71,7 +71,7 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
     localStorage.removeItem('token')
     sessionStorage.removeItem('token')
-    clearCart()
+    clearCart?.()
   }
 
   const isAdmin = computed(() => user.value?.role === 'admin')
