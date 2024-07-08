@@ -53,6 +53,17 @@
 - [useLoginForm.js](src%2Fcomposables%2Fauth%2FuseLoginForm.js) хук для формы, если бы я знал, что хуки, так круто, юзал
   бы их раньше
 - Добавлена Валидация и хук [useValidation.js](src%2Fcomposables%2FuseValidation.js)
+- Логика изменения и добавления товаров, с валидацией полей
+- Реализовал удаление товара по id с проверкой перед удалением
+- Хук [useAdminProductForms.js](src%2Fcomposables%2Fforms%2FuseAdminProductForms.js), чтоб не засорять компонент
+- Хук [useDeleteForm.js](src%2Fcomposables%2Fforms%2FuseDeleteForm.js) для удаления товара
+- Страница товара [ProductView.vue](src%2Fpages%2FProductView.vue),
+  стор [productStore.js](src%2Fstores%2Fproduct%2FproductStore.js)
+- Линки на [ProductItem.vue](src%2Fcomponents%2FProductItem.vue)
+- Форма в [ProductView.vue](src%2Fpages%2FProductView.vue), navigation guard на странице чекаута
+- Функционал уникальной корзины для пользователя в [cartStore.js](src%2Fstores%2Fcart%2FcartStore.js)
+  и [authStore.js](src%2Fstores%2FauthStore.js)
+- Объединение анонимной корзины с корзиной пользователя при логине
 
 ### Изменено
 
@@ -113,6 +124,9 @@
 - перелопатил [modalStore.js](src%2Fstores%2FmodalStore.js)
 - [LoginForm.vue](src%2Fcomponents%2FLoginForm.vue) перенес логику в хук
 - вся логика для форм теперь будет в кастомных хуках в т.ч. и валидация
+- Сделал логику модальных окон более адекватной
+- В [CartView.vue](src%2Fpages%2FCartView.vue) Поправил баг, в некоторых случаях при логине из корзины некорректно
+  отображаются товары
 
 ### Удалено
 
@@ -120,31 +134,16 @@
 - проверка в [QuantityManager.vue](src%2Fcomponents%2FQuantityManager.vue), не понимаю, как она туда попала
 - Удален дропдаун из [AppHeader.vue](src%2Fcomponents%2FAppHeader.vue) слишком он муторный
 - Удален `apiService.js`, заменен на хук [useApi.js](src%2Fcomposables%2FuseApi.js)
+- куча старых хуков для формы
+- лишние вызовы синхронизации локальной корзины удалены, забыл, что есть watch
 
 ## [Не выпущено]
 
 ### Добавлено
 
-- Логика изменения и добавления товаров, с валидацией полей
-- Реализовал удаление товара по id с проверкой перед удалением
-- Хук [useAdminProductForms.js](src%2Fcomposables%2Fforms%2FuseAdminProductForms.js), чтоб не засорять компонент
-- Хук [useDeleteForm.js](src%2Fcomposables%2Fforms%2FuseDeleteForm.js) для удаления товара
-- Страница товара [ProductView.vue](src%2Fpages%2FProductView.vue),
-  стор [productStore.js](src%2Fstores%2Fproduct%2FproductStore.js)
-- Линки на [ProductItem.vue](src%2Fcomponents%2FProductItem.vue)
-- Форма в [ProductView.vue](src%2Fpages%2FProductView.vue), navigation guard на странице чекаута
-- Функционал уникальной корзины для пользователя в [cartStore.js](src%2Fstores%2Fcart%2FcartStore.js) и [authStore.js](src%2Fstores%2FauthStore.js)
-- Объединение анонимной корзины с корзиной пользователя при логине
-
 ### Изменено
 
-- Сделал логику модальных окон более адекватной
-- В [CartView.vue](src%2Fpages%2FCartView.vue) Поправил баг, в некоторых случаях при логине из корзины некорректно отображаются товары
-
 ### Удалено
-
-- куча старых хуков для формы
-- лишние вызовы синхронизации локальной корзины удалены, забыл, что есть watch
 
 ### Нужно сделать
 
