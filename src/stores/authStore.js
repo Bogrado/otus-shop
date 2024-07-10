@@ -30,8 +30,8 @@ export const useAuthStore = defineStore('auth', () => {
       } else {
         sessionStorage.setItem('token', data.token)
       }
-      loadUserCart?.()
-      mergeAnonCart?.()
+      await loadUserCart?.()
+      await mergeAnonCart?.()
     } catch (err) {
       error.value = err
     }
@@ -46,8 +46,8 @@ export const useAuthStore = defineStore('auth', () => {
       localStorage.setItem('token', data.token)
       await createCartForUser?.(email, data.data.id) // Создаю корзину и избранное на сервере для каждого пользователя
       await createFavoritesForUser?.(email, data.data.id)
-      loadUserCart?.()
-      mergeAnonCart?.()
+      await loadUserCart?.()
+      await mergeAnonCart?.()
     } catch (err) {
       error.value = err
     }
