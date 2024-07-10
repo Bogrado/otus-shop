@@ -33,7 +33,7 @@ onMounted(() => {
   cartStore.loadCartProducts()
 })
 
-watch(isLoggedIn, () => { // На коленке поправил баг, в некоторых случаях при логине из корзины некорректно отображаются товары
+watch([isLoggedIn, totalItems], () => { // На коленке поправил баг, в некоторых случаях при логине из корзины некорректно отображаются товары
   cartStore.loadCartProducts()
 })
 </script>

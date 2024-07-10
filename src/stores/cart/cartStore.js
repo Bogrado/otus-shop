@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { reactive, computed } from 'vue'
+import { reactive, computed, watch } from 'vue'
 import { useApi } from '@/composables/useApi.js'
 import { useLoadingStore } from '@/stores/loadingStore.js'
 import { useAuthStore } from '@/stores/authStore.js'
@@ -43,12 +43,10 @@ export const useCartStore = defineStore('cart', () => {
     const anonCart = JSON.parse(localStorage.getItem('cartItems')) || []
     state.items = [...state.items, ...anonCart]
     localStorage.removeItem('cartItems')
-    await syncCartWithServer()
   }
 
   const addItem = async (itemId) => {
     state.items.push({ id: itemId })
-    await syncCartWithServer()
   }
 
   const removeItem = async (itemId) => {
@@ -56,17 +54,14 @@ export const useCartStore = defineStore('cart', () => {
     if (index !== -1) {
       state.items.splice(index, 1)
     }
-    await syncCartWithServer()
   }
 
   const removeAll = async (itemId) => {
     state.items = state.items.filter((item) => item.id !== itemId)
-    await syncCartWithServer()
   }
 
   const clearCart = async () => {
     state.items = []
-    await syncCartWithServer()
   }
 
   const loadCartProducts = async () => {
@@ -103,6 +98,8 @@ export const useCartStore = defineStore('cart', () => {
     const total = state.items.reduce((total, item) => total + item.price, 0)
     return Number(total.toFixed(2))
   })
+
+  watch(totalItems, syncCartWithServer)
 
   return {
     state,
