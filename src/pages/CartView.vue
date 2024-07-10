@@ -24,7 +24,11 @@ const isLoggedIn = computed(() => !!authStore.token)
 
 const handleAccountCheck = () => {
   if (!isLoggedIn.value) {
-    modalStore.openModal('login')
+    router.push('/')
+    setTimeout(() => {
+      modalStore.openModal('login')
+    }, 300)
+
     return
   }
   router.push('/checkout')
@@ -33,7 +37,7 @@ onMounted(() => {
   cartStore.loadCartProducts()
 })
 
-watch([isLoggedIn, totalItems ], () => { // На коленке поправил баг, в некоторых случаях при логине из корзины некорректно отображаются товары
+watch([isLoggedIn, totalItems], () => { // На коленке поправил баг, в некоторых случаях при логине из корзины некорректно отображаются товары
   cartStore.loadCartProducts()
 })
 </script>

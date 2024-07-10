@@ -10,7 +10,7 @@ export const useCartStore = defineStore('cart', () => {
   const authStore = useAuthStore()
 
   const state = reactive({
-    items: []
+    items: JSON.parse(localStorage.getItem('cartItems')) || []
   })
 
   const loadUserCart = async () => {
@@ -43,25 +43,50 @@ export const useCartStore = defineStore('cart', () => {
     const anonCart = JSON.parse(localStorage.getItem('cartItems')) || []
     state.items = [...state.items, ...anonCart]
     localStorage.removeItem('cartItems')
+    await syncCartWithServer()
+  }
+
+  const syncLocalStorage = () => {
+    localStorage.setItem('cartItems', JSON.stringify(state.items))
   }
 
   const addItem = async (itemId) => {
     state.items.push({ id: itemId })
+    if (authStore.userId) {
+      await syncCartWithServer()
+    } else {
+      syncLocalStorage()
+    }
   }
 
   const removeItem = async (itemId) => {
     const index = state.items.findIndex((item) => item.id === itemId)
     if (index !== -1) {
       state.items.splice(index, 1)
+      if (authStore.userId) {
+        await syncCartWithServer()
+      } else {
+        syncLocalStorage()
+      }
     }
   }
 
   const removeAll = async (itemId) => {
     state.items = state.items.filter((item) => item.id !== itemId)
+    if (authStore.userId) {
+      await syncCartWithServer()
+    } else {
+      syncLocalStorage()
+    }
   }
 
   const clearCart = async () => {
     state.items = []
+    if (authStore.userId) {
+      await syncCartWithServer()
+    } else {
+      localStorage.removeItem('cartItems')
+    }
   }
 
   const loadCartProducts = async () => {
@@ -99,7 +124,14 @@ export const useCartStore = defineStore('cart', () => {
     return Number(total.toFixed(2))
   })
 
-  watch(totalItems, syncCartWithServer)
+  watch(totalItems,  async () => {
+    if (authStore.userId) {
+      await syncCartWithServer()
+    } else {
+      console.log(1)
+      syncLocalStorage()
+    }
+  })
 
   return {
     state,
