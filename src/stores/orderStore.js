@@ -11,6 +11,7 @@ export const useOrderStore = defineStore('order', () => {
   const { clearCart } = useCart()
 
   const state = reactive({ // Нужно ли сокращать или ненужно? Вроде, всё важное
+    userId: authStore.userId || '',
     firstName: '',
     lastName: '',
     email: authStore.userEmail || '',
@@ -49,6 +50,7 @@ export const useOrderStore = defineStore('order', () => {
       state.created_at = new Date().toISOString()
       const orderData = {
         user: state.email,
+        user_id: state.userId,
         created_at: state.created_at,
         orderDetails: state.orderDetails,
         totalPrice: state.totalPrice,

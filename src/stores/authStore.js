@@ -3,6 +3,7 @@ import { computed, reactive, ref } from 'vue'
 import { useApi } from '@/composables/useApi'
 import { AUTH_PARAMS } from '@/composables/constants.js'
 import { useCartStore } from '@/stores/cart/cartStore.js'
+import { useUserSetup } from '@/composables/useUserSetup.js'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
@@ -11,6 +12,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const { postData, getData } = useApi()
   const { loadUserCart, clearCart, mergeAnonCart } = useCartStore()
+  const { createCartForUser, createFavoritesForUser } = useUserSetup()
   const tokenParams = reactive({
     headers: {
       Authorization: `Bearer ${token.value}`
@@ -28,8 +30,8 @@ export const useAuthStore = defineStore('auth', () => {
       } else {
         sessionStorage.setItem('token', data.token)
       }
-      loadUserCart()
-      mergeAnonCart()
+      await loadUserCart?.()
+      await mergeAnonCart?.()
     } catch (err) {
       error.value = err
     }
@@ -42,8 +44,10 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = data.token
       error.value = null
       localStorage.setItem('token', data.token)
-      loadUserCart()
-      mergeAnonCart()
+      await createCartForUser?.(email, data.data.id) // Создаю корзину и избранное на сервере для каждого пользователя
+      await createFavoritesForUser?.(email, data.data.id)
+      await loadUserCart?.()
+      await mergeAnonCart?.()
     } catch (err) {
       error.value = err
     }
@@ -54,7 +58,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     try {
       user.value = await getData?.('auth_me', tokenParams)
-      loadUserCart()
+      loadUserCart?.()
     } catch (err) {
       error.value = err
       logout()
@@ -67,7 +71,7 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
     localStorage.removeItem('token')
     sessionStorage.removeItem('token')
-    clearCart()
+    clearCart?.()
   }
 
   const isAdmin = computed(() => user.value?.role === 'admin')

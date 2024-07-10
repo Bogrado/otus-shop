@@ -20,7 +20,11 @@ const modalStore = useModalStore()
 
 const handleAccountCheck = () => {
   if (!isLoggedIn.value) {
-    modalStore.openModal('login')
+    router.push('/')
+    setTimeout(() => {
+      modalStore.openModal('login')
+    }, 300)
+
     return
   }
   router.push('/profile')
